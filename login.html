@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" src="./com/hoperun/3rd/jquery-1.6.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css"/>
+
+<title>WebOffice - GridFrames</title>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("input.input").keydown = function(evt){
+    	var evt = window.event?window.event:evt;
+    	if(evt.keyCode==13)
+    	{
+    	    doLogin();
+    	}
+    };
+    
+    $('#username').focus();
+});
+function doLogin(){
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	if("" != username && "" != password){
+		if(isUser(username,password)){
+			window.location.href = "login?userName=" + username;
+		} else {
+			alert("User not exists!");
+		}
+	} else {
+		alert("Username or password missing!");
+	}
+}
+
+function isUser(name,pwd){
+	if(name == pwd){
+		return true;
+	} else {
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+<div>
+    	<div class="header">
+            <div style="width:1000px;margin: 0px auto;">
+                <div class="logo" style="float:right;">
+                    <img src="images/logo.png" alt="logo"/>
+                </div>
+                <div style="float:left; margin:30px 0px 0px 1px;font-size:25px;font-weight: bold;">
+                    <span>Welcome</span>
+                </div>
+            </div>
+		</div>
+            <!-- content -->
+    		<div id="content">       
+                <div id="loginDiv">
+                	<form onsubmit='return false;'>
+						<div style="margin-top:200px;"><span>Username:</span><input type="text" id="username" name="username" style="margin-left:77px" class='input'/></div>
+						<div style="margin-top:40px;"><span>Password:</span><input type="password" id="password" name="password" style="margin-left:80px" class='input' /></div>
+						<div style="   margin-left: 200px; margin-top: 40px;"><button id="login" onclick='doLogin();'>login</button></div>
+					</form>
+                </div>
+			</div>
+</div></body></html>
