@@ -1,0 +1,38 @@
+#text-style-recentFun .ui-selecting,
+#text-style-slide .ui-selecting,
+#text-style-transition .ui-selecting,
+#text-style-functionType,.ui-selecting,
+#text-style-functionName .ui-selecting{ background: #FECA40; }
+
+#text-style-recentFun .ui-selected,
+#text-style-slide .ui-selected,
+#text-style-transition .ui-selected,
+#text-style-functionType .ui-selected,
+#text-style-functionName .ui-selected{ background: #F39814; color: white; }
+
+#text-style-recentFun, 
+#text-style-slide,
+#text-style-transition,
+#text-style-functionType,
+#text-style-functionName{ list-style-type: none; margin: 0; padding: 0; width: 100%; }
+
+#text-style-recentFun li,
+#text-style-slide li,
+#text-style-transition li,
+#text-style-functionType li,
+#text-style-functionName li{ margin: 1px; padding: 1px; font-size: 14px; }
+
+
+.functionOperator
+{
+	width:40px;
+	height:40px;
+	background-color:Green;
+	color:White;
+	cursor:pointer;
+	border:2px solid #fff;
+	margin:5px;
+	float:left;
+	text-align:center;
+	vertical-align:middle;
+}

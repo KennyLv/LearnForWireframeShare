@@ -1,0 +1,15 @@
+#Menu_List_Text_Style_Format .ui-selecting
+{ background: #FECA40; }
+
+
+#Menu_List_Text_Style_Format .ui-selected 
+{ background: #F39814; color: white; }
+
+#Menu_List_Text_Style_Format 
+{ list-style-type: none; margin: 0; padding: 0; width: 100%; }
+
+#Menu_List_Text_Style_Format li{
+	border:1px solid #DDDDDD;
+	margin-top:2px;
+	text-align: left;
+}

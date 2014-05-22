@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<form id="formDiv" method="post" onsubmit='return false;' enctype="multipart/form-data" name="form1">
+<div id="MENU_SPEC_3">
+	
+	<div id="MENU_SPEC_3_TABS">
+		<ul>
+			<li id="INSERT_MENU_SPEC_3_IMAGES">
+				<a href="#MENU_SPEC_3_IMAGES" class="link">
+					<img src="./images/05 Menus/Graphics/images/picture_main.png">
+				</a>
+			</li>
+			<li id="INSERT_MENU_SPEC_3_SHAPES">
+				<a href="#MENU_SPEC_3_SHAPES" class="link">
+					<img src="./images/05 Menus/Graphics/images/shapes_main.png">
+				</a>
+			</li>
+			<li id="INSERT_MENU_SPEC_3_VIDEO">
+				<a href="#MENU_SPEC_3_VIDEO" class="link">
+					<img src="./images/05 Menus/Graphics/images/video_main.png">
+				</a>
+			</li>
+			<li id="INSERT_MENU_SPEC_3_CHARTS">
+				<a href="#MENU_SPEC_3_CHARTS" class="link">
+					<img src="./images/05 Menus/Graphics/images/charts_main.png">
+				</a>
+			</li>
+			<li id="INSERT_MENU_SPEC_3_TABLES">
+				<a href="#MENU_SPEC_3_TABLES" class="link">
+					<img src="./images/04 Numbers/charts/icon_charts.png">
+				</a>
+			</li>
+		</ul>
+	</div>
+				
+	<div id="MENU_SPEC_3_IMAGES" style="height:245px;">
+		<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+			<span class="Menu_Edit_TableAll_Title_Font">IMAGES</span>
+		</div>
+		<div id="MENU_SPEC_3_IMAGES_INSERT">			
+			<div><span class="MENU_SPEC_3_MENU_FONT" style="float:left;margin:5px;font-weight:bold;font-size:14px;">&gt;&gt;Local Files</span></div>
+			<br/>
+			<input type="file" name="fileUpload" id="fileUpload" size="20" class="ifile" style="margin-top:12px;height:22px;width:49px;margin-left:164px;" onchange="upfile.value=this.value"  onmouseup="fileUpload_MouseUp();"/> 
+ 			<div style="float:left; width:100%">
+ 				<div style="float:left;"><input type="text" id="upfile" name="upfile" size="20" style="width:140px; margin-top:2px; margin-right:5px;"/></div>
+ 				<div id="fileUploadButton1" class="i2Style" style="float:left; margin-right:5px;">Select</div>
+				<div id="fileUploadButton2" class="i2Style" style="float:left;" onclick='sendUpload();return false;'>OK</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="MENU_SPEC_3_SHAPES" style="height:245px;">
+		<div id="MENU_SPEC_3_SHAPES_CONTENT">
+			<div id="Menu_Insert_Shape_FirstPanel" class="Insert_MarginBottom">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">SHAPES</span>
+				</div>
+				<div class="Insert_CharBox Insert_CharBoxAjust">
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Polygon'><img src="images/05 Menus/Graphics/shapes/triangle.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='rounded_tri'><img src="images/05 Menus/Graphics/shapes/rounded_tri.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Rectangle'><img src="images/05 Menus/Graphics/shapes/square.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='rounded_sq'><img src="images/05 Menus/Graphics/shapes/rounded_sq.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Pentagon'><img src="images/05 Menus/Graphics/shapes/pentagon.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='hexagon'><img src="images/05 Menus/Graphics/shapes/hexagon.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='octagon'><img src="images/05 Menus/Graphics/shapes/octagon.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Ellipse'><img src="images/05 Menus/Graphics/shapes/circle.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Star'><img src="images/05 Menus/Graphics/shapes/star_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_02'><img src="images/05 Menus/Graphics/shapes/star_02.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_burst_01'><img src="images/05 Menus/Graphics/shapes/star_burst_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_burst_02'><img src="images/05 Menus/Graphics/shapes/star_burst_02.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='speech_01'><img src="images/05 Menus/Graphics/shapes/speech_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='speech_02'><img src="images/05 Menus/Graphics/shapes/speech_02.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='ArrowLine'><img src="images/05 Menus/Graphics/shapes/line.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='dots'><img src="images/05 Menus/Graphics/shapes/dots.png"></img></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+				</div>
+				
+			</div>
+			<div id="Menu_Insert_Shape_SecondPanel"  style="display:none;" class="Insert_MarginBottom">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">SHAPES</span>
+				</div>
+				<div class="Insert_CharBox Insert_CharBoxAjust">
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Triangle'><img src="images/05 Menus/Graphics/shapes/triangle.png"></img></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='hexagon'><img src="images/05 Menus/Graphics/shapes/hexagon.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='octagon'><img src="images/05 Menus/Graphics/shapes/octagon.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Ellipse'><img src="images/05 Menus/Graphics/shapes/circle.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Star'><img src="images/05 Menus/Graphics/shapes/star_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_02'><img src="images/05 Menus/Graphics/shapes/star_02.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_burst_01'><img src="images/05 Menus/Graphics/shapes/star_burst_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='star_burst_02'><img src="images/05 Menus/Graphics/shapes/star_burst_02.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='speech_01'><img src="images/05 Menus/Graphics/shapes/speech_01.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='speech_02'><img src="images/05 Menus/Graphics/shapes/speech_02.png"></img></div>
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='Line'><img src="images/05 Menus/Graphics/shapes/line.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_IMG" onClick="changeMENUSPEC3ShapeColor(this);" objectType='dots'><img src="images/05 Menus/Graphics/shapes/dots.png"></img></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+					<div class="MENU_SPEC_3_IMG"></div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div id="MENU_SPEC_3_VIDEO" style="height:245px;">
+		<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+			<span class="Menu_Edit_TableAll_Title_Font">MOVIES</span>
+		</div>
+		<div class="Inser_VideoBox Insert_MarginTop Insert_MarginLeft">
+			<div class="MENU_SPEC_3_IMAGES_IMG"><img src="images/05 Menus/Graphics/cam_roll/cam_roll_df.png"></img></div>
+			<div class="MENU_SPEC_3_SELECT" onclick="changeMENUSPEC3BarColor(this);"><span class="MENU_SPEC_3_IMAGES_FONT">CAMERA ROLL</span></div>
+		</div>
+		<div class="Inser_VideoBox Insert_MarginLeft">
+			<div class="MENU_SPEC_3_IMAGES_IMG"><img src="images/05 Menus/Graphics/images/folder.png"></img></div>
+			<div class="MENU_SPEC_3_SELECT" onclick="changeMENUSPEC3BarColor(this);"><span class="MENU_SPEC_3_IMAGES_FONT">FILES</span></div>
+		</div>
+		<div class="Inser_VideoBox Insert_MarginLeft">
+			<div class="MENU_SPEC_3_IMAGES_IMG"><img src="images/05 Menus/Graphics/cam_roll/cam_roll_df.png"></img></div>
+			<div class="MENU_SPEC_3_SELECT" onclick="changeMENUSPEC3BarColor(this);"><span class="MENU_SPEC_3_IMAGES_FONT">OTHER</span></div>
+		</div>
+		<div class="Inser_VideoBox Insert_MarginLeft">
+			<div class="MENU_SPEC_3_IMAGES_IMG"><img src="images/05 Menus/Graphics/cam_roll/cam_roll_df.png"></img></div>
+			<div class="MENU_SPEC_3_SELECT" onclick="changeMENUSPEC3BarColor(this);"><span class="MENU_SPEC_3_IMAGES_FONT">OTHER</span></div>
+		</div>
+		<div class="Inser_VideoBox Insert_MarginLeft">
+			<div class="MENU_SPEC_3_IMAGES_IMG"><img src="images/05 Menus/Graphics/cam_roll/cam_roll_df.png"></img></div>
+			<div class="MENU_SPEC_3_SELECT" onclick="changeMENUSPEC3BarColor(this);"><span class="MENU_SPEC_3_IMAGES_FONT">OTHER</span></div>
+		</div>
+
+	</div>
+	<div id="MENU_SPEC_3_CHARTS" style="height:245px;">
+		<div id="MENU_SPEC_3_CHARTS_CONTENT">
+			<div id="Menu_Insert_Chart_FirstPanel" class="Insert_MarginBottom">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">CHARTS</span>
+				</div>
+				<div class="Insert_CharBox Insert_CharBoxAjust">
+					<div class="MENU_SPEC_3_CHARTS" chartType="BarChart" subChartType="vertical" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/column.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" chartType="BarChart" subChartType="horizon"  onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/bar_chart.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" chartType="PieChart" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/pie.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/line_chart.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/area.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/scatter.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+				</div>
+				<div class="Insert_CharBox">
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_01.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_02.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_03.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_04.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_05.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_06.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_07.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_08.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+				</div>
+			</div>
+			<div id="Menu_Insert_Chart_SecondPanel"  style="display:none;" class="Insert_MarginBottom">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">CHARTS</span>
+				</div>
+				<div class="Insert_CharBox Insert_CharBoxAjust">
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/column.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/scatter.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+				</div>
+				<div class="Insert_CharBox">
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_01.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_02.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_03.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_04.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_05.png"></img></div>
+				</div>
+				<div class="Insert_CharBox">			
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_06.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_07.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS" onClick="changeMENUSPEC3ChartColor(this);"><img src="images/05 Menus/Graphics/charts/colour_08.png"></img></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+					<div class="MENU_SPEC_3_CHARTS"></div>
+				</div>	
+			</div>
+		</div>
+
+	</div>
+	<div id="MENU_SPEC_3_TABLES" style="height:245px;">	
+		<div id="MENU_SPEC_3_TABLES_CONTENT">
+			<div id="Menu_Insert_Text_Tables_FirstPanel">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">TABLES</span>
+				</div>
+				<div id="MENU_SPEC_3_TABLE_INSERT">
+
+					<div style="height:78px;">
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0029.png" id="Menu_Insert_Text_Tables_FirstPanel_TableOne"/>
+						</div>
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0024.png" id="Menu_Insert_Text_Tables_FirstPanel_TableTwo"/>
+						</div>
+					</div>
+					<div style="height:78px;">
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0014.png" id="Menu_Insert_Text_Tables_FirstPanel_TableThree"/>
+						</div>	
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0019.png" id="Menu_Insert_Text_Tables_FirstPanel_TableFour"/>
+						</div>
+					</div>			
+					<div style="height:12px;">
+					</div>					
+				</div>
+			</div>
+			<div id="Menu_Insert_Text_Tables_SecondPanel" style="display:none;">
+				<div class="Menu_Edit_TableAll_Title_Div Insert_MarginTop12">
+					<span class="Menu_Edit_TableAll_Title_Font">TABLES</span>
+				</div>
+				
+				<div id="MENU_SPEC_3_TABLE_INSERT">
+					<div style="height:78px;">
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0009.png" id="Menu_Insert_Text_Tables_FirstPanel_TableSix"/>
+						</div>
+						<div class="MENU_SPEC_3_insert_tableDivStyle">
+							<img src="./images/divImage/common/table/Table_0004.png" id="Menu_Insert_Text_Tables_FirstPanel_TableSeven"/>
+						</div>
+					</div>			
+					<div style="height:12px;">
+					</div>					
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="Menu_Edit_Bottom_Bg1">
+	</div>
+</div>
+			<IFrame id="uploadIFrame" name="uploadIFrame" width="1px" height="1px" style="display:none;" src="fileuploader">
+			</IFrame>
+			<div id="divForTestIFrame" style="display:none;"></div>
+</form>		
+<script type="text/javascript">
+
+function sendInternetUpload(msg){
+	sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_INSERT,
+			com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
+			{'src':document.getElementById("txtInternetFiles").value, 'height':80, 'width':100});
+}
+
+function sendUpload(){
+	var oForm = document.getElementById("formDiv");
+	var fileName = document.getElementById("fileUpload").value;
+	var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
+	var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+	var url = "fileuploader?folderNameOfFile=" + folderNameOfFile + "&userName=" + urlParameter.userName + "&fileType=" + urlParameter.fileType;
+	imgSubmit(url);
+}
+</script>

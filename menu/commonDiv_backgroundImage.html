@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<form action="fileuploader" method="post" enctype="multipart/form-data" name="form2">
+        <div style="width: 255px;height: 320px;" id="menu-tool-backgroundImage">
+            <ul>
+		        <li style="margin-top:-3px;height:25px;line-height:25px" id="menu-slide-tool-backToColorSet">
+		        &nbsp;&nbsp;&lt;&lt;<span style="margin-left:60px;">Background Image</span>
+		        </li>
+		    </ul>
+		    <div style="margin-top:10px;">
+                <!-- <div style="height:20px;">
+                    Local Files
+                </div>
+                <div class="fileuploader2">
+                    <input type="file" name="fileUpload" id="fileUpload2">
+					<input type="button" name="fileUploadButton" id="fileUploadButton2" value="OK" style="width: 40px;" onclick="sendUpload2(this.form);">
+				</div>-->
+				<div>
+				   <ol class="menu_tool_content_slide">
+				       <li class="ui-widget-content li-top-radius" style="border-bottom:none;width:235px">
+                           <div style="margin-left:70px">Local Files</div>
+                       </li>
+                       <li class="ui-widget-content li-bottom-radius" style="height:65px;width:235px">
+                           <div style="margin-left:10px;margin-top:5px">
+                                <input type="file" name="fileUpload" id="fileUpload2">
+                                <input type="button" name="fileUploadButton" id="fileUploadButton2" value="ok" style="width: 40px;" onclick="sendUpload2(this.form);"> 
+                           </div>
+                       </li>
+				   <ol>
+				</div>
+			</div>
+		</div>
+	<IFrame id="uploadIFrame2" name="uploadIFrame2" width="1px" height="1px" style="display: none;" src="fileuploader"></IFrame>
+</form>
+<script type="text/javascript">
+function sendUpload2(oForm) {
+	oForm.action = "fileuploader";
+	oForm.target = "uploadIFrame2";
+	oForm.submit();
+}
+document.getElementById("uploadIFrame2").onload = function() {
+	try {
+		var returnValue = document.getElementById("divForTestIFrame").innerHTML;
+		if ("" != returnValue && returnValue.indexOf("alert") < 0) {
+			var returnValueList = returnValue.split(",");
+			sendMessage( com.hoperun.util.Observer.MessageType.SLIDE_SET_BACKGROUND, currSlide,
+					{ 'src' : returnValueList[0], 'height' : returnValueList[1], 'width' : returnValueList[2] });
+		}
+	} catch (e) {
+		alert('exception: ' + e);
+	}
+};
+</script>
+</html>

@@ -1,0 +1,604 @@
+	#Menu_Edit_Style_Option{
+		height:405px;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+	}
+	#Menu_Edit_ShapeArrowSet_Style_Arrange{
+		height:405px;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+	}
+	#Menu_Edit_ShapArrowSet_BorderLine{
+		list-style-type:none;
+		margin:0;
+		padding:0;
+		width:100%;
+	}
+	#Menu_Edit_ShapArrowSet_BorderLine li{
+		height:30px;
+		background:#fff;
+		line-height:30px;
+		border:1px solid #b2b2b2;
+		font-size:12px;
+		text-align:left;
+		font-weight:bold;
+	}
+	#Menu_Edit_Line_container {	
+		height:405px;
+	}
+	#Menu_Edit_Line_container1 {
+		height:405px;
+		display: none;
+	}
+	#Menu_Edit_Line_container2 {
+		height:405px;
+		display: none;
+	}
+	#Menu_Edit_Line_container3 {
+		height:405px;
+		display: none;
+	}
+	#Menu_Edit_Line_container4 {
+		height:405px;
+		display: none;
+	}
+	ul {
+		list-style:none;
+	}
+	#Menu_Edit_Line_Arrowhead_Options{
+		background-color:#F6F6F6;
+		border:1px solid #B2B2B2;
+		height:400px;
+		padding:5px 3px 5px 5px;
+		position:absolute;
+		border-radius:4px;
+		-o-border-radius:4px;
+		-moz-border-radius:4px;
+		-webkit-border-radius:4px;
+	}
+	#Menu_Edit_Style_Option_Wrap{
+		background-color:#f6f6f6;
+		position:absolute;
+		padding:5px;
+		height:400px;
+		width:268px;
+		border-radius:5px 5px 5px 5px;
+		-o-border-radius:5px 5px 5px 5px;
+		-moz-border-radius:5px 5px 5px 5px;
+		-webkit-border-radius:5px 5px 5px 5px;
+		border:1px solid #999;
+	}
+	#Menu_Edit_Line_Line_Color{
+		background-color:#f6f6f6;
+		padding:5px;
+		height:400px;
+		width:268px;
+		border-radius:5px 5px 5px 5px;
+		-o-border-radius:5px 5px 5px 5px;
+		-moz-border-radius:5px 5px 5px 5px;
+		-webkit-border-radius:5px 5px 5px 5px;
+		border:1px solid #999;
+	}
+	#Menu_Edit_ShapeArrowSet_ArrowheadOptions_List{
+		background-color:#FFFFFF;
+		height:306px;
+		margin-left:-2px;
+		margin-top:0;
+		padding:35px 0 20px 20px;
+		width:250px;
+		border-radius:0 0 4px 4px;
+		-o-border-radius:0 0 4px 4px;
+		-moz-border-radius:0 0 4px 4px;
+		-webkit-border-radius:0 0 4px 4px;
+		border: 1px solid #999;
+		border-top: none;
+	}
+	#Menu_Edit_Line_tab_01_opn_title{
+		border-radius:4px 4px 0px 0px;
+		-moz-border-radius:4px 4px 0px 0px;
+		-webkit-border-radius:4px 4px 0px 0px;
+		background:url("../.././images/tab_tab_bg.png") repeat scroll 0 0 transparent;
+		border:1px solid #999;
+		color:#000000;
+		height:38px;
+		line-height:38px;
+		margin-left:-2px;
+		margin-top:-2px;
+		width:270px;
+	}
+	#Menu_Edit_Line_tab_01_opn_title h1{text-align:left;margin-left:0px;}
+	#Menu_Edit_Line_tab_01_opn_title h1 a:link{text-decoration:none;color:#000;}
+	#Menu_Edit_Line_tab_01_opn_title h1 a:visited{text-decoration:none;color:#000;}
+	#Menu_Edit_Line_tab_01_opn_title h1 a:hover{text-decoration:none;color:#000;}
+	#Menu_Edit_Line_tab_01_opn_title h1 a:active{text-decoration:none;color:#000;}
+
+	#Menu_Edit_Style_Option_to_Menu_Edit_Line{color:#FFFFFF;height:33px;line-height:33px;width:272px;}
+	#Menu_Edit_Style_Option_to_Menu_Edit_Line:link{text-decoration:none;color:#000;}
+	#Menu_Edit_Style_Option_to_Menu_Edit_Line:visited{text-decoration:none;color:#000;}
+	#Menu_Edit_Style_Option_to_Menu_Edit_Line:hover{text-decoration:none;color:#000;}
+	#Menu_Edit_Style_Option_to_Menu_Edit_Line:active{text-decoration:none;color:#000;}
+
+	#Menu_Edit_ShapeArrowSet_WrapStyle .ui-selecting { background: #b2b2b2; }
+	#Menu_Edit_ShapeArrowSet_WrapStyle .ui-selected { 
+		
+	}
+	#Menu_Edit_ShapeArrowSet_WrapStyle { list-style-type: none; margin: 0; padding: 0; width: 100%; text:}
+	#Menu_Edit_ShapeArrowSet_WrapStyle li {
+		margin: 1px 0px 0px -3px;
+		padding: 2px; 
+		font-size:12px;
+		font-weight:bold;
+		height: 30px;
+		text-align:left;
+		background:#fff;
+		width:220px; 
+	}
+	#Menu_Edit_ShapeArrowSet_MovewithText .ui-selecting { background: #FECA40; }
+	#Menu_Edit_ShapeArrowSet_MovewithText .ui-selected { background: #F39814; color: white; }
+	#Menu_Edit_ShapeArrowSet_MovewithText { list-style-type: none; margin: 0; padding: 0; width: 98%; }
+
+	#Menu_Edti_ShapeArrowSet_Shadow_Options .ui-selecting { background-color: #ffffff; }
+	#Menu_Edti_ShapeArrowSet_Shadow_Options .ui-selected { background-color: #ffffff; color: white; }
+	#Menu_Edti_ShapeArrowSet_Shadow_Options { 
+		height:40px;
+		background-color: #ffffff;
+		list-style-type: none;
+		margin-top:5px;
+		padding: 0;
+		border-radius:6px;
+		-webkit-border-radius:6px;
+		-moz-border-radius:6px;
+	}
+	#Menu_Edti_ShapeArrowSet_Shadow_Options li {  padding: 2px; font-size: 10px; height: 15px; }
+	#Menu_Edit_ShapeArrowSet_StyleOption_Image_Effects_Shadow_Image{
+		-webkit-border-radius:6px;
+		-moz-border-radius:6px;
+		border-radius:6px;
+		height:52px;
+		background-color:#FFFFFF;
+		display:none
+	}
+	#Menu_Edit_ShapeArrowSet_StyleOption_Image_Effects_Shadow_Image div{
+		width:40px;
+		height:40px;
+		border:1px solid #000000;
+		float:left;
+	}
+	#Menu_Edit_ShapeArrowSet_ColorPanel_ChangePage {
+		background:none repeat scroll 0 0 #FFFFFF;
+		height:352px;
+		margin-left:-2px;
+		padding-top:10px;
+		width:270px;
+		-webkit-border-radius:0 0 4px 4px;
+		-moz-border-radius:0 0 4px 4px;
+		border-radius:0 0 4px 4px;
+		border: 1px solid #999;
+		border-top: none;
+	}
+	.Menu_Edit_Line_table_style_box1 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+		border:none;
+	}
+	.Menu_Edit_Line_table_style_box2 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+	}
+	.Menu_Edit_Line_table_style_box3 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+	}
+	.Menu_Edit_Line_table_style_box4 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+	}
+	.Menu_Edit_Line_table_style_box5 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+	}
+	.Menu_Edit_Line_table_style_box6 {
+		width:100px;
+		border:1px solid #ddd;
+		height:90px;
+		float:left;
+		margin:7px;
+		-moz-border-radius: 1px;
+		-webkit-border-radius: 1px;
+		-khtml-border-radius: 1px;
+		box-shadow: 1px 1px 2px #ddd;
+		-moz-box-shadow: 1px 1px 2px #ddd;
+		-webkit-box-shadow: 1px 1px 2px #ddd;
+	}
+	.Menu_Edit_Line_table_style_box_option {
+		width:210px;
+		background-color:#fff;
+		border:1px solid #B2B2B2;
+		height:25px;
+		margin-left:8px;
+		margin-top:8px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		font-weight: bolder;
+		font-size:medium;
+		color: #000;
+		padding:3px;
+		clear: both;
+		line-height: 25px;
+		text-indent: 1em;
+		text-align:left;
+	}
+	.Menu_Edit_Line_tab_01_opn_title_symbol{
+		margin-left:100px;font-weight:bold;
+	}
+	.Menu_Edit_ShapeArrowSet_ArrowheadOptions{
+		margin-left:60px;font-weight:bold;
+	}
+	.Menu_Edit_Line_to_radius{
+		background-color:#fff;
+		border:1px solid #B2B2B2;
+		margin-right:4px;
+		margin-top:12px;
+		margin-bottom:-5px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		font-weight: bolder;
+		font-size:medium;
+		color: #000;
+		padding:3px;
+		clear: both;
+		width:238px;
+		line-height: 25px;
+		text-indent: 1em;
+	}
+	.Menu_Edit_ShapeArrowSet_Wrap_MoveWithText_ExtraSapce{
+		width:220px;
+		background-color:#fff;
+		border:1px solid #B2B2B2;
+		margin-left:20px;
+		margin-top:10px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		font-weight: bolder;
+		font-size:medium;
+		padding:3px;
+		clear: both;
+		line-height: 25px;
+		text-indent: 1em;
+	}
+	.Menu_Edit_ShapeArrowSet_Wrap_List{
+		width:220px;
+		margin-left:20px;
+		margin-top:10px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		font-weight: bolder;
+		font-size:medium;
+		padding:3px;
+		clear: both;
+		line-height: 25px;
+		text-indent: 1em;
+	}
+	.Menu_Edit_Line_tab_01_opn_item{
+		width:220px;
+		height:35px;
+		line-height: 35px;
+		border-bottom: 1px solid #ddd;
+	}
+	.Menu_Edit_Line_tab_01_opn_item_1{
+		width:110px;
+		float: left;
+	}
+	.Menu_Edit_Line_tab_01_opn_item span{
+		margin: 0;
+		padding:0;
+		height:35px;
+		display: block;
+	}
+	.Menu_Edit_Line_tab_01_opn_item h1{
+		float: right;
+	}
+	.Menu_Edit_Line_tab_01_opn_item_unit{
+		float: left;
+		width:66px;
+		height: 35px;
+		border-right: 1px solid #ddd;
+		background: #fff;
+		text-align: left;
+	}
+	.Menu_Edit_Line_tab_01_opn_item_unit h1{
+		text-align: left;
+	}
+	.Menu_Edit_Line_color_box{
+		width:60px;
+		height:147px;
+		border:1px solid #0000FF;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		margin:5px;
+		float: left;
+	}
+	.Menu_Edit_Line_color_box_ext{
+		width:60px;
+		height:147px;
+		float: left;
+		margin:6px;
+	}
+	.Menu_Edit_Line_color_box_item_sty_01{
+		width:60px;
+		height:36px;
+		border-bottom:1px solid #fff;
+	}
+	.Menu_Edit_Line_color_box_item_sty_02{
+		width:60px;
+		height:36px;
+		border-bottom:1px solid #fff;
+	}
+	.Menu_Edit_Line_color_box_item_sty_03{
+		width:60px;
+		height:36px;
+		border-bottom:1px solid #fff;
+	}
+	.Menu_Edit_Line_color_box_item_sty_04{
+		width:60px;
+		height:36px;
+		border-bottom:1px solid #fff;
+	}
+	.Menu_Edit_Line_color_box_ext_bg_01{
+		width:60px;
+		height:147px;
+		border:1px solid #666;
+		background: #ddd;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.Menu_Edit_Line_color_box_ext_bg_02{
+		width:60px;
+		height:147px;
+		border:1px solid #666;
+		background: #ddd;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.Menu_Edit_Line_color_box_ext_bg_03{
+		width:60px;
+		height:147px;
+		border:1px solid #666;
+		background: #555;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.Menu_Edit_Line_color_box_ext_bg_04{
+		width:60px;
+		height:147px;
+		border:1px solid #666;
+		background: #666;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.Menu_Edit_Line_color_box_ext_bg_05{
+		width:60px;
+		height:147px;
+		border:1px solid #666;
+		background: #333;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+	}
+	.Menu_Edit_Line_paging{
+		width: 230px;
+		height: 30px;
+		text-align: center;
+		font: bold 12px/30px "宋体";
+		margin-top:340px;
+	}
+	.Menu_Edit_Line_paging a:link{
+		text-decoration: none;
+		color: #333;
+	}
+	.Menu_Edit_Line_paging a:hover{
+		text-decoration: none;
+		color: #f60;
+	}
+	.Menu_Edit_Line_paging a:visited{
+		text-decoration: none;
+		color: #333;
+	}
+	.Menu_Edit_ShapeArrowSet_Line_Img{
+		height:30px;
+		margin-left:-2px;
+		width:247px;
+		background:#fff;
+		-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;
+	}
+	.Menu_Edit_ShapeArrowSet_ColorSelect_Button_Color{
+		width:55px;
+		height:25px;
+		border:1px solid #B2B2B2;
+		background:#fff;
+		border-radius:6px;
+		-moz-border-radius:6px;
+		-webkit-border-radius:6px;
+		font-weight:bolder;
+		font-size:medium;
+		margin:3 -1 2 2;
+	}
+	.Menu_Edit_ShapeArrowSet_Shawdow_Options_List{
+		-webkit-border-radius:6px;
+		-moz-border-radius:6px;
+		border-radius:6px;
+		border:1px solid #B2B2B2;
+		background-color:#FFFFFF;
+		width:234px;
+	}
+	.Menu_Edit_ShapeArrowSet_Opacity{
+		border:1px solid #B2B2B2;
+		width:98%;
+		background-color:#FFFFFF;
+		margin-top:10px;
+		height:30px;
+		border-radius:6px;
+		-webkit-border-radius:6px;
+		-moz-border-radius:6px;
+	}
+	.Menu_Edit_Line_table_style_box_1{
+		box-shadow: 0px 0px 15px #0e1a1a;
+		-moz-box-shadow: 0px 0px 15px #0e1a1a;
+		-webkit-box-shadow: 0px 0px 15px #0e1a1a;
+		margin-left:14px;
+		margin-top:5px;
+	}
+	.Menu_Edit_Line_table_style_box_2{
+		box-shadow: 0px 0px 10px #0e1a1a;
+		-moz-box-shadow: 0px 0px 10px #0e1a1a;
+		-webkit-box-shadow: 0px 0px 10px #0e1a1a;
+		margin-left:14px;
+		margin-top:5px;
+	}
+	.Menu_Edit_Line_table_style_box_3{
+		box-shadow: 0px 0px 5px #0e1a1a;
+		-moz-box-shadow: 0px 0px 5px #0e1a1a;
+		-webkit-box-shadow: 0px 0px 5px #0e1a1a;
+		margin-left:14px;
+		margin-top:5px;
+	}
+	.Menu_Edit_Line_table_style_box_4{
+		box-shadow: 3px 3px 5px #0e1a1a;
+		-moz-box-shadow: 3px 3px 5px #0e1a1a;
+		-webkit-box-shadow: 3px 3px 5px #0e1a1a;
+		margin-left:14px;
+		margin-top:5px;
+	}
+	.Menu_Edit_ShapeArrowSet_LineColor_is_picked{
+		position:relative;
+		top:30%;
+		left:20%;
+	}
+
+	.Menu_Edit_ShapeArrowSet_LineStyle_img{
+		height:30px;
+		width:250px;
+		float:left;
+		margin-left:-3px;
+		border:0px;
+	}
+	.Menu_Edit_ShapeArrowSet_Style_Images{
+		width:100px;height:90px;
+	}
+	.Menu_Edit_ShapeArrowSet_LineEffect_ReturnBack {
+		height:30px;
+		line-height:40px;
+		margin-left:-2px;
+	}
+	.Menu_Edit_ShapeArrowSet_Line_Width{
+		width:50px;
+		margin-right:10px;
+		float:left;
+	}
+	.Menu_Edit_ShapeArrowSet_Line_WidthSlider{
+		width:125px;
+		top:10px;
+		float:left;
+	}
+	.Menu_Edit_ShapeArrowSet_Line_WidthValue{
+		color:#f6931f;
+		border:0pt none;
+		width:20px;
+		float:right;
+		text-align:center;
+		margin-right:13px;
+		margin-top:-2px;
+	}
+	.Menu_Edit_ShapeArrowSet_Effect_ShadowLabel{
+		float:left;
+		margin-top:8px;
+		margin-left:5px;
+	}
+	.Menu_Edit_ShapeArrowSet_Effect_ShadowOnOrOff{
+		float:right;
+		margin-top:8px;
+	}
+	.Menu_Edit_ShapeArrowSet_Effect_Opacity{
+		float:left;
+		margin-top:5px;
+		width:10%;
+		margin-left:5px;
+	}
+	.Menu_Edit_ShapeArrowSet_Effect_Opacity_Slider{
+		width:60%;
+		float:left;
+		margin-left:28px;
+		margin-top:10px;
+	}
+	.Menu_Edit_ShapeArrowSet_Effect_Opacity_Value{
+		width:13%;
+		color:#f6931f;
+		float:right;
+		margin-top:5px;
+	}
+	.Menu_Edit_ShapeArrowSet_Wrap_ExtraSapce{
+		width:150px;
+		top:5px;
+		float:left;
+		height:9px;
+	}
+	.Menu_Edit_ShapeArrowSet_Wrap_ExtraSapce_Value{
+		border:0;
+		color:#f6931f;
+	}

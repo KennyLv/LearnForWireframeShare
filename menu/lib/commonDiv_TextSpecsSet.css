@@ -1,0 +1,123 @@
+.Menu_Edit_TextSpecsSet_1px{float:left;width:1px;height:30px;}
+
+#Menu_Edit_TextSpecsSet_Fonts label,#Menu_Edit_TextSpecsSet_Font_ValueSizeSet label{
+	font-size:14px;
+	color:#E6E7E8;
+	font-weight:700;
+	text-shadow: 0.5px 0.5px 1px #000;
+	filter: dropshadow(color=#000, offx=0.5, offy=0.5);
+}
+.Menu_Edit_TextSpecsSet_Font_StyleSet{float:left;width:128px;height:30px;line-height:25px;}
+
+.Menu_Edit_TextSpecsSet_Font_ValueSizeSet
+{
+	float:left;
+	width:32px;
+	height:30px;
+	line-height:25px;
+}
+
+.Menu_Edit_TextSpecsSet_Height_12px{width:59px;height:12px;}
+.Menu_Edit_TextSpecsSet_Height_40px{width:59px;height:40px;}
+.Menu_Edit_TextSpecsSet_Width_39px{float:left;width:39px;height:30px;}
+.Menu_Edit_TextSpecsSet_Width_40px{float:left;width:40px;height:30px;}
+.Menu_Edit_TextSpecsSet_Width_59px{float:left;width:59px;height:30px;}
+.Menu_Edit_TextSpecsSet_Color_Height_12px{width:204px;height:12px;}
+.Menu_Edit_TextSpecsSet_Color_Height_51px{width:204px;height:51px;}
+.Menu_Edit_TextSpecsSet_color_Height_5px{width:204px;height:5px;}
+.Menu_Edit_TextSpecsSet_Fonts_BackgroundStyle{
+	 width:204px;
+	 height:162px;	
+	 background:url("../.././images/02_Text/Text Nav Bar/Alignment/bkg_pd_align.png")repeat scroll 0 0 transparent;
+}
+
+#Menu_Edit_TextSpecsSet_Fonts_FontName,#Menu_Edit_TextSpecsSet_AlignMent_Style_Set,#Menu_Edit_TextSpecsSet_Color_StyleSet,
+#Menu_Edit_TextSpecsSet_More_Style,#Menu_Edit_TextSpecsSet_More_Edit
+{
+	position:absolute;
+	
+}
+
+
+#Menu_Edit_TextSpecsSet_Fonts_Group_Format .ui-selecting {
+		background:#b2b2b2;
+	}
+
+#Menu_Edit_TextSpecsSet_Fonts_Group_Format li {	    
+	    border:1px solid #b2b2b2;
+		padding-left:8px;
+		text-align:left;
+		height:20px;
+		line-height:20px; 
+		font-size:12px;
+		background:#ffffff;
+		font-weight:bold;
+		list-style:none;
+	}
+
+.Menu_Edit_TextSpecsSet_BIU_Set{
+	float:left;
+	width:120px;
+	height:30px;	
+	line-height:35px;
+  
+}
+.Menu_Edit_TextSpecsSet_AlignMent_Style{
+	 width:59px;
+	 height:172px;	
+	 background:url("../.././images/02_Text/Text Nav Bar/Alignment/bkg_pd_align.png")repeat scroll 0 0 transparent;
+ }
+.Menu_Edit_TextSpecsSet_Color_Style{
+	width:204px;
+	height:170px;
+	background:url("../.././images/02_Text/Text Nav Bar/Colours Pop-down/popdown_bkg.png")repeat scroll 0 0 transparent;
+}
+.Menu_Edit_TextSpecsSet_Fonts_BackgroundStyle{
+	 top:17px;
+	 margin-bottom:5px;
+	 width:180px;
+	 height:170px;
+	 background:url("../.././images/02_Text/Text Nav Bar/Colours Pop-down/popdown_bkg.png")repeat scroll 0 0 transparent;
+}
+.Menu_Edit_TextSpecsSet_Color{position:relative;float:left;width:51px;height:51px;}
+.Menu_Edit_TextSpecsSet_More_Style_Set{
+	width:204px;
+	height:180px;
+	background:url("../.././images/02_Text/Text Nav Bar/Colours Pop-down/popdown_bkg.png")repeat scroll 0 0 transparent;
+}
+.Menu_Edit_TextSpecsSet_More_Style_S{width:204px;height:25px;}
+.Menu_Edit_TextSpecsSet_More_Style_S1{width:200px;height:25px;margin-left:5px}
+/*.Menu_Edit_TextSpecsSet_More_Sets{width:204;height:180px;}*/
+
+.Menu_Edit_TextSpecsSet_More_Set1_Set{float:left;width:200px;height:23px;margin-left:5px;}
+#Menu_Edit_TextSpecsSet_More_Set1_edit_label{
+	float:right;
+	margin-right:20px;
+	margin-top:-20px;
+	height:25;
+	width:30;
+	
+	}
+.Menu_Edit_TextSpecsSet_More_Edit_Set{
+	width:204px;
+	height:180px;
+	background:url("../.././images/02_Text/Text Nav Bar/Colours Pop-down/popdown_bkg.png")repeat scroll 0 0 transparent;
+}
+
+.Menu_Edit_TextSpecsSet_More_Set_attribute1{
+    position: relative;    
+	text-align:left;
+	margin-left:10px;
+	
+	}
+.Menu_Edit_TextSpecsSet_More_edit_label{float:left;margin-top:5px;width:35px;height:25px;margin-left:10px;}
+.Menu_Edit_TextSpecsSet_More_edit_Done_Next{
+	float:right;
+	margin-bottom:-10px;
+	margin-right:2px;
+	margin-top:28px;
+	width:75px;
+	height:30px;
+	}
+.Menu_Edit_TextSpecsSet_More_Done_label{float:left;width:35px;height:25px;background-color:#CCCCCC;border:1px solid #FFFFFF}
+.Menu_Edit_TextSpecsSet_More_Next_label{float:right;width:35px;height:25px;background-color:#CCCCCC;border:1px solid #FFFFFF}

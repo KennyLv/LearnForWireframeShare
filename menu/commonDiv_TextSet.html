@@ -1,0 +1,337 @@
+﻿<div id="Menu_Edit_Text">
+	<div id="Menu_Edit_Text_Option">
+	<ul>
+			<li>
+				<a href="#Menu_Edit_Text_Style" class="link">
+					<img src="./images/tabIcon/icon_Style.png">
+				</a>
+			</li>
+			<li>
+				<a href="#Menu_Edit_Text_List" class="link">
+					<img src="./images/tabIcon/icon_List.png">
+				</a>
+			</li>
+			<li>
+				<a href="#Menu_Edit_Text_Layout" class="link">
+					<img src="./images/tabIcon/icon_Layout.png">
+				</a>
+			</li>
+	</ul>
+	</div>
+	<div id="Menu_Edit_Text_Style">
+        <div class="Menu_Edit_Text_Title_Div">
+			<span class="Menu_Edit_Text_Title_Font">STYLE</span>
+		</div>
+        <div id="Menu_Edit_Text_Style_Text">
+            <div id="Menu_Edit_Text_Style_BIU" class="Menu_Edit_Text_Radius">
+			    <input type="checkbox" class="Text_Style_BIU_Model" command="bold" id="Menu_Edit_Text_Style_BIU_Bold"/>
+			    <label for="Menu_Edit_Text_Style_BIU_Bold">B</label>
+			    <input type="checkbox" class="Text_Style_BIU_Model" command="italic" id="Menu_Edit_Text_Style_BIU_Italic"/>
+			    <label for="Menu_Edit_Text_Style_BIU_Italic">I</label>
+			    <input type="checkbox" class="Text_Style_BIU_Model" command="underline" id="Menu_Edit_Text_Style_BIU_Underline">
+			    <label for="Menu_Edit_Text_Style_BIU_Underline">U</label>
+			    <input type="checkbox" class="Text_Style_BIU_Model" command="linethrough" id="Menu_Edit_Text_Style_BIU_Mark">
+			    <label for="Menu_Edit_Text_Style_BIU_Mark">S</label>
+		    </div>	
+			<div>
+				<ol id="Menu_Edit_TextSet_Style_Format" style="width:250px;margin-top:-20px;">
+					<li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Format_ParagraphStyle textSet_listTopRadius" paraStyle="Title">
+						<span class="Title_Style_1">Title</span>
+					</li>
+					<li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Format_ParagraphStyle" paraStyle="Heading">
+						<span class="Title_Style_2">Heading</span>
+					</li>
+					<li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Format_ParagraphStyle" paraStyle="Body">
+						<span class="Title_Style_3">Body</span>
+					</li>
+					<li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Format_ParagraphStyle" paraStyle="Caption">
+						<span class="Title_Style_4">Caption</span>
+					</li>					
+					<li class="Menu_Edit_Text_Style_Format_ParagraphStyle textSet_listBottomRadius" paraStyle="Label Dark">
+						<span class="Title_Style_5">Label Dark</span>
+					</li>
+				</ol>    
+			</div>
+			
+			<div class="Popup_ComBox Text_Combox" >
+				<div class="Popup_ComBox_Items" style="border:none;" id="Menu_Edit_Text_Style_Size">
+					<div class="Item_Title">Size</div>
+					<div class="Item_Property">
+						 <select id="text-style-font-size" style="float:right;width:50px;"></select>
+					</div>
+				</div>
+			</div>
+
+            
+            <div class="Popup_ComBox Text_Combox" >
+				<div class="Popup_ComBox_Items" style="border:none;" id="Menu_Edit_Text_Style_Fonts">
+					<div class="Item_Title">Font</div>
+					<div class="Item_Property">
+						<div id="Menu_Edit_Text_Style_Fonts_goFontsGroup"></div>
+					</div>
+				</div>
+			</div>
+            
+             <div class="Popup_ComBox Text_Combox">
+				<div class="Popup_ComBox_Items" style="border:none;">
+					<div class="Item_Title">Color</div>
+					<div class="Item_Property">
+						<div style="float:right;width:75px;margin-right:5px;">
+							<div id="Menu_Edit_Text_Style_goColorSet"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+        </div>
+		
+		<div id="Menu_Edit_Text_Style_Fonts_Group"> 
+		
+		 <div class="Option_Box">
+			<div class="Menu_Edit_Title_Bak"><a href="#" id="Menu_Edit_Text_Style_Fonts_Group_Goback_Span" class="Menu_Edit_TableAll_TableOptions_GridOptions_BackStyle"><<</a></div>
+			<div class="Menu_Edit_Title">
+				<h1>Font</h1>
+			</div>
+		</div>
+		 
+			<ol id="Menu_Edit_Text_Style_Fonts_Group_Format" class="Text_MarginTop10">
+			    <li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Fonts_Group_FormatStyle textSet_listTopRadius" fontStyle="Arial">
+			    	<span>Arial</span>
+				</li>
+			    <li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Fonts_Group_FormatStyle" fontStyle="Courier New">
+			    	<span>Courier New</span>
+				</li>
+			    <li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Fonts_Group_FormatStyle" fontStyle="Times New Roman">
+			    	<span>Times New Roman</span>
+				</li>
+			    <li style="border-bottom:0px;" class="Menu_Edit_Text_Style_Fonts_Group_FormatStyle" fontStyle="Georgia">
+			    	<span>Georgia</span>
+				</li>
+			    <li class="Menu_Edit_Text_Style_Fonts_Group_FormatStyle textSet_listBottomRadius" fontStyle="Verdana">
+			    	<span>Verdana</span>
+				</li>
+		    </ol>     
+		</div>
+		
+		<div id="Menu_Edit_Text_Style_ColorPanel_Main">	
+		
+		<div class="Option_Box">
+			<div class="Menu_Edit_Title_Bak"><a href="#" id="Menu_Edit_Text_Style_Color_ColorPanel_Goback_Span" class="Menu_Edit_TableAll_TableOptions_GridOptions_BackStyle"><<</a></div>
+			<div class="Menu_Edit_Title">
+				<h1>Color</h1>
+			</div>
+		</div>
+		
+        <div id="Menu_Edit_Text_Style_ColorPanel_ChangePage">	
+			
+			<div id="Menu_Edit_Text_Style_Color_FirstColorPanel" style="height:275px;">
+	        
+				<div class="Color_ColorPanel">
+		        <div class="color_box">
+			        <div class="Color_colorDiv_normal color_box_text color_box_01">
+				        <div class="text_color_is_picked">
+						</div>
+			        </div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_02">
+				        <div class="text_color_is_picked">
+						</div>
+			        </div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_03">
+				        <div class="text_color_is_picked">
+						</div>
+			        </div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_04" style="border:none;">
+				        <div class="text_color_is_picked">
+						</div>
+			        </div>
+		        </div>
+		        <div class="color_box">
+			        <div class="Color_colorDiv_normal color_box_text color_box_05">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_06">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_07">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_08" style="border:none;">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+		        </div>
+		        <div class="color_box" >
+			        <div class="Color_colorDiv_normal color_box_text color_box_09">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_10">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_11">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_12" style="border:none;">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+		        </div>	
+		        <div class="color_box" >
+			        <div class="Color_colorDiv_normal color_box_text color_box_13">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_14">
+						<div class="text_color_is_picked">
+						</div>
+			        </div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_15">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_16" style="border:none;">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+		        </div>	
+		        <div class="color_box" >
+			        <div class="Color_colorDiv_normal color_box_text color_box_17">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_18">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_19">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_20" style="border:none;">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+		        </div>
+		        <div class="color_box" >
+			        <div class="Color_colorDiv_normal color_box_text color_box_21">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_22">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_23">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+			        <div class="Color_colorDiv_normal color_box_text color_box_24" style="border:none;">
+						<div class="text_color_is_picked">
+						</div>
+					</div>
+		        </div>
+				</div>
+			</div>
+
+	        <div id="Menu_Edit_Text_Style_Color_SecondColorPanel" class="Color_text_MultiStylePanel" style="height:275px;margin-left:0px;">
+	        	<div class="color_box_text color_box_ext_01">
+					<div class="text_color_is_picked">
+					</div>
+				</div>
+		        
+		        <div class="color_box_text color_box_ext_02">
+					<div class="text_color_is_picked">
+					</div>
+				</div>
+				
+		        <div class="color_box_text color_box_ext_03">
+					<div class="text_color_is_picked">
+					</div>
+				</div>	
+				
+		        <div class="color_box_text color_box_ext_04">
+					<div class="text_color_is_picked">
+					</div>
+				</div>	
+		        <div class="color_box_text color_box_ext_05">
+					<div class="text_color_is_picked">
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div id="Menu_Edit_Text_List">
+        <div class="Menu_Edit_Text_Title_Div">
+			<span class="Menu_Edit_Text_Title_Font">LIST</span>
+		</div>
+        <div id="Menu_Edit_Text_List_Around" class="Menu_Edit_Text_Radius" style="margin-left:55px;">
+			<input type="radio" class="Menu_Edit_Text_List_Model" name="Menu_Edit_Text_List_Around_Side" id="Menu_Edit_Text_List_Around_Left"/>
+			<label for="Menu_Edit_Text_List_Around_Left">&lt;-</label>
+			<input type="radio" class="Menu_Edit_Text_List_Model" name="Menu_Edit_Text_List_Around_Side" id="Menu_Edit_Text_List_Around_Right"/>
+			<label for="Menu_Edit_Text_List_Around_Right">-&gt;</label>											
+		</div>
+        <ol id="Menu_Edit_Text_List_Format" class="Text_Combox_Margin">
+			<li style="border-bottom:0px;" class="Menu_Edit_Text_List_Format_ListStyle textSet_listTopRadius" listStyle="none">
+				<span>None</span>
+			</li>
+			<li style="border-bottom:0px;" class="Menu_Edit_Text_List_Format_ListStyle" listStyle="bullet">
+				<span>・Bullet</span>
+			</li>
+			<li style="border-bottom:0px;" class="Menu_Edit_Text_List_Format_ListStyle" listStyle="image">
+				<span><Strong>・</Strong>Image</span>
+			</li>
+			<li style="border-bottom:0px;" class="Menu_Edit_Text_List_Format_ListStyle" listStyle="lettered">
+				<span>A.Lettered</span>
+			</li>
+			<li class="Menu_Edit_Text_List_Format_ListStyle textSet_listBottomRadius" listStyle="numbered">
+				<span>1.Numbered</span>
+			</li>
+		</ol>	
+	</div>
+	<div id="Menu_Edit_Text_Layout">
+        <div class="Menu_Edit_Text_Title_Div">
+			<span class="Menu_Edit_Text_Title_Font">LAYOUT</span>
+		</div>
+		<div id="Menu_Edit_Text_Layout_Align" class="Menu_Edit_Text_Radius">
+			<p>Alignment</p>
+			<input type="radio" id="Menu_Edit_Text_Layout_Align_Left" paraAlignStyle="left" class="Menu_Edit_Text_Layout_Align_Model" name="Menu_Edit_Text_Layout_Align_Style"/>
+			<label for="Menu_Edit_Text_Layout_Align_Left"><img src="images/textstyle_left.png"/></label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Align_Center" paraAlignStyle="center" class="Menu_Edit_Text_Layout_Align_Model" name="Menu_Edit_Text_Layout_Align_Style"/>
+			<label for="Menu_Edit_Text_Layout_Align_Center"><img src="images/textstyle_center.png"/></label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Align_Right" paraAlignStyle="right" class="Menu_Edit_Text_Layout_Align_Model" name="Menu_Edit_Text_Layout_Align_Style"/>
+			<label for="Menu_Edit_Text_Layout_Align_Right"><img src="images/textstyle_right.png"/></label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Align_Justify" paraAlignStyle="justify" class="Menu_Edit_Text_Layout_Align_Model" name="Menu_Edit_Text_Layout_Align_Style"/>
+			<label for="Menu_Edit_Text_Layout_Align_Justify"><img src="images/textstyle_both.png"/></label>
+		</div>	
+		<div id="Menu_Edit_Text_Layout_Columns" class="Menu_Edit_Text_Radius">
+			<p>Columns</p>
+			<input type="radio" id="Menu_Edit_Text_Layout_Columns_One" paraColumns="one" class="Menu_Edit_Text_Layout_Columns_Model" name="Menu_Edit_Text_Layout_Columns_Style"/>
+			<label for="Menu_Edit_Text_Layout_Columns_One">1</label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Columns_Two" paraColumns="two" class="Menu_Edit_Text_Layout_Columns_Model" name="Menu_Edit_Text_Layout_Columns_Style"/>
+			<label for="Menu_Edit_Text_Layout_Columns_Two">2</label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Columns_Three" paraColumns="three" class="Menu_Edit_Text_Layout_Columns_Model" name="Menu_Edit_Text_Layout_Columns_Style"/>
+			<label for="Menu_Edit_Text_Layout_Columns_Three">3</label>
+			<input type="radio" id="Menu_Edit_Text_Layout_Columns_Four" paraColumns="four" class="Menu_Edit_Text_Layout_Columns_Model" name="Menu_Edit_Text_Layout_Columns_Style"/>
+			<label for="Menu_Edit_Text_Layout_Columns_Four">4</label>
+		</div>
+		
+		<div class="Popup_ComBox Text_Combox Text_MarginTop32" >
+				<div class="Popup_ComBox_Items" style="border:none;" id="Menu_Edit_Text_Layout_Line">
+					<div class="Item_Title">Line</div>
+					<div class="Item_Property">
+						<select id="text-style-line-spacing" style="float:right;width:50px;">
+			  			</select>
+					</div>
+				</div>
+			</div>
+		
+		
+	</div>
+	<div class="Menu_Edit_Bottom_Bg1">
+</div>

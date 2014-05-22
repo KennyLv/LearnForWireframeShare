@@ -1,0 +1,34 @@
+$(document).ready(function(){
+  $("#media_option").click(function(){
+	  $("#media_menu").toggle();
+	  $("#menu_shadow").toggle();
+	  $("#menu_shadow_body").toggle();
+	  $("#menu_shadow_arrayhead").toggle();
+  });
+  $("#media_share").click(function(){
+	  if($("#media_share").attr("class")=="focus"){
+		  $("#media_share").attr('class','unfocus');
+	  }else{
+		  $("#media_share").attr('class','focus');
+		  $("#media_expert").attr('class','unfocus');
+		  $("#media_print").attr('class','unfocus');
+	  }
+  });
+  $("#media_expert").click(function(){
+	  if($("#media_expert").attr("class")=="focus"){
+		  $("#media_expert").attr('class','unfocus');
+	  }else{
+		  $("#media_expert").attr('class','focus');
+		  $("#media_share").attr('class','unfocus');
+		  $("#media_print").attr('class','unfocus');
+	  }
+  });$("#media_print").click(function(){
+	  if($("#media_print").attr("class")=="focus"){
+		  $("#media_print").attr('class','unfocus');
+	  }else{
+		  $("#media_print").attr('class','focus');
+		  $("#media_expert").attr('class','unfocus');
+		  $("#media_share").attr('class','unfocus');
+	  }
+  });
+});

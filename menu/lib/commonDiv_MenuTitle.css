@@ -1,0 +1,21 @@
+#Menu_Title_Text_Style_Format .ui-selecting
+{ background: #b2b2b2; }
+
+
+#Menu_Title_Text_Style_Format .ui-selected 
+{ background:none repeat scroll 0 0 #FFFFFF; }
+
+#Menu_Title_Text_Style_Format 
+{ list-style-type: none; margin: 0; padding: 0; width: 100%; }
+
+#Menu_Title_Text_Style_Format li{
+	border:1px solid #b2b2b2;
+	padding-left:8px;
+	text-align:left;
+	height:35px;
+	line-height:35px; 
+	font-size:12px;
+	background:#fff;
+	font-weight:bold;
+	list-style:none;
+}

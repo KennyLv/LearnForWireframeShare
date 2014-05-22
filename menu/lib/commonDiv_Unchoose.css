@@ -1,0 +1,9 @@
+.Menu_Edit_UnSelect_Style {
+	background:none repeat scroll 0 0 #FFFFFF;
+	height:260px;
+	width:271px;
+}
+.Menu_Edit_UnSelect_Style h2 {
+	height: 20px;
+	line-height: 20px;
+}
