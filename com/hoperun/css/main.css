@@ -1,0 +1,213 @@
+* {
+	margin: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font: 14px Arial, Helvetica, sans-serif;
+	text-align: center;
+	background-color: #F4F5F5;
+	
+}
+.header {
+	width: 999px;
+	height: 180px;
+	margin: 0px auto;
+	margin:10px auto 0;
+}
+a {
+	background-color: transparent;
+}
+
+span {
+	background-color:transparent;
+}
+
+#hidden
+{
+	z-index:1000;
+	}
+
+#operationPannel ul li span {
+	background-color:#505C60;
+	position:relative;
+	width:100%;
+}
+
+.clear {
+	clear: both;
+}
+.logo{
+	float:left;
+	margin:30px 0px 0px 20px;
+	cursor:pointer;
+}
+
+.footer {
+
+	background-color:#f5f6f7;
+	--bottom:4%;
+	height:12%;
+	margin:3% auto;
+	min-height:180px;
+	padding:10px 0 30px;
+	position:relative;
+	width:1009px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+	margin:10px auto 0;
+
+	color: #888888;
+
+}
+.footer .centrol {
+	width: 980px;
+	margin: 0px auto;
+}
+
+/*popup menu*/
+#popup-menu-edit-none, #popup-menu-edit-image,#popup-menu-edit-table,
+#popup-menu-edit-cell,#popup-menu-edit-shape-arrow,#popup-menu-edit-shape-text,
+#popup-menu-edit-shape-img, #popup-menu-insert,#popup-menu-tool,#popup-menu-title,#popup-menu-list,#popup-menu-edit-text {
+	position:absolute;
+	width:272px;
+	z-index:6666;
+}
+
+#popup-menu-shortCut,#popup-menu-cell-function,#shape_rightclick_menu
+{	position: absolute;
+	z-index: 6666;
+	text-align:center;
+}
+
+#popup-menu-tool 
+{
+	width:220px;
+}
+#popup-menu-edit-text-content, #popup-menu-edit-image-content,#popup-menu-cell-function
+#popup-menu-insert-content,#popup-menu-tool-content {
+	background-color: #fff;/*66c5ff*/
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-o-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+#popup-menu-tool-content div ul
+{	border-radius:6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-o-border-radius: 6px;
+	margin:0 auto;
+	min-height:50px;
+}
+#popup-menu-tool-content div ul li
+{
+	background-color:#f6f6f6;
+	height:20px;
+	margin:0 auto;
+	margin-top:1px;
+	padding:1px 0px 1px 5px;
+	font-size:14px;
+	color:1c94c4;
+	width:98%;	
+}
+#popup-menu-tool-content div ul li:hover
+{
+	cursor:pointer;
+	background-color:#fff;
+}
+/*color panel - body */
+.Color_ColorPanel
+{
+	 height: 270px;
+     width: 260px;
+}
+
+/*color panel - component */
+.Color_colorGroup
+{
+	width:70px;
+	height:122px;
+	float:left;
+	margin-left:6px;
+	margin-bottom:10px;
+	border:1px solid #FFFFFF;
+	border-radius:10px;
+	-o-border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+.Color_MultiStylePanel{
+	height:260px;
+}
+.Color_MultiStylePanel div{
+	width:70px;
+	height:122px;
+	float:left;
+	margin-left:6px;
+	margin-bottom:10px;
+	border-radius:10px;
+	-o-border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+
+
+
+/*color panel - small part */
+
+
+.Menu_Edit_Text_Style_Format_LiStyle { 
+	border: 1px solid #dddddd; 
+	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x; 
+	color: #333333; 
+}
+
+	
+.context-menu{
+	position: absolute;
+	z-index:6666;
+	width: 300px;
+}
+
+
+.li-top-radius{
+    -moz-border-radius:6px 6px 0 0;
+    border-radius:6px 6px 0 0;
+    -o-border-radius:6px 6px 0 0;
+    -webkit-border-radius:6px 6px 0 0;
+}
+
+.li-bottom-radius{
+    -moz-border-radius:0 0 6px 6px; 
+    border-radius:0 0 6px 6px; 
+    -o-border-radius:0 0 6px 6px;  
+    -webkit-border-radius:0 0 6px 6px; 
+}
+
+#menu-tool-content,#menu-tool-setting-content,#menu-tool-ColorSet-content{
+    -moz-border-radius:0 0 10px 10px; 
+    border-radius:0 0 10px 10px; 
+    -o-border-radius:0 0 10px 10px; 
+    -webkit-border-radius:0 0 10px 10px; 
+    border: 1px solid #999;
+    border-top: none;
+    background: #ffffff;
+    padding-top:10px;
+}
+.temp_title {
+	font-size:15px;
+	font-weight:bold;
+	height:35px;
+	line-height:35px;
+	margin-left:25%;
+	padding:0 5px;
+}
+.Menu_Drawing_TextFont_BackgroundStyle font{
+	text-shadow:0.1em 0.06em white, -0.02em -0.01em #000;
+	color: #000;
+	font: bold 16px Helvetica, sans-serif; 
+}

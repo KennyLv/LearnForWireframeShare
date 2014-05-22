@@ -1,0 +1,98 @@
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+    color: black;
+    font-family: Arial,sans-serif,sans;
+    font-size: 13px;
+    padding:0px;
+    margin:0px;
+}
+.node-moveable{
+	cursor: move;
+}
+.droppable-active{
+	background-color: #FFF;
+}
+
+.droppable-hover{
+	/** background-color: blue; */
+	opacity: 0.5;
+}
+/***************************************** Docs global style ***************************************/
+.hr-docstext-unprintable {
+
+}
+
+.hr-docstext-bubble {
+    background-color: #E0ECFF;
+    border: 1px solid #99C0FF;
+    cursor: default;
+    font: 12px sans-serif;
+    margin: 2px;
+    padding: 4px;
+    position: absolute;
+    z-index: 1020;
+}
+.hr-docstext-inline-block {
+    display: inline-block;
+    position: relative;
+}
+.hr-docstext-bubble-link {
+    color: #000099;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.hr-docstext-bubble-label, .hr-docstext-bubble-link {
+    font-size: 11px;
+}
+.hr-docstext-bubble-label {
+    font-weight: bold;
+}
+.hr-embeddedobjectview-handle{
+ 	cursor: move;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 2000;
+}
+.hr-view-editor {
+
+}
+.hr-page {
+    cursor: text;
+    overflow: hidden;
+}
+.hr-page-paginated {
+    border: 1px solid #BBBBBB;
+    margin-bottom: 8px;
+}
+
+/***************************************** Menu item global style ***************************************/
+.menu-toolbar-text{
+	z-index:5001;
+}
+.menu-popup-item{
+	z-index:5002;
+}
+.menu-popup-item-button{
+	z-index:5003;
+}
+
+.menu-toolbar-text{
+	width:1366px;
+	top:0px;
+	margin: 0 auto;
+	height: 30px;
+	background: url('./../../../images/02_Text/Text Nav Bar/General Elements/bar_landscap.png');
+}
+.paper_ruler_tool{
+    height:30px;
+    margin-bottom:0;
+    margin-left:auto;
+    margin-right:auto;
+    padding:0;
+    width:830px;
+}

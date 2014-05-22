@@ -1,0 +1,31 @@
+/****** special for added image  *******/
+.imgStyle1{
+	box-shadow: 5px 5px 10px #0e1a1a;
+	-moz-box-shadow: 5px 5px 10px #0e1a1a;
+	-webkit-box-shadow: 5px 5px 10px #0e1a1a;
+}
+.imgStyle2
+{
+	padding:2px;
+	background-color:#fff;
+	box-shadow: 5px 5px 10px #0e1a1a;
+	-moz-box-shadow: 5px 5px 10px #0e1a1a;
+	-webkit-box-shadow: 5px 5px 10px #0e1a1a;
+}
+.imgStyle3
+{
+	padding:2px;
+	background-color:#fff;
+	box-shadow: 1px 1px 1px #0e1a1a;
+	-moz-box-shadow: 1px 1px 1px #0e1a1a;
+	-webkit-box-shadow: 1px 1px 1px #0e1a1a;
+}
+.imgStyle4
+{
+	-o-transform:scale(1) rotate(4deg) translate(12px, 10px) skew(0deg, 0deg);
+	-moz-transform:scale(1) rotate(4deg) translate(12px, 10px) skew(0deg, 0deg);
+	-webkit-transform: scale(1) rotate(4deg) translate(12px, 10px) skew(0deg, 0deg);
+	box-shadow: 3px 3px 1px #0e1a1a;
+	-moz-box-shadow: 3px 3px 1px #0e1a1a;
+	-webkit-box-shadow: 3px 3px 1px #0e1a1a;
+}

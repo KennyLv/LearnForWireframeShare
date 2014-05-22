@@ -1,0 +1,1 @@
+com.hoperun.util.BaseTool.log4jsConfig();
