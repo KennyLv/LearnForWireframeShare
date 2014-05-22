@@ -1,0 +1,127 @@
+﻿<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<script type="text/javascript" src="./com/hoperun/3rd/jquery-1.6.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css"/>
+
+<title>WebOffice - GridFrames</title>
+
+	<style  type="text/css">
+		#content{
+			width:100%;
+        	height:281px;
+			margin:150px 0px 100px 0px;
+			background-color:transparent;
+			z-index:20;
+		}
+
+/********** chooseDiv ***********/
+		#chooseDiv{
+			width:1009px;
+			margin:0 auto;
+
+		}
+		
+		#chooseDiv .sectiondiv {
+			border:medium none;
+			float:none;
+			margin-left:20px;
+			width:310px;
+			height:281px;
+		}
+		#chooseDiv .sectiondiv:hover{
+			/*-webkit-box-shadow: 2px 5px 10px #0E1A1A;
+			box-shadow: 2px 5px 10px #0E1A1A;
+			-moz-box-shadow: 2px 5px 10px #0E1A1A;
+			-o-box-shadow: 2px 5px 10px #0E1A1A;*/
+			cursor:pointer;
+		}
+
+/********** footer ***********/
+		.InstructionSection {
+			float:left;
+			width:300px;
+			margin:10px 20px 0px 0px;
+			text-align:left;
+			
+		}
+		.InstructionSection a{
+			font-size:14px;
+			float:left;
+			color:Black;
+			text-decoration:none;
+			font-weight: bold;
+			font-family:Arial;
+		}
+		.InstructionSection a:hover{
+			font-size:10px;
+			float:left;
+			text-decoration:none;
+			cursor:pointer;
+		}
+	</style>
+    <script type="text/javascript">
+        var myPermission = [
+		{ type: 'slide', img: 'icon_slide.png', forword: 'requestConvert' },
+        { type: 'paper', img: 'icon_paper.png', forword: 'requestConvert'},
+        { type: 'sheet', img: 'icon_sheet.png', forword: 'requestConvert' }        
+        ];
+        $(document).ready(function () {
+        	var url = window.location.href.toString();
+    		var username = url.substr(url.indexOf("userName=") + 9,url.length);
+    		$('#username')[0].innerHTML = username;
+
+            var container = $('#chooseDiv');
+            var buff = [], n;
+            for (n = 0; n < myPermission.length; ++n) {
+                buff.push('<a href="'+ myPermission[n].forword + '?doctype=' + myPermission[n].type
+                + '&userName=' + username + '"><img class="sectiondiv" src=\'images/' + myPermission[n].img + '\'/></a>');
+            }
+            container.html(buff.join(''));
+            //set the main part style, so that the menu can be adjust to it
+           // container.css('width', 330 * (myPermission.length) + 'px');
+
+            $('.logo').click(function () {
+                window.location.href = "index.html";
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+    	<div class="header">
+            <div style="width:1000px;margin: 0px auto;">
+                <div class="logo" style="float:right;">
+                    <img src="images/logo.png" alt="logo"/>
+                </div>
+                <div style="float:left; margin:30px 0px 0px 1px;font-size:25px;font-weight: bold;">
+                    <span>Welcome  </span><span id="username"></span>
+                </div>
+            </div>
+		</div>
+            <!-- content -->
+    		<div id="content">       
+                <div id="chooseDiv">    
+
+                </div>
+			</div>
+		 <div style="width:999px;height:1px;background-color:#6D6E71;margin:0 auto;"></div>
+    	<div class="footer">
+            <div class="centrol">
+                <div class="InstructionSection">
+                    <a>
+                   <br/>Presentations on the web has never been better. Sophisticated interface and improved functionalities. works just like a desktop app. express yourselves like never before.</a>
+                </div>
+                <div class="InstructionSection">
+                    <a>
+                    <br/>Write all day long, collaborate and do anything you want with words online. Text is an unparalleled word editing software on the web.</a>
+                </div>
+                <div class="InstructionSection">
+                    <a>
+                    <br/>Crunch numbers, cashflow budgets, reports and more. A whole new experience for spreadsheets online.</a>
+                </div>
+            </div>
+       </div>
+</div></body></html>

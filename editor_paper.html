@@ -1,0 +1,499 @@
+﻿<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>WebOffice - GridFrames</title>
+
+<script type="text/javascript" src="Import.js"></script>
+<script type="text/javascript" src="./com/example/data/PageDocs.js"></script>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/paper.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/docs.css" />
+
+<script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
+<link rel="stylesheet" type="text/css" href="./menu/lib/paperDiv_RulerMenu.css" />
+
+<script type="text/javascript" src="ImportMenu.js"></script>
+
+<style type="text/css">
+
+.left {
+    float:left;
+    z-index: 1001;
+}
+
+.right {
+    float:right;
+    z-index: 1001;
+}
+
+
+
+#feedback { font-size: 10px; }
+select{margin-top:10px;margin-right: 5px;}
+
+/****rewrite the jQuery UI ****/
+/*#text-style-format .ui-selecting, #text-list-format .ui-selecting, #image-style-shadow .ui-selecting { background: #FECA40; }
+#text-style-format .ui-selected, #text-list-format .ui-selected, #image-style-shadow .ui-selected { background: #F39814; color: white; }
+#text-style-format, #text-list-format, #image-style-shadow { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#text-style-format li, #text-list-format li, #image-style-shadow li { margin: 1px; padding: 2px; font-size: 10px; height: 15px; }
+
+#menu_edit_img_effort_shadow_choose .ui-button-text-only .ui-button-text,#menu_edit_img_effort_reflection_choose .ui-button-text-only .ui-button-text,#menu_edit_img_style_border_choose .ui-button-text-only .ui-button-text{ padding:0; text-align: right;}
+#menu_edit_img_effort_shadow_choose .ui-button .ui-button-text,#menu_edit_img_effort_reflection_choose .ui-button .ui-button-text,#menu_edit_img_style_border_choose .ui-button .ui-button-text{ display:block; line-height:20px; height:20px; text-align: right;width:35px; }
+*/
+	.paper_ruler_container {
+		width:1366px;;
+		margin:0 auto;
+		height:34px;
+		position:relative;
+		background:none repeat scroll 0 0 #D7D7D7;
+		overflow:hidden;
+	}
+	#page-ruler-h-bar{
+		background:none repeat scroll 0 0 #f8f8f8;
+		height:35px;
+		width:818px;
+		margin-bottom:-10px;
+		filter:Alpha(Opacity=80);
+		opacity:0.8;
+		-moz-opacity:0.8;
+		-webkit-opacity:0.8;
+
+	}
+	.page-ruler-h-title{}
+	#page-ruler-v-bar{
+		background:none repeat scroll 0 0 #F8F8F8;
+		height:1058px;
+		left:232px;
+		filter:Alpha(Opacity=80);
+		opacity:0.8;
+		-moz-opacity:0.8;
+		-webkit-opacity:0.8;
+		position:absolute;
+		top:13px;
+		width:35px;
+	}
+</style>
+<script type="text/javascript">
+var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+var id = urlParameter.id;
+var currDocID = urlParameter.docid;
+var currDocType = "paper";
+var currFloder = urlParameter.fileFolderName;
+var currFile = urlParameter.fileName;
+var currentSelectedObj = null;
+///var shortCutMenu = new com.hoperun.menu.ShortCutMenu();
+
+function sendMessage(_id, _sender, _data) {
+    var message = new com.hoperun.util.Observer.Message();
+    message.id = _id;
+    message.sender = _sender;
+    message.data = _data;
+    com.hoperun.util.Observer.sendMessage(message);
+}
+
+function initRuler() {
+	//$("#ruler-Content").append("<div id='ruler-h-div'></div>").append("<div id='ruler-h-num-div'></div>").append("<div id='ruler-v-div'></div>").append("<div id='ruler-v-num-div'></div>");
+	//$("#page-ruler-h-bar").append("<div id='ruler-h-div' class='ruler'></div>").append("<div id='ruler-h-num-div' class='ruler'></div>");
+	$("#page-ruler-v-bar").append("<div id='ruler-v-div' class='ruler'></div>").append("<div id='ruler-v-num-div' class='ruler'></div>");
+	var width = 816;
+	var height = 1056;
+	var countH = width/10;
+	var countV = height/10;
+
+	/*for(var i=0; i<=countH; i++){
+		i%5 == 0
+			? $("#ruler-h-div").append("<div class='ruler-h-major' style='left:" + i*10 + "px'><div>") 
+			: $("#ruler-h-div").append("<div class='ruler-h-minor' style='left:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-h-num-div").append("<div class='ruler-h-num-major' style='left:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-h-num-div").append("<div class='ruler-h-num-minor' style='left:" + i*10 + "px'><div>");
+	}*/
+
+	
+	
+	for(var i=0; i<=countV; i++){
+		i%5 == 0 
+			? $("#ruler-v-div").append("<div class='ruler-v-major' style='top:" + i*10 + "px'><div>") 
+			: $("#ruler-v-div").append("<div class='ruler-v-minor' style='top:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-v-num-div").append("<div class='ruler-v-num-major' style='top:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-v-num-div").append("<div class='ruler-v-num-minor' style='top:" + i*10 + "px'><div>");
+	}
+
+	var main = 1366;
+	var countM = 1366/25;
+	var x0 = 265.5; /**position of zero*/
+
+	for (var i = 0 ; i <= countM && (x0+i*25) <= main ; i++){
+		i%2 == 0 
+			? $("#page-ruler-m").append("<div class='ruler-m-major' style='left:" + (x0+i*25) + "px'><div>") 
+			: $("#page-ruler-m").append("<div class='ruler-m-minor' style='left:" + (x0+i*25) + "px'><div>");
+		if (i%2 == 0){
+			if ((x0+i*25) <= 1366 - 30/*word length*/){
+				$("#page-ruler-num-m").append("<div class='ruler-m-num-major' style='left:" + (x0+i*25) + "px'>" + i*25 + "<div>");
+			}
+			
+		}	
+	}
+
+	for(var i = 0 ; 0 <= (x0-i*25) ; i++){
+		i%2 == 0 
+		? $("#page-ruler-m").append("<div class='ruler-m-major' style='left:" + (x0-i*25) + "px'><div>") 
+		: $("#page-ruler-m").append("<div class='ruler-m-minor' style='left:" + (x0-i*25) + "px'><div>");
+		if (i%2 == 0){
+			if ((x0+i*25) <= 1366 - 30/*word length*/){
+				$("#page-ruler-num-m").append("<div class='ruler-m-num-major' style='left:" + (x0-i*25) + "px'>" + i*25 + "<div>");
+			}
+			
+		}	
+	}  
+}
+
+
+$(document).ready(function () {
+	
+	initRuler();
+	
+	// Added by ganlingli
+	$('#Menu_Drawing_pencil').click(function(e){
+		com.hoperun.util.BaseTool.showMenuShadow();
+        $("#Menu_DrawingEraser_Container_Get").css("position","absolute").css("top", e.pageY - 290).css("left", e.pageX - 100).css('display', 'block');
+    });
+	$('#Menu_Drawing_Star_Click').click(function(e){
+		com.hoperun.util.BaseTool.showMenuShadow();
+		$('#upfile').attr("value","");
+		$("#Menu_Picture_Insert_Container_Get").css("position","absolute").css("top", e.pageY - 340).css("left", e.pageX - 120).css('display', 'block');
+    });
+	
+	$('#Menu_Drawing_MenuUp_Click').click(function(e){
+		com.hoperun.util.BaseTool.showMenuShadow();
+		$("#Menu_Drawing_Intro_Container_Get").slideDown();
+		$("#Menu_Drawing_Intro_Container_Get").css('left', '0');
+    });
+	
+	$('#Menu_Drawing_T_Click').click(function(e){
+		com.hoperun.util.BaseTool.closeMenuPopup();
+		
+		var objectType = $(this).attr('objectType');
+		insertObject = {};
+		insertObject.objectType = objectType;
+		if (objectType == "TextBox") {
+		}
+		var message = new com.hoperun.util.Observer.Message();
+		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+		message.sender = insertObject;
+		com.hoperun.util.Observer.sendMessage(message);
+	});
+	
+	// end added
+	//Added for Menu_Drawing_Redo & Menu_Drawing_Undo
+	$("#Menu_Drawing_Undo").click(function (e) {
+		if(document.getElementById("Menu_Drawing_Undo").getAttribute("canUndo")=="true")
+			sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+	});
+	
+	$("#Menu_Drawing_Redo").click(function (e) {
+		if(document.getElementById("Menu_Drawing_Redo").getAttribute("canRedo")=="true")
+			sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+	});
+	jskataUndo.onChange = function() {
+		if(jsk.canUndo()){
+			$("#Menu_Drawing_Undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo.png');
+			document.getElementById("Menu_Drawing_Undo").setAttribute("canUndo", "true");
+			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style, 'color',null);
+		}
+		else{
+			$("#Menu_Drawing_Undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo_disabled.png');
+			document.getElementById("Menu_Drawing_Undo").setAttribute("canUndo", "false");
+			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style,'color', '#AAA');
+		}
+		if(jsk.canRedo()){
+			$("#Menu_Drawing_Redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo.png');
+			document.getElementById("Menu_Drawing_Redo").setAttribute("canRedo", "true");
+			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style,'color', null);
+		}
+		else{
+			$("#Menu_Drawing_Redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo_disabled.png');
+			document.getElementById("Menu_Drawing_Redo").setAttribute("canRedo", "false");
+			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style, 'color','#AAA');
+		}
+	};
+	
+	
+	
+	//sunwei
+	$("#Menu_Drawing_Save").click(function () {
+		var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
+		if(id){
+			var fileInf = {'random': id};
+			com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+		    	if(data){
+				sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':data.filename, 'fileType':data.doctype, 'userName':data.username, 'fileFolderName':folderNameOfFile});
+		    	}
+			});
+		} else {
+			sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+		}
+	});
+	
+	$("#Paper_Edit").click(function (e) {
+    	com.hoperun.util.BaseTool.showMenuShadow();
+        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +25, 'y': e.pageY });
+	 });
+	
+    document.getElementById('myContent').oncontextmenu = function () {
+        return false;
+    };
+    $('#viewHistory').click(function () {
+        if (confirm("The current edit state will lose. Quit?")){
+			if(id){
+     	 		window.location.href = "requestConvert?id=" + id;
+           	    } else {
+				var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
+				com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+					if("false" != data.id){
+						window.location.href = "requestConvert?id=" + data.id;
+            } else {
+						window.history.go(-1);
+					}
+				});
+       	    }
+        }
+    });
+	
+	$("#Menu_DrawingEraser_Container_Get").load('menu/commonDiv_DrawingMenu.html', function () {
+		commonDiv_DrawingMenu_ready();
+	});
+	
+	$("#Menu_Picture_Insert_Container_Get").load('menu/commonDiv_Insert.html', function () {
+		commonDiv_Insert_Ready();
+	});
+	
+	$("#Menu_Drawing_Intro_Container_Get").load('menu/commonDiv_IntroPresentation.html', function () {
+		commonDiv_InroPresentation_ready();
+	});
+	
+	$("#Menu_Edit_Test_Sepace_Select").load('menu/commonDiv_TextSpecsSet.html', function () {
+		commonDiv_TextSpecsSet_Ready();
+	});
+	 $("#popup-menu-edit-none").load('menu/commonDiv_Unchoose.html', function () {
+    });
+
+   	//text
+    $("#popup-menu-edit-text").load('menu/commonDiv_TextSet.html', function () {
+        commonDiv_TextSet_Ready();
+    });
+    
+     //image
+    $("#popup-menu-edit-image").load('menu/commonDiv_ImageSet.html', function () {
+        $("#Menu_Edit_Images_Arrange_WrapClick").css('display', 'block');
+		$("#menu_edit_img_arrange_setting_flipV").addClass("li-top-radius");
+        // $("#Menu_Edit_Images_Arrange_WrapClick").addClass("li-bottom-radius");
+        
+        menuu_edit_image_ready();
+    });
+    
+     $("#popup-menu-edit-table").load('menu/commonDiv_TableSet.html', function () {
+        commonDiv_TableSet_Ready(currDocType);
+    });
+
+    $("#popup-menu-edit-cell").load('menu/commonDiv_CellSet.html', function () {
+        loadMenuEditCellReady(currDocType);
+    });
+     $("#popup-menu-edit-shape-arrow").load('menu/commonDiv_ShapeArrowSet.html', function () {
+        commonDiv_ShapeArrowSet_ready();
+        $("#Menu_Edit_Line_arrange_to_Wrap_Div").css('display', 'block');
+    });
+
+    //
+    $("#popup-menu-edit-shape-img").load('menu/commonDiv_ShapeImageSet.html', function () {
+        commonDiv_ShapeImageSet_Ready();
+        $("#Menu_Edit_ShapeImages_Arrange_Wrap").css('display', 'block');
+        
+	});
+	//initRuler();
+
+});
+function showMenu(type, e) {
+    switch (type) {
+        case 'None':
+            $("#popup-menu-edit-none").css("top", e.y - 300).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'Text':
+            $("#popup-menu-edit-text").css("top", e.y - 457).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'IMAGE':
+            $("#popup-menu-edit-image").css("top", e.y - 465).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'TABLE':
+            $("#popup-menu-edit-table").css("top", e.y - 435).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'CELL':
+            $("#popup-menu-edit-cell").css("top", e.y - 435).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'ShapeArrow':
+            $("#popup-menu-edit-shape-arrow").css("top", e.y - 300).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'ShapeImage':
+            $("#Menu_Edit_ShapeImages_List").css('display', 'block');
+            $("#Menu_Edit_ShapeText_List").css('display', 'none');
+            $("#popup-menu-edit-shape-img").css("top", e.y - 435).css("left", e.x - 160).css('display', 'block');
+            break;
+        case 'ShapeText':
+        	if($("#Menu_Edit_ShapeImage_StyleOptions").css('display') == 'block'){
+        		$("#Menu_Edit_ShapeImageSet").css('display','block');
+        		$("#Menu_Edit_ShapeImage_StyleOptions").css('display','none');
+        	};
+            $("#Menu_Edit_ShapeImages_List").css('display', 'none');
+            $("#Menu_Edit_ShapeText_List").css('display', 'block');
+            $("#popup-menu-edit-shape-img").css("top", e.y - 435).css("left", e.x - 160).css('display', 'block');
+            break;
+    }
+}
+</script>
+
+
+
+<script type="text/javascript">
+<!--
+var _activeContainer = null;
+
+function getActiveContainer(){
+    return this._activeContainer;
+}
+function setActiveContainer(docObj){
+    this._activeContainer = docObj;
+}
+-->
+</script>
+</head>
+<body>
+<div style="width:100%;height:100%;overflow-y:hidden;"  class='content-area'>
+    <div id="popup-menu-edit-none" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-text" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-image" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-table" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-cell" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-shape-arrow" style="display:none;" class="menu-popup-item">
+    </div>
+    <div id="popup-menu-edit-shape-img" style="display:none;" class="menu-popup-item">
+    </div>
+	<div id="Menu_Edit_Test_Sepace_Select" style="display:none;position:relative;"  class="paper_panel_container menu-toolbar-text">
+
+	</div>
+	<div id="popup-menu-shortCut" style="display:none;" class="menu-popup-item">
+    </div>
+
+	<div class ="paper_ruler_container">
+		<div id ="page-ruler-m"></div>
+		<div id ="page-ruler-num-m"></div>
+		<div class="hr-ruler hr-docstext-unprintable" style="margin: -10px 17px 0 0; position:absolute;top:0px;border:0px; ">
+			<div class="hr-ruler-inner" style="left: 86px; width: 816px; ">
+				<div class="hr-ruler-background" style="width: 816px; ">
+					<div class="hr-ruler-background-inner" style="left: 97px; width: 623px; "></div>
+				</div>
+				<div class="hr-ruler-face" style="margin-left: -5px; width: 1375px;height: 30px; margin-top: -10px; z-index: 1100; ">
+                
+                </div>				
+				<div class="hr-ruler-mask" style="width: 1375px; ">
+
+                </div>
+				<div>				
+					<div class="hr-ruler-margin-left" title="Left Margin" style="padding-left: 5px; left: -4px; width: 96px; z-index:1150;"></div>
+					<div class="hr-ruler-margin-right" title="Right Margin" style="padding-right: 5px; left: 720px; width: 96px; z-index:1150;"></div>
+				</div>
+				<div>
+					<div class="hr-ruler-indent-first-line" title="First Line Indent" style="left: 0px;z-index:1150; ">
+                        <img src="./images/03_Pages/Text Nav Bar/Pages View/marker_block.png" />
+                    </div>
+					<div class="docs-icon hr-inline-block hr-ruler-indent-left" title="Left Indent" style="left: 0px;z-index:1140;">
+						<!--<div class="docs-icon-img-container hr-icon-accessible-img hr-ruler-indent-left-sprite">&nbsp;</div>-->
+                        <img src="./images/03_Pages/Text Nav Bar/Pages View/marker_point.png" />
+					</div>
+					<div class="docs-icon hr-inline-block hr-ruler-indent-right" title="Right Indent" style="left: 915px;z-index:1140; ">
+						<!--<div class="docs-icon-img-container hr-icon-accessible-img hr-ruler-indent-right-sprite">&nbsp;</div>-->
+                        <img src="./images/03_Pages/Text Nav Bar/Pages View/marker_point.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+    <div id="myContent" containerType='paper' class='docs-editor' align='center' style='overflow-y:scroll;position:relative;direction: ltr;width:1366px;' tabindex="1" >
+    	<!--  <div id ="page-ruler-h-bar" class="ruler"></div>-->
+        <div id ="page-ruler-v-bar" class="ruler"></div>
+        <div class="hr-cursor hr-docstext-unprintable" style="z-index:100;top:-5000px;left:-5000px; position: absolute;">
+            <div class="hr-cursor-caret" style="border-color: rgb(0, 0, 0); height: 18.7px; visibility: visible; ; border-left: 2px solid; font-size: 0; position: absolute; width: 0;"></div>
+        </div>
+    </div>
+	
+	<div id="Menu_Drawing_Intro_Container_Get" style="display:none;width: 100%;height:100%;z-index:6666;overflow-y:hidden;">	
+	</div>
+	
+	<div id="Menu_DrawingEraser_Container_Get" class='menu-popup-item' style="display:none;z-index:6666;">	
+	</div>
+	
+	<div id="Menu_Picture_Insert_Container_Get" class='menu-popup-item' style="display:none;z-index:6666;">	
+	</div>
+	
+	<div style="margin: 0pt auto; width: 1366px; height: 20px;">
+		<div align='center' style="z-index:2000;"id="Menu_Drawing_AllContent_Get" class="Menu_Drawing_Style" >
+			<div style="float:left;" class="width8 height20 background_black">
+				&nbsp;
+			</div>
+			<div id="viewHistory" style="float:left;" class="width75 height20 background_black hoverStyle">
+				<img  class="height20" src="images/03 Main Nav/Nav Bar/back.png">
+			</div>
+			<div class="width150 height20 Menu_Drawing_TextFont_BackgroundStyle">
+				<font class="Menu_Drawing_TextFont_Style Menu_TextFont_Opacity hoverStyle">TEXT</font>
+			</div>
+			<div id="Menu_Drawing_pencil" style="float:left;" class="width75 height20 background_black">
+				<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/draw.png"/>
+			</div>
+			<div id="Menu_Drawing_T_Click" style="float:left;" class="width75 height20" objectType='TextBox'>
+				<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/type.png"/>
+			</div>
+			<div id="Menu_Drawing_Star_Click" style="float:left;" class="width75 height20 background_black">
+				<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/star.png"/>
+			</div>
+			<div id="Menu_Drawing_MenuUp_Click" style="float:left;opacity:25%;margin-left:160px;" class="width150 height20 background_black">
+				<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/menu_up.png"/>
+			</div>
+			<div style="float:right;">
+				<div id="Paper_Edit" style="float:left;" class="width75 height20">
+					<img class="height20 hoverStyle" id="" src="images/02_Text/Text Nav Bar/Font Style/italic_on.png"/>
+				</div>
+				<div id="Menu_Drawing_Save" class="width75 height20 Menu_Drawing_TextFont_BackgroundStyle">
+					<font class="Menu_Drawing_TextFont_Style Menu_TextFont_Opacity hoverStyle">SAVE</font>
+				</div>
+				<div id="Menu_Drawing_Undo" style="float:left;" class="width75 height20 background_black">
+					<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/undo_disabled.png"/>
+				</div>
+				<div id="Menu_Drawing_Redo" style="float:left;" class="width75 height20">
+					<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/redo_disabled.png"/>
+				</div>
+				<div style="float:left;" class="width75 height20 background_black">
+					<img class="height20 hoverStyle" id="" src="images/03 Main Nav/Nav Bar/animate_disabled.png"/>
+				</div>
+				<div style="float:left;" class="width8 height20 background_black">
+					&nbsp;
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="folderNameOfFile" style="display:none;"></div>
+
+
+<div class="hr-cursor-svg hr-docstext-unprintable" style="z-index:100;top:-5000px;left:-5000px; position: absolute;">
+    <div class="hr-cursor-caret-svg" style="border-color: rgb(0, 0, 0); height: 18.7px; visibility: visible; ; border-left: 2px solid; font-size: 0; position: absolute; width: 0;"></div>
+</div>
+</div>
+</body>
+</html>

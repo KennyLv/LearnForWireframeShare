@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>slide play -- GridFrames</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="Import.js"></script>
+<style>
+#canvas{
+	box-shadow: 0px 5px 6px #0e1a1a;
+	-o-box-shadow: 0px 5px 6px #0e1a1a;
+	-moz-box-shadow: 0px 5px 6px #0e1a1a;
+	-webkit-box-shadow: 0px 5px 6px #0e1a1a;
+	background-color: white;
+	margin: 0 auto;
+	overflow: hidden;
+}
+</style>
+</head>
+<body style="background-color: #414141;">
+    <div id="canvas">
+		<img alt="" src="images/cleardot.gif" style="position:absolute; width:100%; height:100%; z-index:9999;">
+    </div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('body').bind('click', nextSlide);
+});
+
+var slidesForPlay = [];
+for(var i=0; i<window.opener.slides.length; i++){
+	var data = window.opener.slides[i].getData();
+	var slide = new com.hoperun.node.Slide();
+	slide.setData(data);
+	slidesForPlay.push(slide);
+}
+	
+var currSlide = null;
+var animation = new com.hoperun.util.Animation();
+
+// play slide
+function play(slide){
+	animation.setSlide(slide);
+	animation.setContainer(document.getElementById("canvas"));
+	
+	var transitions = slide.getTransitions() != null ? slide.getTransitions() : 'none';
+	
+	eval('animation.' + transitions + '();');
+	
+	currSlide = slide;
+}
+// next slide
+function nextSlide(){
+	if(slidesForPlay.length == 0){
+		$('body').unbind('click');
+		alert("No slide to play!"); return;
+	}
+	
+	var slide = slidesForPlay[slidesForPlay.indexOf(currSlide,0)+1];
+
+	if(slide == null){
+		$('body').unbind('click');
+		alert("This is the last slide!"); 
+		$('body').bind('click', nextSlide);
+		return;
+	}
+	play(slide);
+}
+</script>
+</html>

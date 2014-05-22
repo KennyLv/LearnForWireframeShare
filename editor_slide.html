@@ -1,0 +1,575 @@
+﻿<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>WebOffice - GridFrames</title>
+
+<script type="text/javascript" src="Import.js"></script>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/slide.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./menu/lib/paperDiv_RulerMenu.css" />
+<script type="text/javascript" src="ImportMenu.js"></script>
+<script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
+<script type="text/javascript" src="./menu/lib/slideDiv_transition.js"></script>
+<script type="text/javascript" src="./menu/lib/commonDiv_MouseRightClickMenu.js"></script>
+<script type="text/javascript" src="./com/example/data/PageSlides.js"></script>
+
+<style>
+	.paper_ruler_tool {
+        height:30px;
+        margin-bottom:0;
+        margin-left:auto;
+        margin-right:auto;
+        padding:0;
+        width:830px;
+	}
+</style>
+<script type="text/javascript">
+var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+var id = urlParameter.id;
+var currDocID = urlParameter.docid;
+var currDocType = "slide";
+
+    var insertObject = null;
+
+    function sendMessage(_id, _sender, _data) {
+        var message = new com.hoperun.util.Observer.Message();
+        message.id = _id;
+        message.sender = _sender;
+        message.data = _data;
+        com.hoperun.util.Observer.sendMessage(message);
+    }
+    function openFullWindow() {
+        var win = window.open("", "", "scrollbars");
+        win.moveTo(0, 0);
+        win.resizeTo(screen.availWidth, screen.availHeight);
+        win.location = "slidePlay.html";
+        win.focus();
+    }
+</script>
+<script type="text/javascript">
+function getActiveContainer(){
+	return currSlide;
+}
+</script>
+<script type="text/javascript">
+    var addingAnimation = false;
+$(document).ready(function () {
+    document.getElementById('myContent').oncontextmenu = function () {
+        return false;
+    };
+    
+    initRuler();
+    
+    $(".logo").click(function () {
+        window.location.href = "index.html";
+    });
+    
+    $("#viewHistory").click(function () {
+        window.location.href = "history.html?doctype=slide";
+    });
+
+    //none
+    $("#popup-menu-edit-none").load('menu/commonDiv_Unchoose.html', function () {
+
+    });
+
+    $("#popup-menu-edit-shape-arrow").load('menu/commonDiv_ShapeArrowSet.html', function () {
+        commonDiv_ShapeArrowSet_ready();
+    });
+
+    $("#popup-menu-edit-shape-img").load('menu/commonDiv_ShapeImageSet.html', function () {
+        commonDiv_ShapeImageSet_Ready();
+    });
+
+    //text
+    $("#popup-menu-edit-bar").load('menu/commonDiv_TextSpecsSet.html', function () {
+    	commonDiv_TextSpecsSet_Ready();
+    });
+
+    //text
+    $("#popup-menu-edit-text").load('menu/commonDiv_TextSet.html', function () {
+        commonDiv_TextSet_Ready();
+    });
+    
+    //image
+    $("#popup-menu-edit-image").load('menu/commonDiv_ImageSet.html', function () {
+    	$("#menu_edit_img_arrange_setting_flipV").addClass("li-top-radius");
+    	$("#menu_edit_img_arrange_setting_flipH").addClass("li-bottom-radius");
+        //$("#menu_edit_img_arrange_setting_maskEdit").addClass("li-bottom-radius");
+        menuu_edit_image_ready();
+    });
+
+    $("#popup-menu-edit-table").load('menu/commonDiv_TableSet.html', function () {
+        commonDiv_TableSet_Ready(currDocType);
+    });
+
+    $("#popup-menu-edit-cell").load('menu/commonDiv_CellSet.html', function () {
+        loadMenuEditCellReady(currDocType);
+    });
+
+    $("#popup-menu-insert").load('menu/commonDiv_Insert.html', function () {
+        commonDiv_Insert_Ready();
+    });
+    
+    $("#popup-menu-draw").load('menu/commonDiv_DrawingMenu.html', function () {
+    	commonDiv_DrawingMenu_ready();
+    });
+    $("#popup-menu-transition").load('menu/slideDiv_transition.html', function () {
+        transitionReady();
+    });
+
+    $("#popup-menu-cell-function").load('menu/commonDiv_CellFunction.html', function () {
+        commonCellFunctionReady();
+    });
+	
+	$("#slide-footer-undo").click(function (e) {
+		if(document.getElementById("slide-footer-undo").getAttribute("canUndo")=="true")
+			sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+	});
+	
+        $("#slide-footer-redo").click(function (e) {
+            if (document.getElementById("slide-footer-redo").getAttribute("canRedo") == "true")
+                sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+        });
+
+	jskataUndo.onChange = function() {
+            if (jsk.canUndo()) {
+            	$("#slide-footer-undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo.png');
+                document.getElementById("slide-footer-undo").setAttribute("canUndo", "true");
+                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', null);
+            }
+            else {
+            	$("#slide-footer-undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo_disabled.png');
+                document.getElementById("slide-footer-undo").setAttribute("canUndo", "false");
+                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', '#AAA');
+            }
+            if (jsk.canRedo()) {
+            	$("#slide-footer-redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo.png');
+                document.getElementById("slide-footer-redo").setAttribute("canRedo", "true");
+                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', null);
+            }
+            else {
+            	$("#slide-footer-redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo_disabled.png');
+                document.getElementById("slide-footer-redo").setAttribute("canRedo", "false");
+                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', '#AAA');
+            }
+	};
+
+    $("#edit").click(function (e) {
+    	com.hoperun.util.BaseTool.showMenuShadow();
+        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY });
+    });
+
+    $("#insertAnimation").click(function (e) {
+    	com.hoperun.util.BaseTool.closeMenuPopup();
+        $("#normalSilderCommandBar").css('display', 'none');
+        $("#playSilderCommandBar").css('display', 'block');
+        addingAnimation = true;
+        $("#addSlidePage").css("display","none");
+    });
+
+    $("#addAnimationDone").click(function (e) {
+        $("#playSilderCommandBar").css('display', 'none');
+        $("#normalSilderCommandBar").css('display', 'block');
+        addingAnimation = false;
+        $("#addSlidePage").css("display","block");
+    });
+
+    $("#slide-footer-animate-edit").click(function (e) {
+    	com.hoperun.util.BaseTool.closeMenuPopup();
+        openFullWindow();
+    });
+
+    $(".slide-presentation-add, #slide-footer-plus").click(function (e) {
+        var currentMode = $("#slide-themes-footer-edit").css("display");
+        if(currentMode!="block"){
+    		swapTemplateAndSlide(true, false);
+        } else {
+            alert("This is edit mode!");
+        }
+    });
+
+    $("#slide-footer-save").click(function () {
+    	var data = [];
+    	for(var i=0; i<slides.length; i++){
+    		data.push(slides[i].getData());
+    	}
+    	var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
+    	var fileName = document.getElementById("fileName").value;
+    	if(id){
+			var fileInf = {'random': id};
+			com.hoperun.util.FileHelper.loadParams(fileInf, function(temp_data){
+		    	if(temp_data){
+				sendMessage(com.hoperun.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':temp_data.doctype, 'userName':temp_data.username, 'fileFolderName':folderNameOfFile});
+    	}
+			});
+		} else {
+			sendMessage(com.hoperun.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+		}
+    	
+    });
+
+    $("#themesList").click(function () {
+    	if (confirm("The current edit state will lose. Quit?")){
+	    	var currentMode = $("#slide-themes-footer-edit").css("display");
+	        if(currentMode!="block"){
+	        	if(id){
+	     	 		window.location.href = "requestConvert?id=" + id;
+				} else {
+					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
+					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+						if("false" != data.id){
+							window.location.href = "requestConvert?id=" + data.id;
+						} else {
+							window.history.go(-1);
+						}
+					});
+				}
+	        } else {
+	            alert("This is edit mode!");
+	        }
+    	}
+    });
+
+    $("#docsList").click(function () {
+    	if (confirm("The current edit state will lose. Quit?")){
+	    	var currentMode = $("#slide-themes-footer-edit").css("display");
+	        if(currentMode!="block"){
+	        	if(id){
+	     	 		window.location.href = "requestConvert?id=" + id;
+				} else {
+					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
+					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+						if("false" != data.id){
+							window.location.href = "requestConvert?id=" + data.id;
+						} else {
+							window.history.go(-1);
+						}
+					});
+				}
+	        } else {
+	            alert("This is edit mode!");
+	        }
+    	}
+    });
+    
+    $("#slide-footer-back, #slide-footer-back-template").click(function () {
+    	//Update current slide changes into presentation
+    	updatePresentationSlide();
+    	$("#themesList").show();
+    	$("#docsList").show();
+    	$('#docsName').show();
+    	$('.slides-presentation').show();
+    	$('#slide-themes-footer').show();
+		$('#slide-edit-footer').hide();
+		$('#slide-edit-footer-template').hide();
+		$("#contentId").hide();
+		$("#popup-menu-edit-bar").hide();
+    });
+
+    $("#slide-footer-star").click(function (e) {
+    	var objs = $('.svg-text-shadow:visible');
+    	if(objs.length > 0) {
+    		objs.click();
+    	}
+   		com.hoperun.util.BaseTool.showMenuShadow();
+        $("#popup-menu-insert").css("position","absolute").css("top", e.pageY - 350).css("left", e.pageX - 127).css('display', 'block');
+    });
+
+    $("#slide-footer-type").click(function (e) {
+    	com.hoperun.util.BaseTool.closeMenuPopup();
+        //Send insert textbox message.
+		var message = new com.hoperun.util.Observer.Message();
+		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+		message.sender = {objectType: "TextBox"};
+		com.hoperun.util.Observer.sendMessage(message);
+        //var left = ($(window).width() - $("#myContent").css("width").replace("px","")) / 2;
+        //$("#popup-menu-edit-text").css("top", 0).css("left", left).css('display', 'block');
+    });
+
+    $("#slide-footer-draw").click(function (e) {
+    	com.hoperun.util.BaseTool.showMenuShadow();
+        $("#popup-menu-draw").css("position","absolute").css("top", e.pageY - 290).css("left", e.pageX - 100).css('display', 'block');
+    });
+
+    $("#slide-footer-edit").click(function (e) {
+    	$("#slide-themes-footer-edit").css("display", "block");
+    	$("#slide-themes-footer").css("display", "none");
+    });
+
+    $("#slide-footer-done").click(function (e) {
+    	$("#slide-themes-footer-edit").css("display", "none");
+    	$("#slide-themes-footer").css("display", "block");
+    	//Remove the select's icon
+    	for(var i=0; i<currentSelectedSlideAbbreviation.length; i++){
+    		var parentDivOfSlide = currentSelectedSlideAbbreviation[i].getDomInstance().parentNode;
+    		if(parentDivOfSlide){
+    			for(var j = 0; j < parentDivOfSlide.childNodes.length; j++){
+    				if (parentDivOfSlide.childNodes[j].className && "slide-edit-selected-image".indexOf(parentDivOfSlide.childNodes[j].className) != -1){
+    					parentDivOfSlide.removeChild(parentDivOfSlide.childNodes[j]);
+    				}
+    			}
+    		}
+    	}
+    	currentSelectedSlide = [];
+    	currentSelectedSlideAbbreviation = [];
+    });
+
+    $("#slide-footer-duplicate-edit").click(function (e) {
+    	if(currentSelectedSlide.length == 0){
+            alert("Please select a slide!");
+        } else {
+	    	for(var i=0; i<currentSelectedSlide.length; i++){
+		    	var newSlideForCopy = currentSelectedSlide[i].clone();
+	    		addPresentationSlide(newSlideForCopy);
+	        	slides.add(newSlideForCopy);
+	    	}
+        }
+    });
+
+    $("#slide-footer-delete-edit").click(function (e) {
+    	if(currentSelectedSlide.length == 0){
+            alert("Please select a slide!");
+        } else if(currentSelectedSlide.length == slides.length){
+        	alert("Can not remove all slides!");
+        } else {
+	    	for(var i=0; i<currentSelectedSlide.length; i++){
+	    		removeSlide(currentSelectedSlide[i]);
+	    	}
+	    	currentSelectedSlide = [];
+	    	currentSelectedSlideAbbreviation = [];
+        }
+    });
+
+    $("#slide-footer-information").click(function (e) {
+    	 com.hoperun.util.BaseTool.showMenuShadow();
+         sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY - 304});
+    });
+});
+
+function showMenu(type, e) {
+    switch (type) {
+        case 'None':
+            $("#popup-menu-edit-none").css("top", e.y + 20).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'Text':
+            $("#popup-menu-edit-text").css("top", e.y - 120).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'IMAGE':
+            $("#popup-menu-edit-image").css("top", e.y - 160).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'TABLE':
+            $("#popup-menu-edit-table").css("top", e.y - 125).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'CELL':
+            $("#popup-menu-edit-cell").css("top", e.y - 125).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'ShapeArrow':
+            $("#popup-menu-edit-shape-arrow").css("top", e.y - 120).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'ShapeImage':
+            $("#Menu_Edit_ShapeImages_List").css('display', 'block');
+            $("#Menu_Edit_ShapeText_List").css('display', 'none');
+            $("#popup-menu-edit-shape-img").css("top", e.y - 130).css("left", e.x - 130).css('display', 'block');
+            break;
+        case 'ShapeText':
+        	if($("#Menu_Edit_ShapeImage_StyleOptions").css('display') == 'block'){
+        		$("#Menu_Edit_ShapeImageSet").css('display','block');
+        		$("#Menu_Edit_ShapeImage_StyleOptions").css('display','none');
+        	};
+            $("#Menu_Edit_ShapeImages_List").css('display', 'none');
+            $("#Menu_Edit_ShapeText_List").css('display', 'block');
+            $("#popup-menu-edit-shape-img").css("top", e.y - 125).css("left", e.x - 130).css('display', 'block');
+            break;
+    }
+}
+
+</script>
+<script type="text/javascript">
+function initRuler() {
+	//$("#canvas").append("<div id='ruler-h-div'></div>").append("<div id='ruler-h-num-div'></div>").append("<div id='ruler-v-div'></div>").append("<div id='ruler-v-num-div'></div>");
+//$("#canvas").before("<div id='ruler-h-div' class='ruler'></div>").before("<div id='ruler-h-num-div' class='ruler'></div>").after("<div id='ruler-v-div' class='ruler'></div>").after("<div id='ruler-v-num-div' class='ruler'></div>");
+
+	var width = $("#canvas").width();
+	var height = $("#canvas").height();
+	var countH = width/10;
+	var countV = height/10;
+
+	for(var i=0; i<=countH; i++){
+		i%5 == 0
+			? $("#ruler-h-div").append("<div class='ruler-h-major' style='left:" + i*10 + "px'><div>") 
+			: $("#ruler-h-div").append("<div class='ruler-h-minor' style='left:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-h-num-div").append("<div class='ruler-h-num-major' style='left:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-h-num-div").append("<div class='ruler-h-num-minor' style='left:" + i*10 + "px'><div>");
+	}
+	
+	for(var i=0; i<=countV; i++){
+		i%5 == 0 
+			? $("#ruler-v-div").append("<div class='ruler-v-major' style='top:" + i*10 + "px'><div>") 
+			: $("#ruler-v-div").append("<div class='ruler-v-minor' style='top:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-v-num-div").append("<div class='ruler-v-num-major' style='top:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-v-num-div").append("<div class='ruler-v-num-minor' style='top:" + i*10 + "px'><div>");
+	}
+}
+$(document).ready(function(){
+	$("#rotation-left").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
+	});
+	$("#rotation-right").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
+	});
+	
+	$("#flip-left").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
+	});
+	$("#flip-right").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
+	});
+	$("#flip-up").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
+	});
+	$("#flip-down").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
+	});
+});
+</script>
+</head>
+<body>
+<form style="width:100%;height:100%;overflow:auto;" class="menu_edit_form">
+	<div style="width:100%; margin:0 auto;"  class='content-area'>
+        <div id="popup-menu-edit-none" style="display:none;" class='menu-popup-item'></div>
+		<div id="popup-menu-draw" style="display:none;z-index:6666;" class='menu-popup-item'></div>
+	    <div id="popup-menu-edit-bar" style="display:none;position:relative;'" class='menu-toolbar-text'></div>
+	    <div id="popup-menu-edit-image" style="display:none;" class='menu-popup-item'></div>
+        <div id="popup-menu-edit-table" style="display:none;" class='menu-popup-item'></div>
+        <div id="popup-menu-edit-cell" style="display:none;" class='menu-popup-item'></div>
+		<div id="popup-menu-insert" style="display:none;z-index:6666;" class='menu-popup-item'></div>
+        <div id="popup-menu-transition" style="display:none" class='menu-popup-item'></div>
+        <div id="popup-menu-cell-function" style="display:none" class='menu-popup-item'></div>
+        <div id="popup-menu-shortCut" style="display:none;" class='menu-popup-item'></div>
+        <div id="shape_rightclick_menu" style="display:none;" class='menu-popup-item'></div>
+        <div id="popup-menu-edit-text" style="display:none;" class='menu-popup-item'></div>
+        <div id="popup-menu-edit-shape-arrow" style="display:none;" class='menu-popup-item'></div>
+        <div id="popup-menu-edit-shape-img" style="display:none;" class='menu-popup-item'></div>
+        <!-- test button start 
+		<div style="float:right; padding:200px 0 0 0;">
+			<div>
+				<span>rotation</span>
+				<input type="button" id="rotation-left" value="left">
+				<input type="button" id="rotation-right" value="right">
+			</div>
+			<div>
+				<span>flip</span>
+				<input type="button" id="flip-left" value="left">
+				<input type="button" id="flip-right" value="right">
+				<input type="button" id="flip-up" value="up">
+				<input type="button" id="flip-down" value="down">
+			</div>
+		</div>
+		 test button end -->
+		<div style="padding-left:60px;">
+		    <div id="slide_rule" style="position: relative;margin:0 auto;">
+			    <div id='ruler-h-div' class='ruler'></div>
+	            <div id='ruler-h-num-div' class='ruler'></div>
+	            <div id='ruler-v-num-div' class='ruler'></div>
+                <div id='ruler-v-div' class='ruler'></div>
+		    </div>
+			<div id="myContent" containerType='slide' style="width:1394px; height: 828px; margin: 0 auto;background:#FFFFFF;">
+			<div id="themesList" class="slides-themes"><span class="slide-footer-presentation">THEMES</span></div>
+			<div id="docsList" class="slides-docs"><span class="slide-footer-presentation">DOCS</span></div>
+			<div id="docsName" class="slides-docsName">
+				<input type="text" name="fileName" id="fileName" value="Presentation 1" class="slides-docsNameInput slide-footer-presentation">
+			</div>
+				<div class="slides-presentation" style="width:98%;height:98%;min-height:718px;margin-top:-3px;">
+					<div class='slides-presentation-page'><div class='slide-presentation-add slide-presentation'>
+						<div><div></div></div>
+					</div></div></div>
+				<div id='contentId' style="display:none;width:98%;min-height:776px;">
+					
+					<div id='overflow-button' style='position:absolute;top:0px;width:230px;left:350px;min-height:20px;overflow:hidden;height:20px;z-index:2000;background-color:#eee;Opacity: 0.75;' >
+						<div style='margin-top:20px;text-align:center;position:relative;margin-left:0px;width:230px;height:50px;'>
+							<div class='presentation-slide-button-left presentation-slide-button'></div>
+							<div id='backToPresentation' class='presentation-slide-button presentation-slide-button-text '>
+								<div style='margin-top:12px;'>
+									Presentation
+								</div>
+							</div>
+							<div class='presentation-slide-button-right presentation-slide-button'></div>
+						</div>
+					</div>
+						<div id="canvas" class="docs-editor" style="position:absolute; width:98%; height:98%;background:#FFFFFF;margin-left:14px;margin-top:14px;">
+						<div id='slides-presentation-template' class='slides-presentation-template' style='position: absolute;'></div>
+						</div>
+				</div>
+				<div id="footer" class="slide-footer">
+					<div id="slide-themes-footer" style="float: left;">
+						<div id="slide-footer-plus" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/plus.png" /></div>
+						<div id="slide-footer-edit" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">EDIT</span></div>
+						<div id="slide-footer-duplicate-disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/duplicate_disabled.png" /></div>
+						<div id="slide-footer-export-disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/export_disabled.png" /></div>
+						<div id="slide-footer-menuup" class="slide-footer-plus-div" style="margin-left: 215px;"><img src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+						<div id="slide-footer-save" class="slide-footer-save-div" style="margin-left: 500px;"><span class="slide-footer-presentation">SAVE</span></div>
+						<div id="slide-footer-delete-disabled" class="slide-footer-undo-div" style="margin-left: 8px;"><img src="images/03 Main Nav/Nav Bar/delete_disabled.png" /></div>
+					</div>
+					<div id="slide-themes-footer-edit" style="float: left;display:none;width:100%;">
+						<div id="slide-footer-plus-disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/plus_disabled.png" /></div>
+						<div id="slide-footer-edit-disabled" class="slide-history-footer-edit" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">EDIT</span></div>
+						<div id="slide-footer-done" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">DONE</span></div>
+						<div id="slide-footer-duplicate-edit" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/duplicate.png" /></div>
+						<div id="slide-footer-export-edit" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/export.png" /></div>
+						<div id="slide-footer-delete-edit" class="slide-footer-undo-div" style="margin-left: 8px;"><img src="images/03 Main Nav/Nav Bar/delete.png" /></div>
+					</div>
+					<div id="slide-edit-footer" style="float: left;display:none;width:100%;">
+						<div id="slide-footer-back" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/back.png" /></div>
+						<div id="slide-footer-normal" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation hoverStyle" style="margin-left: 5px;">NORMAL</span></div>
+						<div id="slide-footer-draw" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/draw.png" /></div>
+						<div id="slide-footer-type" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/type.png" /></div>
+						<div id="slide-footer-star" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/star.png" /></div>
+						<div id="slide-footer-menuup-edit" class="slide-footer-plus-div" style="margin-left: 133px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+						<div id="slide-footer-animate-edit" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/animate.png" /></div>
+						<div id="slide-footer-redo" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/redo_disabled.png" /></div>
+						<div id="slide-footer-undo" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/undo_disabled.png" /></div>
+						<div id="slide-footer-information" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/02_Text/Text Nav Bar/Font Style/italic_information.png" /></div>
+					</div>
+					<div id="slide-edit-footer-template" style="float: left;display:none;width:100%;">
+						<div id="slide-footer-back-template" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/back.png" /></div>
+						<div id="slide-footer-normal" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation hoverStyle" style="margin-left: 5px;">NORMAL</span></div>
+						<div id="slide-footer-draw-disabled" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/draw_disabled.png" /></div>
+						<div id="slide-footer-type-disabled" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/type_disabled.png" /></div>
+						<div id="slide-footer-star-disabled" class="slide-footer-plus-div"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/star_disabled.png" /></div>
+						<div id="slide-footer-menuup-disabled" class="slide-footer-plus-div" style="margin-left: 133px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+						<div id="slide-footer-animate-disabled" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/animate_disabled.png" /></div>
+						<div id="slide-footer-redo-disabled" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/redo_disabled.png" /></div>
+						<div id="slide-footer-undo-disabled" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/undo_disabled.png" /></div>
+						<div id="slide-footer-information" class="slide-footer-undo-div" style="margin-left: 8px;"><img class="hoverStyle" src="images/02_Text/Text Nav Bar/Font Style/italic_information_off.png" /></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="folderNameOfFile" style="display:none;"></div>
+	<div id="oldFileName" style="display:none;"></div>
+<div class="hr-cursor-svg hr-docstext-unprintable" style="z-index:100;top:-5000px;left:-5000px; position: absolute;">
+    <div class="hr-cursor-caret-svg" style="border-color: rgb(0, 0, 0); height: 18.7px; visibility: visible; ; border-left: 2px solid; font-size: 0; position: absolute; width: 0;"></div>
+</div>
+</form>
+<script type="text/javascript">
+function keyUp(e){
+	var nodesObj = [];
+	for(var i=0; i<slides.length; i++){
+		nodesObj.push(slides[i].getData());
+	}
+	var currKey=0, e = e||event;
+	currKey = e.keyCode || e.which || e.charCode;
+	if(currKey == 32){
+		//alert(JSON.stringify(nodesObj));
+	}
+}
+//document.onkeyup=keyUp;
+</script>
+</body>
+</html>

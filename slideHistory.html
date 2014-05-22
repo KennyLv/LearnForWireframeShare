@@ -1,0 +1,718 @@
+﻿<html>
+<head>
+<title>WebOffice - GridFrames</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css"/>
+<script type="text/javascript" >
+    var com = {};
+    com.hoperun = {};
+    com.hoperun.util = {};
+</script>
+<script type="text/javascript" src="Import.js"></script>
+<style  type ="text/css">
+
+/********** historyRecords ***********/
+
+
+</style>
+<script type="text/javascript">
+    //get the doctype from the URL
+    var urlParameters = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+    var random = urlParameters.id;
+    var currentDocType = urlParameters.doctype;
+    window.document.write("<link rel=\"stylesheet\" type=\"text\/css\" href=\"com\/hoperun\/css\/slide.css\">");
+
+    var SLIDE_HEIGHT = 770, SLIDE_WIDTH = 1366, SLIDE_COL_NUMBER = 5, SLIDE_ROW_NUMBER = 4;
+    var _presetationZoom = 1, _presentationWidth = 100, _presentationHeight = 75;
+    var currentSelectedHistory = [];
+    var currentSelectedHistoryPath = [];
+    var currentSelectedHistoryDiv = [];
+    var currentSelectedVersion = [];
+    var _indent = {
+    		top:-4,
+    		right:58,
+    		bottom:20,
+    		left:8
+    };
+    var _margin = {
+    		left:50,
+    		top:50
+    };
+    var pageIndex = 0;
+    var pageHistoryIndex = 0;
+
+    var historyList = "";
+    var themesList = "";
+    var currentFolderName = "";
+    //Get history record
+    function getHistoryRecords() {
+    	$("#slides-presentation-history-list").html("");
+    	if(document.getElementById("currFileName").innerHTML){
+    		currentFolderName = document.getElementById("currFileFolderName").innerHTML;
+    	}
+    	var fileInf = {'random': random};
+		com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+	    	if(data){
+		    	username = data.username;
+		    	currentDocType = data.doctype;
+		    	getThemes();
+		    	var fileInfo = {'fileType': currentDocType, 'userName': username,'currentFolderName': currentFolderName};
+    	var historyRecordList = "";
+    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+        	if(data.list){
+        		layoutSlidesThemesList(data.list, true);
+        		historyList = data.list;
+    	    	var currentshowDivId = urlParameters.showDivId;
+    	    	if(!currentshowDivId || (currentshowDivId && currentshowDivId =="history")){
+   	    			layoutForHistory();
+    	    	}
+        	} else {
+        		$("#docsList-history").css("display","none");
+        		layoutForTemplate();
+        	}
+    	});
+    }
+		});
+    }
+
+  	//Get history record by char
+    function getHistoryRecordsByChar() {
+    	$("#slides-presentation-history-list").html("");
+    	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byChar', 'searchText':$('#searchText').val()};
+    	var historyRecordList = "";
+    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+        	if(data.list){
+        		layoutSlidesThemesList(data.list, true);
+        		historyList = data.list;
+    	    	var currentshowDivId = urlParameters.showDivId;
+    	    	if(!currentshowDivId || (currentshowDivId && currentshowDivId =="history")){
+   	    			layoutForHistory();
+    	    	}
+        	}
+    	});
+    }
+
+  	//Get history record by date
+    function getHistoryRecordsByDate() {
+    	$("#slides-presentation-history-list").html("");
+    	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byDate', 'searchText':$('#searchText').val()};
+    	var historyRecordList = "";
+    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+        	if(data.list){
+        		layoutSlidesThemesList(data.list, true);
+        		historyList = data.list;
+    	    	var currentshowDivId = urlParameters.showDivId;
+    	    	if(!currentshowDivId || (currentshowDivId && currentshowDivId =="history")){
+   	    			layoutForHistory();
+    	    	}
+        	}
+    	});
+    }
+
+  	//Get history record by text
+    function getHistoryRecordsByText() {
+    	$("#slides-presentation-history-list").html("");
+    	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byText', 'searchText':$('#searchText').val()};
+    	var historyRecordList = "";
+    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+        	if(data.list){
+        		layoutSlidesThemesList(data.list, true);
+        		historyList = data.list;
+    	    	var currentshowDivId = urlParameters.showDivId;
+    	    	if(!currentshowDivId || (currentshowDivId && currentshowDivId =="history")){
+   	    			layoutForHistory();
+    	    	}
+        	}
+    	});
+    }
+
+   	function getThemes() {
+       	var fileInfoo = {'fileType': currentDocType};
+       	com.hoperun.util.FileHelper.loadFileImage(fileInfoo, function(dataa){
+           	if(dataa.list){
+   	    		layoutSlidesThemesList(dataa.list, false);
+   	    		templateList = dataa.list;
+           	}
+    	});
+   	}
+
+   	function layoutSlidesThemesList(themesListDivObj, isHistory){
+   		var moveNextPageItems = [];
+   		for(var i = 0; i < themesListDivObj.length; i++){
+   			var fileImage = themesListDivObj[i];
+   			var colIdx = i % SLIDE_COL_NUMBER;
+   			var rowIdx = (i - i % SLIDE_COL_NUMBER) / SLIDE_COL_NUMBER;
+   			if(SLIDE_ROW_NUMBER <= rowIdx){
+   				moveNextPageItems.push(fileImage);
+   			}
+   			else{
+   				var left = colIdx * _presentationWidth + _margin.left + _indent.left + pageIndex * SLIDE_WIDTH;
+   				if(isHistory){	
+   				 	left = colIdx * _presentationWidth + _margin.left + _indent.left + pageHistoryIndex * SLIDE_WIDTH;
+   				}
+   				var top = rowIdx * _presentationHeight + _margin.top + _indent.top;
+   				//image
+   				var addImageObj = document.createElement('img');
+   				addImageObj.src = fileImage.filePath;
+   				addImageObj.style.width = SLIDE_WIDTH * _presetationZoom;
+   				addImageObj.style.height = SLIDE_HEIGHT * _presetationZoom; 
+   				//div
+   				var parentDiv = document.createElement("div");
+   				parentDiv.className = "slide-presentation slide-presentation-move";
+   				parentDiv.style.width = SLIDE_WIDTH * _presetationZoom;
+   				parentDiv.style.height = SLIDE_HEIGHT * _presetationZoom;
+   				parentDiv.style.top = top;
+   				parentDiv.style.left = left;
+   				parentDiv.appendChild(addImageObj);
+   				(function(fileImage, parentDiv){
+   					$(parentDiv).click(function(){
+   	   					if(isHistory){
+	   	   					var currentMode = $("#slide-history-footer").css("display");
+	   						if(currentMode!="block"){
+	   							setSelectedHistory(parentDiv, fileImage.filePath, fileImage.fileFolderName ,fileImage.fileName , fileImage.version);
+	   						} else {
+	   							setSelectedHistoryForOpen(parentDiv, fileImage.fileName, fileImage.fileFolderName, fileImage.version);
+	   							//window.location.href = "editor_" + currentDocType + ".html?fileName=" + fileImage.fileName + "&userName=kennylv&fileType=" + currentDocType + "&fileFolderName=" + fileImage.fileFolderName;
+	   						}
+   	   					} else {
+   	   						window.location.href = "editor_" + currentDocType + ".html?docid=" + fileImage.fileName + "&userName=" + username + "&fileType=" + currentDocType + "&folderName=" + fileImage.folderName + "&fileName="  + fileImage.fileName;
+   	   					}			
+   					});	
+   				})(fileImage, parentDiv);	
+   				if(isHistory){	
+   					var parentNameDiv = document.createElement("div");
+   					parentNameDiv.className = "slide-presentation slide-presentation-move";
+   					parentNameDiv.style.width = SLIDE_WIDTH * _presetationZoom * 0.6;
+   					parentNameDiv.style.height = 24;
+   					parentNameDiv.style.top = top - 24;
+   					parentNameDiv.style.left = left;
+   					parentNameDiv.style.textAlign = "left";
+   					parentNameDiv.style.background = "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_off.png')";
+   					if($("#version_ctl")[0].innerHTML == "true"){
+   						parentNameDiv.innerHTML =fileImage.fileName + "_Version" + fileImage.version;
+   					} else {
+   					parentNameDiv.innerHTML = fileImage.fileName;
+   					}
+   					document.getElementById("slides-presentation-history-list").appendChild(parentNameDiv);	
+   					document.getElementById("slides-presentation-history-list").appendChild(parentDiv);	
+   				} else {
+   					document.getElementById("slides-presentation-themes-list").appendChild(parentDiv);	
+   				}
+   			}
+   		}
+	   	if(moveNextPageItems.length > 0){
+	   		if(isHistory){	
+	   			pageHistoryIndex++;
+	   		} else {
+	   			pageIndex++;
+	   		}
+			layoutSlidesThemesList(moveNextPageItems, isHistory);
+			layoutPresentationPage(isHistory);
+		}
+   	}
+   	
+  	//Do layout presentation page
+   	function layoutPresentationPage(isHistory){
+   		var width = $("#hidtoryContent").width(), height =  $("#hidtoryContent").height();
+   		//$('#slides-presentation-themes-list').each(function(i){
+   		//	$(this).css("width", width).css('left', width * i);
+   		//});
+   		if(height < 718){
+   			height = 718;
+   		}
+   		else{
+   			height -= 68;
+   		}
+   		if(isHistory){	
+   			$('#slides-presentation-history-list').css('height', height).css('width', (pageHistoryIndex + 1) * width);
+   		} else {
+   			$('#slides-presentation-themes-list').css('height', height).css('width', (pageIndex + 1) * width);
+   		}
+   	}
+
+   	function setSelectedHistory(currentDiv, filePath, fileFolderName , fileName, version){
+   		if(currentDiv){
+   			var isHasImageDiv = false;
+   			for(var j = 0; j < currentDiv.childNodes.length; j++){
+   				if (currentDiv.childNodes[j].className && "slide-edit-selected-image".indexOf(currentDiv.childNodes[j].className) != -1){
+   					isHasImageDiv = true;
+   					currentDiv.removeChild(currentDiv.childNodes[j]);
+   					if(currentSelectedHistory.indexOf(fileFolderName, 0)!=-1){
+   						var index = currentSelectedHistory.indexOf(fileFolderName, 0);
+   						currentSelectedHistory.removeAt(index);
+   						currentSelectedHistoryPath.removeAt(index);
+   						currentSelectedHistoryDiv.removeAt(index);
+   					}
+   				}
+   			}
+   			if(!isHasImageDiv){
+   				var imageDotObj = document.createElement('img');
+   				imageDotObj.src = "images/02_Text/Colours Pop-down/red_press.png";
+   				imageDotObj.className = "slide-edit-selected-image";
+   				imageDotObj.style.height = 51;
+   				imageDotObj.style.top = -26;
+   				imageDotObj.style.left = SLIDE_WIDTH * _presetationZoom - 20;
+   				imageDotObj.style.opacity = 0.5;
+   				imageDotObj.style.position = "absolute";
+   				currentDiv.appendChild(imageDotObj);
+   				currentSelectedHistory.add(fileFolderName);
+   				currentSelectedVersion.add(version);
+   				currentSelectedHistoryPath.add(filePath);
+   				currentSelectedHistoryDiv.add(currentDiv);
+   			}
+   		}
+   	}
+
+   	function setSelectedHistoryForOpen(currentDiv, fileName, fileFolderName, version){
+   		if(currentDiv){
+   			$(".slide-presentation").filter(".slide-presentation-move").each(function(){
+    			$(this).css("border","0px");
+    		})
+   			currentDiv.style.border = "2px solid #B2B2B2";
+   			document.getElementById("currFileVersion").innerHTML = version;
+   			document.getElementById("currFileName").innerHTML = fileName;
+   			document.getElementById("currFileFolderName").innerHTML = fileFolderName;
+   		}
+   	}
+
+  	//Layout for history
+    function layoutForHistory() {
+    	$("#themesList").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_off.png')");
+    	if(urlParameters.currentFolderName){
+			$("#docsList").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_off.png')");
+			$("#docsList-history").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_on.png')");
+    	} else {
+		$("#docsList").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_on.png')");
+    		$("#docsList-history").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_off.png')");
+    	}
+		$("#slides-presentation-history-list").css("display", "block");
+		$("#slides-presentation-themes-list").css("display", "none");
+		$("#docsList-sort-characters").css("display", "block");
+		$("#docsList-sort-date").css("display", "block");
+		$("#docsList-search-text").css("display", "block");
+		$("#searchText").css("display", "block");
+		$("#docsList-search").css("display", "block");
+		$("#docsList-open").css("display", "block");
+		$("#slide-themes-footer").css("display", "none");
+		if ($("#slide-history-footer-edit-mode").is(":visible")){
+			$("#slide-history-footer-edit-mode").css("display", "block");
+			$("#slide-history-footer").css("display", "none");
+		}else{
+			$("#slide-history-footer-edit-mode").css("display", "none");
+			$("#slide-history-footer").css("display", "block");
+		}
+    }
+
+  	//Layout for template
+    function layoutForTemplate() {
+    	$("#themesList").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_on.png')");
+		$("#docsList").css("background", "URL('images/03 Main Nav/Pop Menus/menu_mode_btn_off.png')");
+		$("#docsList-history").css("display", "none");
+		$("#slides-presentation-history-list").css("display", "none");
+		$("#slides-presentation-themes-list").css("display", "block");
+		$("#docsList-sort-characters").css("display", "none");
+		$("#docsList-sort-date").css("display", "none");
+		$("#docsList-search-text").css("display", "none");
+		$("#searchText").css("display", "none");
+		$("#docsList-search").css("display", "none");
+		$("#docsList-open").css("display", "none");
+		$("#slide-history-footer").css("display", "none");
+		$("#slide-themes-footer").css("display", "block");
+		$("#slide-history-footer-edit").css("display", "none");
+    }
+    	
+	$(document).ready(function () {
+		//Get div's width and height.
+		var contentObj = $('#hidtoryContent');
+		_presentationWidth = (contentObj.width() - _indent.left - _indent.right) / SLIDE_COL_NUMBER;
+		_presetationZoom = (_presentationWidth - _margin.left) / SLIDE_WIDTH;
+		_presentationHeight = _presetationZoom * SLIDE_HEIGHT + _margin.top;
+		
+		getHistoryRecords();
+
+		$('#slides-presentation-themes-list, #slides-presentation-history-list').bind('mousedown', function(e){
+	    	var obj = com.hoperun.util.BaseTool.findEventElement(e);
+	        var iswrongEvent = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'class', "slide-presentation slide-presentation-move");
+	        //console.info("isValidEvent:" + isValidEvent);
+	        if (iswrongEvent) {	
+	            return;
+	        }
+	        var x = e.pageX;
+        	var self = $(this);
+			var leftOfDiv = parseInt(self.css('left').replace("px",""));
+			var widthOfDiv = parseInt(self.css('width').replace("px",""));
+        	self.bind('mousemove', function(e){
+        		var distance = e.pageX - x;
+        		//When it has been handled by slider, remove the listener
+    			if(Math.abs(distance) > 20){
+        			var left = 0;
+    				if(distance<0){
+        				if(leftOfDiv - SLIDE_WIDTH <= -widthOfDiv ){
+    						left = leftOfDiv;
+        				} else {
+        					left = leftOfDiv - SLIDE_WIDTH;
+        				}
+    				} else {
+        				if(leftOfDiv >= 0){
+    						left = leftOfDiv;
+        				} else {
+        					left = leftOfDiv + SLIDE_WIDTH;
+        				}
+    				}
+    				self.animate({'left':left}, 1000);
+                	self.unbind('mousemove').unbind('mouseup');
+        		}
+        	}).bind('mouseup', function(e){
+        		//$('.slides-presentation').removeClass('pageMoving');
+        		self.unbind('mousemove').unbind('mouseup');
+        	});
+	    });
+
+		$("#themesList").click(function () {
+			var currentMode = $("#slide-history-footer-edit-mode").css("display");
+	        if(currentMode!="block"){
+		        $("#searchText").val("");
+				layoutForTemplate();
+	        } else {
+	            alert("This is edit mode!");
+	        }
+	    });
+
+	    $("#docsList").click(function () {
+	    	var currentMode = $("#slide-history-footer-edit-mode").css("display");
+	        if(currentMode!="block"){
+	        	window.location.href = "slideHistory.html?id=" + random;
+	        	layoutForHistory();
+	        }
+	    });
+
+	    $("#docsList-open").click(function () {
+	    	var currentMode = $("#slide-history-footer-edit-mode").css("display");
+	        if(currentMode!="block"){
+		        if("" != document.getElementById("currFileName").innerHTML){
+		        	var cFileName = document.getElementById("currFileName").innerHTML;
+			        var cFolderName = document.getElementById("currFileFolderName").innerHTML;
+			        var version = document.getElementById("currFileVersion").innerHTML;
+		        	window.location.href = "requestConvert?fileName=" + cFileName + "&userName=" + username + "&doctype=" + currentDocType + "&uuid=" + cFolderName + "&version=" + version;
+		        } else {
+		        	alert("Please select a history!");
+		        }
+	        } else {
+	            alert("This is edit mode!");
+	        }
+	    });
+
+	    $("#docsList-history").click(function () {
+	    	if(!urlParameters.currentFolderName){
+		    	var currentMode = $("#slide-history-footer-edit-mode").css("display");
+		        if(currentMode!="block"){
+		        	if("" != document.getElementById("currFileName").innerHTML){
+				        var cFileName = document.getElementById("currFileName").innerHTML;
+				        var cFolderName = document.getElementById("currFileFolderName").innerHTML;
+		        		var fileInfo = {'fileType': currentDocType, 'userName': username ,'currentFolderName': cFolderName};
+						com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+				        	if(!data.list || data.list.length == 0){
+					        	alert("No history avaliable!");
+					        	return;
+				        	} else {
+				        		$("#version_ctl")[0].innerHTML = "true";
+				        		$("#slides-presentation-history-list").html("");
+				        		layoutSlidesThemesList(data.list, true);
+				        		historyList = data.list;
+				   	    		layoutForHistory();
+							}
+				    	});
+			        } else {
+			        	alert("Please select a history!");
+			        }
+		        } else {
+		            alert("This is edit mode!");
+		        }
+	    	}
+	    });
+
+	  	//by char
+	    $("#docsList-sort-characters").click(function() {
+		    $("#docsList-sort-date,#docsList-search").removeClass("menu-on");
+		    $(this).addClass("menu-on");
+	    	getHistoryRecordsByChar();
+		});
+	   
+		//by date
+	    $("#docsList-sort-date").click(function() {
+	    	$("#docsList-sort-characters,#docsList-search").removeClass("menu-on");
+	    	$(this).addClass("menu-on");
+	    	getHistoryRecordsByDate();
+		});
+
+		//by text
+	    $("#docsList-search").click(function() {
+	    	$("#docsList-sort-characters,#docsList-sort-date").removeClass("menu-on");
+	    	$(this).addClass("menu-on");
+	    	getHistoryRecordsByText();
+		});
+	    
+
+	    $("#slide-footer-back, #slide-footer-back-history, #slide-footer-back-history-edit").click(function () {
+	    	if(!document.getElementById("currFileName").innerHTML){
+		    		window.location.href = "login?userName=" + username;
+	    	} else{
+	    		window.location.href = "slideHistory.html?id=" + random;
+	    	}
+	    });
+
+	    $("#slide-footer-edit").click(function () {
+	    	$("#slide-history-footer").css("display", "none");
+	    	$("#slide-history-footer-edit-mode").css("display", "block");
+	    });
+
+	    $("#slide-footer-done").click(function () {
+	    	$("#slide-history-footer").css("display", "block");
+	    	$("#slide-history-footer-edit-mode").css("display", "none");
+	    	//Remove the select's icon
+	    	for(var i=0; i < currentSelectedHistoryDiv.length; i++){
+	    		var parentDivOfHistory = currentSelectedHistoryDiv[i];
+	    		if(parentDivOfHistory){
+	    			for(var j = 0; j < parentDivOfHistory.childNodes.length; j++){
+	    				if (parentDivOfHistory.childNodes[j].className && "slide-edit-selected-image".indexOf(parentDivOfHistory.childNodes[j].className) != -1){
+	    					parentDivOfHistory.removeChild(parentDivOfHistory.childNodes[j]);
+	    				}
+	    			}
+	    		}
+	    	}
+	    	currentSelectedHistory = [];
+			currentSelectedHistoryPath = [];
+			currentSelectedHistoryDiv = [];
+	    });
+
+		$("#slide-footer-copy").click(function(){
+			if(currentSelectedHistory.length == 0){
+					alert("Please select " + currentDocType +" to Copy!");
+			}else{
+				var selectedFolders = currentSelectedHistory.join("&");
+				var confirmInfo = "Copy the selected " + currentDocType + (currentSelectedHistory.length > 1 ? "s": "") + ". Are you sure?";
+				if(confirm(confirmInfo)){
+					var copyFileInfo = {
+							userName: username,
+							fileType: currentDocType,
+							selectedFolderNames: currentSelectedHistory.join("&"),
+						};
+					$.post("copyFileServlet",copyFileInfo,function(data){
+						if(data.success =="true"){
+							alert(data.returnMsg);
+							$("#slides-presentation-history-list").html("");
+							getHistoryRecords();
+						}else{
+							alert(data.errors);
+						}
+						
+					},"json"); 
+				}
+			}
+		});
+
+
+		$("#slide-footer-download").click(function () {
+			if(currentSelectedHistory.length == 0){
+				alert("Please select a history!");
+			} else if (currentSelectedHistory.length > 1){
+				alert("Only can select one history!");
+			} else {
+				var fileInfo = {
+						fileType : currentDocType,
+						userName: 'kennylv',
+						fileFolderName: currentSelectedHistory[0]
+		    	};
+		    	//com.hoperun.util.FileHelper.downloadFile(fileInfo, function(data){
+		    		
+		    	//});
+		    	var oForm = document.getElementById("slideHistoryFormDiv");
+		    	var currFileNameForDownload = $(".slide-edit-selected-image").parent().prev().text();
+				oForm.action="filedownloader?fileType=" + currentDocType + "&userName=kennylv&fileFolderName=" + currentSelectedHistory[0] + "&currFileName=" + currFileNameForDownload;
+				oForm.target="downloadIFrame";
+				oForm.submit();
+			}
+	    });
+
+		$("#slide-footer-delete").click(function () {
+			if(currentSelectedHistory.length == 0){
+				alert("Please select a history!");
+			}else{
+				var confirmInfo = "Delete the selected " + currentDocType + (currentSelectedHistory.length > 1 ? "s": "") + ". Are you sure?";
+				 if (confirm(confirmInfo)){
+					 var currVers = "";
+					if(document.getElementById("currFileName").innerHTML){
+						var currVers = currentSelectedVersion.join(",")
+					}
+					var delInfo = {
+									userName: username,
+									fileType: currentDocType,
+									delTitles: currentSelectedHistory.join(","),
+									currSelectedId: currVers
+								};
+					$.get("deleteHistory",delInfo,function(){
+						$("#slides-presentation-history-list").html("");
+						getHistoryRecords();
+					}); 
+					$("#slide-history-footer").css("display", "none");
+					$("#slide-history-footer-edit-mode").css("display", "block");
+					currentSelectedHistory = [];
+					currentSelectedHistoryPath = [];
+					currentSelectedHistoryDiv = [];  
+				 }
+					    
+			}
+			
+	    });
+
+		$("#slide-footer-upload").toggle(
+				function(e){
+					e.preventDefault();
+					$("#uploadDiv").show();
+				},
+				function(e){
+					e.preventDefault();
+					$("#uploadDiv").hide();
+				});
+
+		$("#fileUploadOK").click(function(){
+			if ($("#fileUpload").val()){
+				$uploadForm = $("#slideHistoryFormDiv");
+				var upldFileName = $("#fileUpload").val();
+				var actionwithParams = "fileUploaderForHistory?userName=kennylv&fileType=" + urlParameters.doctype + "&uploadFileName=" + upldFileName;
+				$uploadForm.attr("action",actionwithParams);
+				$uploadForm.attr("target","downloadIFrame");
+				$uploadForm.submit();
+				$("#uploadDiv").hide();
+				document.getElementById("downloadIFrame").onload = function(){
+						if ($("#divForTestIFrame").html() != ""){
+							history.go(0);
+						}else{
+							//alert("Upload failed!");
+						}
+					};
+			}else{
+				alert("Please select a file!");
+			}
+		});
+
+
+		$(document).click(function(event){
+			if (event.target.id != "upload" && event.target.id !="fileUpload"){
+				$("#uploadDiv").hide();
+			}
+		});
+	    $(window).resize();
+	});
+</script>
+
+<style type="text/css">
+	.ifile {
+	    left: 0;
+	    opacity: 0;
+	    position: absolute;
+	}
+
+	.i2Style {
+	    background: none repeat scroll 0 0 #F5F5F5;
+	    border: 1px solid #BBBBBB;
+	    border-radius: 5px 5px 5px 5px;
+	    box-shadow: 0 1px 10px #D1CFD1;
+	    color: #000000;
+	    cursor: pointer;
+	    font: 10px Verdana,Geneva,sans-serif;
+	    margin: 0 auto;
+	    padding: 5px 10px;
+	    text-shadow: 0 1px 0 #FFFFFF;
+	    width: 30px;
+	    float: left;
+	    margin-left: 3px;
+	}
+	
+	#uploadDiv{
+		position: absolute;
+		top: -30px;
+		left: 400px;
+		display: none;
+	}
+	
+	#uploadDiv .display{
+		width:140px; 
+		margin:2px 5px 0 0 ; 
+	}
+	
+	.slides-doc-search-text{
+		float:left;
+		height:24px;
+		margin-top:-24px;
+		padding-left:8px;
+		text-align:left;
+		width:63px;
+	}
+	
+	.menu-on{
+		background: url("images/03 Main Nav/Pop Menus/menu_mode_btn_on.png") repeat scroll 0% 0% transparent;
+	}
+
+</style>
+</head>
+<body style="overflow:auto;">
+	<form id="slideHistoryFormDiv" method="post" enctype="multipart/form-data">
+	    <div id="hidtoryContent" style="width:1366px; height: 794px; margin: 25px auto;background-color: RGB(147,149,152);overflow-y: hidden;overflow-x: hidden;">
+			<div id="themesList" class="slides-themes-history"><span class="slide-footer-presentation">THEMES</span></div>
+			<div id="docsList" class="slides-docs-history"><span class="slide-footer-presentation">DOCS</span></div>
+			<div id="docsList-sort-characters" class="slides-doc-sort" style="margin-left:315px;border-right:1px solid black;display:none;"><span class="slide-footer-presentation">A-Z</span></div>
+			<div id="docsList-sort-date" class="slides-doc-sort" style="margin-left:387px;border-right:1px solid black;display:none;"><span class="slide-footer-presentation">DATE</span></div>
+			<div id="docsList-search-text" class="slides-doc-search-text" style="margin-left:452px;"><input type="text" id="searchText" name="searchText" style="height:23px;"/></div>
+			<div id="docsList-search" class="slides-doc-sort" style="margin-left:572px;display:none;"><img src="images/03 Main Nav/Nav Bar/search.png" style="margin-left: -15px;"/></div>
+			<div id="docsList-open" class="slides-doc-sort" style="margin-left:690px;width:170px;display:none;"><span class="slide-footer-presentation">OPEN</span></div>
+			<div id="docsList-history" class="slides-doc-sort" style="margin-left:910px;width:170px;display:block;"><span class="slide-footer-presentation">HISTORY</span></div>
+			<div id='slides-presentation-themes-list' style="width:100%; height:726px;min-height:726px;position: relative;"></div>
+			<div id='slides-presentation-history-list' style="width:100%; height:726px;min-height:726px;display:none;position: relative;"></div>
+			<div id="footer" style="background:black;width:100%;height:23px;">
+				<div id="slide-themes-footer" style="float: left;">
+					<div id="slide-footer-back" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/back.png" /></div>
+					<div id="slide-footer-presentation" class="slide-footer-presentation-div"><span class="slide-footer-presentation">PRESENTATION</span></div>
+					<div id="slide-footer-figures" class="slide-footer-figures-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">FIGURES</span></div>
+					<div id="slide-footer-text" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">TEXT</span></div>
+					<div id="slide-footer-menuup" class="slide-footer-plus-div" style="margin-left: 80px;"><img src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+				</div>
+				<div id="slide-history-footer" style="float: left;display:none; position:relative">
+					<div id="slide-footer-back-history" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/back.png" /></div>
+					<div id="slide-footer-edit" class="slide-footer-figures-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">EDIT</span></div>
+					<div id="slide-footer-copy_disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/duplicate_disabled.png" /></div>
+					<div id="slide-footer-export_disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/export_disabled.png" /></div>
+					<div id="slide-footer-download_disabled" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/download_disabled.png" /></div>
+					<div id="slide-footer-upload" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/upload.png" /></div>
+					<div id="slide-footer-menuup" class="slide-footer-plus-div" style="margin-left: 149px;"><img src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+					<div id="slide-footer-delete_disabled" class="slide-footer-plus-div" style="margin-left: 450px;"><img src="images/03 Main Nav/Nav Bar/delete_disabled.png"/></div>
+					<div id="uploadDiv">
+						<input type="file" name="fileUpload" id="fileUpload" class="ifile" style="width:195px;" onchange="upfile.value=this.value" />
+						<div style="float:left;"><input type="text" name="upfile" class="display" /></div>
+		 				<div id="fileUploadSelect" class="i2Style" >Select</div>
+						<div id="fileUploadOK" class="i2Style" >OK</div>
+					</div>
+				</div>
+				<div id="slide-history-footer-edit-mode" style="float: left;display:none;">
+					<div id="slide-footer-back-history-edit" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/back.png" /></div>
+					<div id="slide-footer-edit-disabled" class="slide-history-footer-edit" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">EDIT</span></div>
+					<div id="slide-footer-done" class="slide-footer-text-div" style="text-align:left;"><span class="slide-footer-presentation" style="margin-left: 5px;">DONE</span></div>
+					<div id="slide-footer-copy" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/duplicate.png" /></div>
+					<div id="slide-footer-export" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/export.png" /></div>
+					<div id="slide-footer-download" class="slide-footer-plus-div"><img src="images/03 Main Nav/Nav Bar/download.png" /></div>
+					<div id="slide-footer-menuup" class="slide-footer-plus-div" style="margin-left: 0px;"><img src="images/03 Main Nav/Nav Bar/menu_up.png"/></div>
+					<div id="slide-footer-delete" class="slide-footer-plus-div" style="margin-left: 578px;"><img src="images/03 Main Nav/Nav Bar/delete.png"/></div>
+				</div>
+			</div>
+		</div>
+		<div id="currFileVersion" style="display:none"></div>
+		<div id="currFileName" style="display:none"></div>
+		<div id="currFileFolderName" style="display:none"></div>
+		<div id="version_ctl" style="display:none"></div>
+		<IFrame id="downloadIFrame" name="downloadIFrame" width="1px" height="1px" style="display:none;" src="">
+		</IFrame>
+		<div id="divForTestIFrame" style="display:none"></div>
+	</form>
+</body>
+</html>

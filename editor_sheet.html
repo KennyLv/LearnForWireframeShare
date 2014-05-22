@@ -1,0 +1,892 @@
+﻿<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>WebOffice - GridFrames</title>
+
+<script type="text/javascript" src="Import.js"></script>
+<!--<script type="text/javascript" src="./com/hoperun/util/Calculate.js"></script>-->
+<!-- <script type="text/javascript" src="./com/hoperun/util/Function.js"></script> -->
+<script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/sheet.css" />
+<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
+<script type="text/javascript" src="ImportMenu.js"></script>
+<style type="text/css">
+.left {
+	float:left;
+	margin-top:3px;
+}
+.right {
+	float:right;
+	height: 20px;
+	margin-top:3px;
+}
+#feedback { font-size: 10px; }
+#text-style-format .ui-selecting, #text-list-format .ui-selecting, #image-style-shadow .ui-selecting { background: #FECA40; }
+#text-style-format .ui-selected, #text-list-format .ui-selected, #image-style-shadow .ui-selected { background: #F39814; color: white; }
+#text-style-format, #text-list-format, #image-style-shadow { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#text-style-format li, #text-list-format li, #image-style-shadow li { margin: 1px; padding: 2px; font-size: 10px; height: 15px; }
+</style>
+<script type="text/javascript">
+function initRuler() {
+	//$("#ruler-Content").append("<div id='ruler-h-div'></div>").append("<div id='ruler-h-num-div'></div>").append("<div id='ruler-v-div'></div>").append("<div id='ruler-v-num-div'></div>");
+	$("#tabBand").append("<div id='ruler-h-div' class='ruler'></div>").append("<div id='ruler-h-num-div' class='ruler'></div>").append("<div id='ruler-v-div' class='ruler'></div>").append("<div id='ruler-v-num-div' class='ruler'></div>");
+	//$("#editArea").before("<div id='ruler-v-div'></div>").before("<div id='ruler-v-num-div'></div>");
+	var width = 1330;
+	var height = 700;
+	var countH = width/10;
+	var countV = height/10;
+
+	for(var i=0; i<=countH; i++){
+		i%5 == 0
+			? $("#ruler-h-div").append("<div class='ruler-h-major' style='left:" + i*10 + "px'><div>") 
+			: $("#ruler-h-div").append("<div class='ruler-h-minor' style='left:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-h-num-div").append("<div class='ruler-h-num-major' style='left:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-h-num-div").append("<div class='ruler-h-num-minor' style='left:" + i*10 + "px'><div>");
+	}
+	
+	for(var i=0; i<=countV; i++){
+		i%5 == 0 
+			? $("#ruler-v-div").append("<div class='ruler-v-major' style='top:" + i*10 + "px'><div>") 
+			: $("#ruler-v-div").append("<div class='ruler-v-minor' style='top:" + i*10 + "px'><div>");
+		(i+1)%5 == 0 
+			? $("#ruler-v-num-div").append("<div class='ruler-v-num-major' style='top:" + i*10 + "px'>" + (i+1)*10 + "<div>") 
+			: $("#ruler-v-num-div").append("<div class='ruler-v-num-minor' style='top:" + i*10 + "px'><div>");
+	}
+}
+$(document).ready(function(){
+	$("#rotation-left").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
+	});
+	$("#rotation-right").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
+	});
+	
+	$("#flip-left").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
+	});
+	$("#flip-right").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
+	});
+	$("#flip-up").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
+	});
+	$("#flip-down").click(function(){
+		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
+	});
+});
+</script>
+<script type="text/javascript">
+    var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+    var id = urlParameter.id;
+    var currDocID = urlParameter.docid;
+    var currDocType = "sheet";
+    var currentSelectedObj = null;
+
+    function sendMessage(_id, _sender, _data) {
+        var message = new com.hoperun.util.Observer.Message();
+        message.id = _id;
+        message.sender = _sender;
+        message.data = _data;
+        com.hoperun.util.Observer.sendMessage(message);
+    }
+
+   /* function stopAllVideo(sheet){
+    	for(var s=0;s<sheets.length;s++){
+    		var videoLtngth=sheets[s].getDomInstance().getElementsByTagName("video").length;
+    		if(videoLtngth>0){
+            	if(sheet!=sheets[s]){
+	    			for(var v=0;v<videoLtngth;v++){
+	    				sheets[s].getDomInstance().getElementsByTagName("video")[v].pause();
+	    			}
+            	}else{
+	    			for(var v=0;v<videoLtngth;v++){
+	    				sheets[s].getDomInstance().getElementsByTagName("video")[v].play();
+	    			}
+                }
+    		}
+    	}
+    }*/
+    
+</script>
+<script type="text/javascript">
+    var sheetNum = 0;
+    var sheets = [];
+    var currSheet = null;
+
+    var bSheetNameEditable = true;
+    var tabScrolToleft = 0;
+
+    function getActiveContainer() {
+        return currSheet;
+    }
+    function addSheet(n) {
+        var msg = new com.hoperun.util.Observer.Message();
+        msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+        msg.sender = null;
+        msg.data = { 'isFirst': n, obj:{
+        	height: "699px",
+       		width: "1366px"
+        } };
+        com.hoperun.util.Observer.sendMessage(msg);
+    }
+    function setCurrSheet(sheet) {
+        if (sheet != null) {
+            if (currSheet != null){
+                document.getElementById("iFrame").removeChild(currSheet.getDomInstance());
+                currSheet.removeChild();
+            }
+            currSheet = sheet;
+            var margin ={
+            	'top':'25px',
+            	'right':'',
+            	'bottom':'',
+            	'left':'25px'
+            };
+            sheet.setMargin(margin);
+            document.getElementById("iFrame").appendChild(sheet.getDomInstance());
+            //focusOn($("#tabContainer li[targetId=" + sheet.getId() + "]"));
+           // $("#tabContainer li[class^='tab']").attr('class', 'tab');
+           // $("#tabContainer li[targetId=" + sheet.getId() + "]").attr('class', 'tabselected');
+        }
+    }
+
+    function AddTab(sheet,n) {
+        var buff = [];
+        var thissheetName = sheet.getSheetName().toString();
+        if (thissheetName.length > 7) {
+            buff.push('<li itemNum ="'+sheet.getSheetNum()+'" targetId="' + sheet.getId() + '" class="tab" style="float:left;"><span class="tabFont">' + thissheetName.substring(0, 7) + '...' + '</span><div class="close"></div></li>');
+        	sheet.setSheetName(thissheetName.substring(0, 7)+'...');
+        } else {
+            buff.push('<li itemNum ="'+sheet.getSheetNum()+'" targetId="' + sheet.getId() + '" class="tab" style="float:left;"><span class="tabFont">' + thissheetName + '</span><div class="close"></div></li>');
+        	sheet.setSheetName(thissheetName);
+        }
+
+        // undo for closing tab
+        if(n == 1){
+			if (sheet.getSheetNum() == 1) {
+        		$(buff.join('')).insertBefore($('#tabContainer').children('li').eq(0));
+				inserDom();
+        	}else{
+        		$("#tabContainer").children().each( function() {
+					if($(this).attr('itemnum')){
+						if(Number($(this).attr('itemnum'))+1 == sheet.getSheetNum()){
+							$(buff.join('')).insertAfter($(this));
+					        inserDom();
+						}
+					}        		
+				
+				});
+        	}
+			
+        }else{
+        $(buff.join('')).insertBefore('#addSheetPage');
+	         inserDom();
+        }
+		
+    }
+    
+    function inserDom(){
+        $(".tab").unbind("click").unbind("dblclick").bind("click", tabClick).bind("dblclick", tabDblClick);
+        $(".close").unbind("click").bind("click", closeTab);
+        //return id;
+        focusOn($('#addSheetPage').prev());
+        //move
+        var sheetNums = $('#tabContainer').children('li').length;
+        $('#tabContainer').css('width', 160 * sheetNums + 380);
+        if (sheetNums > 5) {
+            tabScrolToleft -= 37;
+            $('#tabContainer').animate({ 'margin-left': tabScrolToleft }, 160);
+        }
+    }
+
+    function closeTab() {
+        if ($("#tabContainer").children("li").length < 2) {//if the only one?
+            alert('This is the last sheet !');
+        } else {
+            var selectedIndex = $(this).parent().index();
+            var sheetId = $(this).parent().attr('targetId');
+            if (selectedIndex != 0) {
+                //focusOn($(this).parent().prev());
+                //$(this).parent().remove();
+
+                var msg = new com.hoperun.util.Observer.Message();
+                msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CLOSE;
+                msg.sender = null;
+                msg.data = { 'sheetId': sheetId };
+                com.hoperun.util.Observer.sendMessage(msg);
+
+            } else {//if the first one ？
+                focusOn($(this).parent().next());
+                $(this).parent().next().attr('class', 'tabselected_first');
+                $(this).parent().next().children()[0].className = 'tabFont_first';
+           //     $(this).parent().remove();
+                var msg = new com.hoperun.util.Observer.Message();
+	            msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CLOSE;
+	            msg.sender = null;
+	            msg.data = { 'sheetId': sheetId };
+	            com.hoperun.util.Observer.sendMessage(msg);
+            }
+            
+            
+            
+            //move
+            $('#tabContainer').css('width', $('#tabContainer').css('width') - 122);
+            if (tabScrolToleft < 0) {
+                tabScrolToleft += 122;
+                $('#tabContainer').animate({ 'margin-left': tabScrolToleft }, 1000);
+            }
+
+            var sheet = findSheetById(sheetId);
+            if (currSheet === sheet) {
+                var index = sheets.indexOf(sheet, 0);
+                var nextSheet = slides[index + 1];
+                var preSheet = slides[index - 1];
+                if (nextSheet != null) {
+                    setCurrSheet(nextSheet);
+                } else if (preSheet != null) {
+                    setCurrSheet(preSheet);
+                }
+            }
+            if (sheets.indexOf(sheet, 0) != -1) {
+                var index = sheets.indexOf(sheet, 0);
+                sheets.removeAt(index);
+            }
+        }
+    }
+
+    function tabClick() {
+        focusOn($(this));
+        var selectedIndex = $(this).index();
+        var showIndex = (selectedIndex + 1) - (tabScrolToleft * (-1) / 122);
+
+        if (showIndex < 4 && tabScrolToleft < 0) {
+            tabScrolToleft += 122;
+        } else if (showIndex > 5) {
+            tabScrolToleft -= 122;
+        }
+        $('#tabContainer').animate({ 'margin-left': tabScrolToleft }, 1000);
+    }
+
+    function tabDblClick() {
+    	var haveChineseFlg = false;
+    	
+        if (bSheetNameEditable) {
+            bSheetNameEditable = false;
+            var sheetName = $(this).children('span').get(0).innerText;//currSheet.getSheetName();
+            var fontName = $(this).children('span').get(0).className;
+            $(this).children('span').remove();
+            $(this).children('div').before('<input type="text" id="nameEditor"class="'+fontName+'_edit'+'" value="' + sheetName + '"/>');
+            $('#nameEditor').focus();
+            $('#nameEditor').blur(function () {
+                var newName = $('#nameEditor').val();
+
+                if(newName != sheetName){ 
+                if (newName.toString().length < 1) {
+                    alert("Name can't be empty!");
+                    newName = sheetName;
+                    
+                }
+                
+                var existFLag = false;
+                for (var s = 0; s < sheets.length; s++) {
+                	// com.hoperun.util.BaseTool.log4js('DEBUG' ,"NAMES: "+sheets[s].getSheetName());
+                    if (newName == sheets[s].getSheetName() ) {
+                        alert("This name was used!");
+                        newName = sheetName;
+                       existFLag = true;
+                        break;
+                    }
+                }
+                
+                if (!existFLag){
+                	currSheet.setSheetName(newName);
+                }
+                
+                }
+               
+                // currSheet.setSheetName(newName);
+                if (StringLength(newName.toString()) > 7) {
+                	if(fullshapeNums(newName.toString()) > 4){
+                		$('#nameEditor').before('<span class="'+fontName+'">' + newName.toString().substring(0, 4) + "..." + '</span>');
+                	}else{
+                		if(fullshapeNums(newName.toString()) > 0){
+                			$('#nameEditor').before('<span class="'+fontName+'">' + newName.toString().substring(0, 6) + "..." + '</span>');
+                		}else{
+                			$('#nameEditor').before('<span class="'+fontName+'">' + newName.toString().substring(0, 7) + "..." + '</span>');
+                		}
+                	}
+                    
+                } else {
+                    $('#nameEditor').before('<span class="'+fontName+'">' + newName + '</span>');
+                }
+                $('#nameEditor').remove();
+                bSheetNameEditable = true;
+            });
+        }
+    }
+    
+    function StringLength(fData){
+    	var length = 0;
+    	for(var i = 0;i< fData.length;i++){
+    		if(fData.charCodeAt(i) < 0 || fData.charCodeAt(i) > 255){
+    			length = length + 2;
+    		}else{
+    			length = length + 1;
+    		}
+    	}
+    	return length;
+    }
+    
+    function fullshapeNums(str){ 
+        var re =/[\u4E00-\u9FA5]/g; 
+        if(re.test(str)) {
+        	return str.match(re).length;
+        }       
+        else{
+        	return 0;
+        }
+    } 
+
+    function focusOn(obj) {
+        $("#tabContainer li[class^='tab']").attr('class', 'tab');
+        $("#tabContainer li[class^='tab']").children('span').attr('class', 'tabFont');
+        $("#tabContainer li[class^='tab']").children('div').attr('class', 'close_b');
+        if(obj.prevAll().length > 0){
+        obj.attr('class', 'tabselected');
+        obj.children('div').attr('class', 'close');
+        	obj.prev().attr('class', 'tabselected_left');
+        	obj.children()[0].className = 'tabselectedFont';
+        	if(obj.prevAll().length == 1){
+        		obj.prev().attr('class', 'tab_second');
+        		obj.prev().children('div').attr('class', 'close_b');
+        		obj.prev().children()[0].className = 'tabFont_first';
+        	} else {
+        		obj.prevAll()[obj.prevAll().length-1].className = 'tab_first';
+        		obj.prevAll()[obj.prevAll().length-1].firstChild.className = 'tabFont_first';
+        	}
+        }
+        else {
+            obj.attr('class', 'tabselected_first');
+            obj.children('div').attr('class', 'close');
+            obj.children()[0].className = 'tabselectedFont_first';
+        }
+        
+        var sheetId = obj.attr('targetId');
+        var sheet = findSheetById(sheetId);
+        if (sheet) {
+            setCurrSheet(sheet);
+        }
+        var msg = new com.hoperun.util.Observer.Message();
+        msg.id = com.hoperun.util.Observer.MessageType.CONTEXT_BLUR;
+        msg.sender = sheet;
+        com.hoperun.util.Observer.sendMessage(msg);
+    }
+    
+    function findSheetById(id){
+    	for (var i = 0 ; i < sheets.length ; i++){
+    		if (sheets[i].getId() == id){
+    			return sheets[i];
+    		}
+    	}
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //forbidden the right click
+	    document.getElementById('myContent').oncontextmenu = function () {
+	        return false;
+	    };
+	    $(".command-bar h2").html(currDocID);
+	    $('.logo').click(function () {
+	        window.location.href = "index.html";
+	    });
+	    $('#viewHistory').click(function () {
+	    	if (confirm("The current edit state will lose. Quit?")){
+	    		if(id){
+	     	 		window.location.href = "requestConvert?id=" + id;
+				} else {
+					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
+					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+						if("false" != data.id){
+							window.location.href = "requestConvert?id=" + data.id;
+						} else {
+							window.history.go(-1);
+						}
+					});
+				}
+	    	}
+	    });
+
+	    //<None> Menu
+	    $("#popup-menu-edit-none").load('menu/commonDiv_Unchoose.html', function () {
+
+	    });
+	    //<Text> Menu
+	    $("#popup-menu-edit-text").load('menu/commonDiv_TextSpecsSet.html', function () {
+	    	commonDiv_TextSpecsSet_Ready();
+	    });
+		
+	    //<Image> Menu
+	    $("#popup-menu-edit-image").load('menu/commonDiv_ImageSet.html', function () {
+	    	$("#menu_edit_img_arrange_setting_flipV").addClass("li-top-radius");
+	    	//$("#menu_edit_img_arrange_setting_maskEdit").addClass("li-bottom-radius");
+	    	$("#menu_edit_img_arrange_setting_flipH").addClass("li-bottom-radius");
+	        menuu_edit_image_ready();
+	    });
+	    //<Table> Menu
+	    $("#popup-menu-edit-table").load('menu/commonDiv_TableSet.html', function () {
+	        commonDiv_TableSet_Ready(currDocType);
+	    });
+	    //<Cell> Menu
+	    $("#popup-menu-edit-cell").load('menu/commonDiv_CellSet.html', function () {
+	        loadMenuEditCellReady(currDocType);
+	    });
+	    //<ShapeArrow> Menu
+	    $("#popup-menu-edit-shape-arrow").load('menu/commonDiv_ShapeArrowSet.html', function () {
+	        commonDiv_ShapeArrowSet_ready();
+	    });
+	    //<ShapeImage> Menu
+	    $("#popup-menu-edit-shape-img").load('menu/commonDiv_ShapeImageSet.html', function () {
+	        commonDiv_ShapeImageSet_Ready();
+	    });
+	    //<Draw> Menu
+	    $("#popup-menu-draw").load('menu/commonDiv_DrawingMenu.html', function () {
+			commonDiv_DrawingMenu_ready();
+		});
+	    //<Insert> Menu
+	    $("#popup-menu-insert").load('menu/commonDiv_Insert.html', function () {
+	        commonDiv_Insert_Ready();
+	    });
+	    //<Function> Menu
+	    $('#popup-menu-cellFunctionPannel').load('menu/commonDiv_CellFunction.html', function () {
+	        commonCellFunctionReady();
+	    });
+
+
+        // UNDO REDO function
+	    jskataUndo.onChange = function () {
+	        if (jsk.canUndo()){
+	        	$("#undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo.png');
+	            document.getElementById("undo").setAttribute("canUndo", "true");
+	        } else {
+	        	$("#undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo_disabled.png');
+	            document.getElementById("undo").setAttribute("canUndo", "false");
+	        }
+	        if (jsk.canRedo()){
+	        	$("#redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo.png');
+	            document.getElementById("redo").setAttribute("canRedo", "true");
+	        } else {
+	        	$("#redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo_disabled.png');
+	            document.getElementById("redo").setAttribute("canRedo", "false");
+	        }
+	    };
+		$("#undo").click(function (e) {
+			if(document.getElementById("undo").getAttribute("canUndo")=="true")
+				sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+		});
+		$("#redo").click(function (e) {
+			if(document.getElementById("redo").getAttribute("canRedo")=="true")
+				sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+		});
+
+		//<Draw> Event 
+		$("#Menu_Drawing_pencil").click(function(e){
+			com.hoperun.util.BaseTool.showMenuShadow();
+	        $("#popup-menu-draw").css("position","absolute").css("top", e.pageY - 290 + $(".menu_edit_form").scrollTop()).css("left", e.pageX - 103 + $(".menu_edit_form").scrollLeft()).css('display', 'block');
+	    });
+	    
+        //<Edit> Event 
+	    $("#edit").click(function (e) {
+	    	com.hoperun.util.BaseTool.showMenuShadow();
+	        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +155 + $(".menu_edit_form").scrollLeft(), 'y': e.pageY + $(".menu_edit_form").scrollTop() });
+	    });
+	    //<Insert> Event 
+	    $("#insert").click(function (e) {
+	    	com.hoperun.util.BaseTool.showMenuShadow();
+	        $("#popup-menu-insert").css("top", e.pageY -350 + $(".menu_edit_form").scrollTop()).css("left", e.pageX -125 +$(".menu_edit_form").scrollLeft()).css('display', 'block');
+	    });
+
+	    //<Tool> Event 
+	    $("#menu-tool").tabs();
+	    $("#menu-tool-setting").tabs();
+	    $("#menu-tool-content-radio-Edge").buttonset();
+	    $("#menu-tool-content-radio-Center").buttonset();
+	    $("#menu-tool-content-radio-Check").buttonset();
+	    $("#tool").click(function (e) {
+	    	com.hoperun.util.BaseTool.showMenuShadow();
+	    	
+	        $("#menu-tool").css("top", e.pageY - 300).css("left", e.pageX - 200).css('display', 'block');
+	        $("#menu-tool-content-setting").click(function () {
+	            $("#menu-tool").css('display', 'none');
+	            $("#menu-tool-setting").css("top", e.pageY - 300).css("left", e.pageX - 200).css('display', 'block');
+	        });
+	        
+	        /** Need to add menu-tool
+	        $(document.body).append('<div id="hidden" style="width:100%; height:100%; top:0; left:0; position:absolute;"></div>');
+	        $("#hidden").click(function () {
+	            $("#hidden").remove();
+	            $("#menu-tool").css('display', 'none');
+	            $("#menu-tool-setting").css('display', 'none');
+	        });*/
+	    });
+	    $("#menu-tool-back").click(function (e) {
+	        $("#menu-tool").css('display', 'block');
+	        $("#menu-tool-setting").css('display', 'none');
+	    });
+	    //<Add Sheet> Event 
+	    $("#addSheetPage").click(function () {
+	        addSheet(0);
+	    });
+	    $(".tab").bind("click", tabClick).bind("dblclick", tabDblClick);
+	    $(".close").bind("click", closeTab);
+	    //<Save> Event 
+	    $("#Menu_Drawing_Save").click(function () {
+	    	var data = [];
+	    	for(var i=0; i<sheets.length; i++){
+	    		data.push(sheets[i].getData());
+	    	}
+	    	var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
+	    	if(id){
+		    	var fileInf = {'random': id};
+		    	com.hoperun.util.FileHelper.loadParams(fileInf, function(temp_data){
+	    	var fileInfo = {
+		    			userName : temp_data.username,
+		    			fileName : temp_data.filename,
+		    			fileType : temp_data.doctype,
+    			fileFolderName : folderNameOfFile
+        	};
+	        sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_SAVE, data, fileInfo);
+	    });
+	    	} else {
+	    		sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_SAVE, data, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+	    	}
+	    });
+
+        //<FunctionEditor> Event
+        $("#function_inputValue").focus(function (e) {
+            //autoFinish(e);
+        });
+        $("#function_inputValue").keypress(function (e) {
+            //alert(document.getElementById('function_inputValue').selectionStart);
+            autoFinish(e);
+        });
+	    
+        $('#Menu_Drawing_T_Click').click(function(e){
+        	com.hoperun.util.BaseTool.closeMenuPopup();
+        	
+    		var objectType = $(this).attr('objectType');
+    		insertObject = {};
+    		insertObject.objectType = objectType;
+    		if (objectType == "TextBox") {
+    		}
+    		var message = new com.hoperun.util.Observer.Message();
+    		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+    		message.sender = insertObject;
+    		com.hoperun.util.Observer.sendMessage(message);
+    		$('#Menu_Edit_TextSpecsSet').css('display', 'block');
+    	});
+        
+	    //<Resize> Event 
+	    var bodyResize = function () {
+	        var w = $(window).width(), h = $(window).height();
+	        //$("#myContent").css("height", h - 122);
+	        $("#myContent").css("height", 699);
+	    };
+	    $(window).bind("resize", bodyResize);
+	    bodyResize();
+	});
+
+	/*show the menu*/
+	function showMenu(type, e) {
+	    switch (type) {
+	        case 'None':
+	            $("#popup-menu-edit-none").css("top", e.y - 300).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'Text':
+	            $("#popup-menu-edit-text").css("top", e.y - 300).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'IMAGE':
+	            $("#popup-menu-edit-image").css("top", e.y - 465).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'TABLE':
+	            $("#popup-menu-edit-table").css("top", e.y - 430).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'CELL':
+	            $("#popup-menu-edit-cell").css("top", e.y - 430).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'ShapeArrow':
+	            $("#popup-menu-edit-shape-arrow").css("top", e.y - 300).css("left", e.x - 160).css('display', 'block');
+	            break;
+	        case 'ShapeImage':
+	            $("#Menu_Edit_ShapeImages_List").css('display', 'block');
+	            $("#Menu_Edit_ShapeText_List").css('display', 'none');
+	            $("#popup-menu-edit-shape-img").css("top", e.y - 440).css("left", e.x - 290).css('display', 'block');
+	            break;
+	        case 'ShapeText':
+	        	if($("#Menu_Edit_ShapeImage_StyleOptions").css('display') == 'block'){
+	        		$("#Menu_Edit_ShapeImageSet").css('display','block');
+	        		$("#Menu_Edit_ShapeImage_StyleOptions").css('display','none');
+	        	};
+	            $("#Menu_Edit_ShapeImages_List").css('display', 'none');
+	            $("#Menu_Edit_ShapeText_List").css('display', 'block');
+	            $("#popup-menu-edit-shape-img").css("top", e.y - 440).css("left", e.x - 290).css('display', 'block'); 
+	            break;
+	    }
+	}
+
+    function init() {
+    	with(com.hoperun.node) {
+    		var random = urlParameter.id;
+		    var fileInf = {'random': random};
+		    var fileInfo;
+		    if(!random){
+		    	fileInfo = {
+    				userName : urlParameter.userName,
+    				fileType : urlParameter.fileType,
+    				docid: urlParameter.docid,
+					folderName: urlParameter.folderName
+		    	};
+		    }
+    		com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+    	    	if(data){
+    	    		if(random){
+		    	    	fileInfo = {
+			    				userName : data.username,
+			    				//fileName : urlParameter.fileName,
+			    				fileType : data.doctype,
+			    				//docid: urlParameter.docid,
+								//folderName: urlParameter.folderName,
+								version: urlParameter.version,
+								fileFolderName: data.uuid
+    	    	};
+    	    		}
+    	    	com.hoperun.util.FileHelper.load(fileInfo, function (data) {
+    	    		if(data.fileFolderName){
+    	    			document.getElementById('folderNameOfFile').innerHTML = data.fileFolderName;
+    	    		}
+    	    	    for (var i = 0; i < data.sheet.length; i++) {
+    	    	        var sheetsReturn = JSON.parse(data.sheet[i]);
+
+    	    	        for (var j = 0; j < sheetsReturn.length; j++) {
+    	    	            var obj = sheetsReturn[j];
+    	    	            var msg = new com.hoperun.util.Observer.Message();
+    	    	            msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+    	    	            msg.sender = null;
+    	    	           // msg.data = obj;
+    	    	            msg.data = { 'isFirst': 1,'obj': obj};
+    	    	            com.hoperun.util.Observer.sendMessage(msg);
+    	    	            
+    	    	            //sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_CREATE, null, obj);
+    	    	            //var msg = new com.hoperun.util.Observer.Message();
+    	    	            //msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+    	    	            //msg.sender = null;
+    	    	            //msg.data = obj;
+    	    	            //com.hoperun.util.Observer.sendMessage(msg);
+    	    	        }
+    	    	    }
+    	    	});
+    		} else {
+    			addSheet(1);
+    		}
+    		});	
+    	}
+    	initRuler();
+    }
+</script>
+</head>
+<body onLoad="init();">
+<form style="width:100%;height:100%;overflow:auto;" class="menu_edit_form">
+
+
+<div id="ruler-Content" style="width:100%;margin: 0px auto;position: relative;">
+
+<div  style="width:1366px;margin:0 auto;padding-left:60px;" class='content-area'>
+    <div id="popup-menu-edit-none" style="display:none;"  class='menu-popup-item'>
+    </div>
+	<div id="popup-menu-edit-text" style="display:none;width: 1366px; "  class='menu-toolbar-text'>
+	</div>
+	<div id="popup-menu-edit-image" style="display:none;"  class='menu-popup-item'>
+	</div>
+    <div id="popup-menu-edit-table" style="display:none;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-edit-cell" style="display:none;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-edit-shape-arrow" style="display:none;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-edit-shape-img" style="display:none;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-draw" style="display:none;" class='menu-popup-item' >
+	</div>
+	<div id="popup-menu-insert" style="display:none;" class='menu-popup-item' >
+	</div>
+    <div id="popup-menu-shortCut" style="display:none;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-cellFunctionPannel" style="display:none; border:1px solid #67a111;"  class='menu-popup-item'>
+    </div>
+    <div id="popup-menu-cellFunctionBar" style="display:none;"  class='menu-popup-item'>
+        <div class="function_bar" style="width:880px;">
+                <div id="function_editCell" style="float:left; width:80px; font-size:16px;">Formula</div>
+                <div  style="float:left; width:20px; height:20px;font-size:16px; background-color:#ecfa95;">=</div>                
+                <!--<div id="Text1" style="float:left; width:700px;text-align:left; font-size:14px; padding-left:4px; color:Red;height:18px;background-color:#f0f0f0"></div>-->
+                <input type="text" id="function_inputValue" style=" float:left; width:700px;text-align:left; font-size:14px; padding-left:4px; color:Red;height:18px;background-color:#f0f0f0"/>
+                <div id="function_done" style=" float:right; width:30px;height:20px;cursor:pointer;"><img width="16px" src="images/cellfunction_ok.png" /></div>
+                <div id="function_cancel" style=" float:right; width:30px;height:20px;cursor:pointer;"><img width="16px" src="images/cellfunction_cancel.png" /></div>
+        </div>
+    </div>     
+        <div id="menu-tool" class='menu-popup-item' style="position:absolute;width: 240px;display: none;height:222px;">
+		    <ul>
+		        <li style="margin-top:-3px;height:25px;line-height:25px"><span style="margin-left:90px;color:#000;">Tools</span></li>
+		    </ul>		    
+            <div id="menu-tool-content">
+                <div>                    
+                    <ol class="menu_tool_content_sheet">
+                        <li class="ui-widget-content li-top-radius" style="border-bottom:none;">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Find</div>
+                        </li>
+                        <li class="ui-widget-content" style="border-bottom:none;">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Print</div>
+                        </li>
+                        <li class="ui-widget-content" style="border-bottom:none;" id="menu-tool-content-setting">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Settings<span style="margin-left: 90px;">&gt; </span></div>
+                        </li>
+                        <li class="ui-widget-content" style="border-bottom:none;">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Go to Help</div>
+                        </li>
+                        <li class="ui-widget-content li-bottom-radius" id="sheets_save">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Sheet Save</div>
+                        </li>                         
+                    </ol>
+                </div>
+            </div>
+        </div>  
+        <div id="menu-tool-setting" class='menu-popup-item' style="position:absolute;display: none;width: 240px;height:222px;">
+            <ul>
+                <li style="margin-top:-3px;height:25px;line-height:25px;color:#000;" id="menu-tool-back">&nbsp;&nbsp;&lt;&lt;<span style="margin-left:70px;color:#000;">Settings</span></li>
+            </ul>
+            <div id="menu-tool-setting-content" style="height:180px;">
+                <div>
+                    <ol class="menu_tool_content_sheet">
+                        <li class="ui-widget-content li-top-radius" style="border-bottom:none;">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Check Spelling</div>
+                            <div id="menu-tool-content-radio-Check" style="text-align: right;margin-top:-35px;">
+                                <input type="radio" value="on" id="menu-tool-content-radio-Check-radio1" name="radio-Check" ></input>
+                                <label for="menu-tool-content-radio-Check-radio1" style="margin-top:0px;margin-left:-8px;">ON</label>
+                                <input type="radio" value="off" id="menu-tool-content-radio-Check-radio2" name="radio-Check" ></input>
+                                <label for="menu-tool-content-radio-Check-radio2" style="margin-top:0px;margin-right:8px;">OFF</label>
+                            </div>
+                        </li>
+                        <li class="ui-widget-content" style="border-bottom:none;">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Center Guides</div>
+                            <div id="menu-tool-content-radio-Center" style="text-align: right;margin-top:-35px;">
+                                <input type="radio" value="on" id="menu-tool-content-radio-Center-radio1" name="radio-Center" ></input>
+                                <label for="menu-tool-content-radio-Center-radio1" style="margin-top:0px;margin-left:-8px;">ON</label>
+                                <input type="radio" value="off" id="menu-tool-content-radio-Center-radio2" name="radio-Center" ></input>
+                                <label for="menu-tool-content-radio-Center-radio2" style="margin-top:0px;margin-right:8px;">OFF</label>
+                            </div>
+                        </li>
+                        <li class="ui-widget-content li-bottom-radius">
+                            <div class="temp-div"></div>
+                            <div>&nbsp;Edge Guide</div>
+                            <div id="menu-tool-content-radio-Edge" style="text-align: right;margin-top:-35px;">
+                                <input type="radio" value="on" id="menu-tool-content-radio-Edge-radio1" name="radio-Edge" ></input>
+                                <label for="menu-tool-content-radio-Edge-radio1" style="margin-top:0px;margin-left:-8px;">ON</label>
+                                <input type="radio" value="off" id="menu-tool-content-radio-Edge-radio2" name="radio-Edge" ></input>
+                                <label for="menu-tool-content-radio-Edge-radio2" style="margin-top:0px;margin-right:8px;">OFF</label>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div id="sheetHeader" style="overflow:hidden;width:1366px;">
+                <div id="testss" style="overflow:hidden;width:100%;margin-top:45px;">
+                    <ul>
+                    	<div id="tabContainer" style="width: 100%;">
+    <!--                    <div class="tabselected">
+                            <span>default sheet</span>
+                            <div class="close"><span>x</span></div>
+                        </div>-->
+	                        <div id="addSheetPage">
+<!--	                        	<div id="tab_off_left">-->
+	                        	<div id="tab_off_mid">
+	                        		<div class="addSheet_icon"></div>
+                        		</div>
+	                        	<div id="tab_off_right"></div>
+	                        </div>
+	                    </div>
+                    </ul>
+                </div>
+         </div>
+         <div id ="sheetBody" style="background-color:white">
+         	<div id="tabBand"></div>
+        <div id="myContent" containerType='sheet' class='docs-editor' style='position: relative;width: 1366px; margin: 0pt auto;overflow: auto;'>
+		    <div id="editArea" style="height:100%;width:100%;">
+			    <div id="iFrame" style="height:100%;width:100%;"></div>
+		    </div>
+        </div>
+        </div>
+        <div id="sheetFooter" style="position: relative;width: 1366px; height: 20px;margin: 0pt auto; ">
+		<div align="center" class="Menu_Drawing_Style" id="Menu_Drawing_AllContent_Get" style="z-index: 6666;">
+			<div class="width8 height20 background_black" style="float: left;">
+				&nbsp;
+			</div>
+			<div class="width75 height20 background_black" style="float: left;" id="viewHistory">
+				<img class="hoverStyle" src="images/03 Main Nav/Nav Bar/back.png" class="height20">
+			</div>
+			<div class="width150 height20 Menu_Drawing_TextFont_BackgroundStyle">
+				<font class="Menu_Drawing_TextFont_Style Menu_TextFont_Opacity hoverStyle">FIGURES</font>
+			</div>
+			<div class="width75 height20 background_black" style="float:left;"  id="Menu_Drawing_pencil">
+				<img src="images/03 Main Nav/Nav Bar/draw.png" class="height20 hoverStyle" id="" />
+			</div>
+			<div objecttype="TextBox" class="width75 height20" style="float: left;" id="Menu_Drawing_T_Click">
+				<img src="images/03 Main Nav/Nav Bar/type.png" id="" class="height20 hoverStyle">
+			</div>
+			<div class="width75 height20 background_black" style="float: left;" id="insert">
+				<img src="images/03 Main Nav/Nav Bar/star.png" id="" class="height20 hoverStyle">
+			</div>
+			<div class="width150 height20 background_black" style="float: left;margin-left:160px;" id="Menu_Drawing_MenuUp_Click">
+				<img src="images/03 Main Nav/Nav Bar/menu_up.png" id="" class="height20 hoverStyle">
+			</div>
+			<div style="float:right;">
+				<div class="width75 height20 background_black" style="float: left;" id="edit">
+					<img src="images/02_Text/Text Nav Bar/Font Style/italic_on.png" id="" class="height20 hoverStyle">
+				</div>
+				<div id="Menu_Drawing_Save" class="width75 height20 Menu_Drawing_TextFont_BackgroundStyle">
+					<font class="Menu_Drawing_TextFont_Style Menu_TextFont_Opacity hoverStyle">SAVE</font>
+				</div>
+				<div class="width75 height20 background_black" style="float: left;" id="undo">
+					<img src="images/03 Main Nav/Nav Bar/undo_disabled.png" id="" class="height20 hoverStyle">
+				</div>
+				<div class="width75 height20" style="float: left;" id="redo">
+					<img src="images/03 Main Nav/Nav Bar/redo_disabled.png" id="" class="height20 hoverStyle">
+				</div>
+				<div class="width75 height20 background_black" style="float: left;">
+					<img src="images/03 Main Nav/Nav Bar/animate_disabled.png" id="" class="height20 hoverStyle">
+				</div>
+				<div class="width8 height20 background_black" style="float: left;">
+					&nbsp;
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="folderNameOfFile" style="display:none;"></div>
+<div class="hr-cursor-svg hr-docstext-unprintable" style="z-index:100;top:-5000px;left:-5000px; position: absolute;">
+    <div class="hr-cursor-caret-svg" style="border-color: rgb(0, 0, 0); height: 18.7px; visibility: visible; ; border-left: 2px solid; font-size: 0; position: absolute; width: 0;"></div>
+</div>
+</div><input type="text" style="display:none;"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,1046 @@
+<html>
+<head>
+	<title>Templates</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<script type="text/javascript" src="Import.js"></script>
+	<script type="text/javascript">
+	
+		var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+		var random = urlParameter.id;
+
+		var username;
+		var currDocType;
+		var currentSelectedID;
+		var currentFolderName;
+		var currentFileName;
+		var notGetTemplate = false;
+		
+	    var historyList = [];
+	    var templateList = [];
+
+	    var selectedPapers = [];
+
+	    function doreturn(){
+	    //$("#return").click(function(){
+	    	if(!currentFileName){
+		    		window.location.href = "login?userName=" + username;
+	    	} else{
+	    		window.location.href = "templates_docs.html?id=" + random;
+	    		//window.location.href = "templates_docs.html?doctype=paper&userName=kennylv";
+	    	}
+		//});
+	    }
+	    
+		function getTemplates() {
+	    	var fileInf = {'random': random};
+			com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+		    	if(data){
+			    	username = data.username;
+		    		currDocType = data.doctype;
+			var fileInfo = {'fileType': currDocType};
+			var templatesRecordList = "";
+			com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+		    	if(data.list){
+		    		for(var i = 0; i < data.list.length; i++) {
+		    			var fileImage = data.list[i];
+		    			if(templatesRecordList == ""){
+		    				templatesRecordList += "[";
+		    			}
+		    			templatesRecordList += "{ id:'" + fileImage.fileName + "', folderName:'" + fileImage.folderName + "', frontPage: '" + fileImage.filePath + "', description:'" + fileImage.fileName + "', creatDate:'" + fileImage.creatDate + "'}";
+		    			if(i < data.list.length - 1){
+		    				templatesRecordList += ",";
+		    			} else {
+		    				templatesRecordList += "]";
+		    			}
+		    		}
+		    		templateList = eval(templatesRecordList);
+					
+		    	}
+				if (templateList != undefined){
+					setRecords(templateList,"#templates");
+				}
+				getHistoryRecords();
+			});
+		}
+			});
+		}
+
+	    function setRecords(list,type) {
+	        var currImage = 0, leftImage = 0, container = $(type+' .list');
+	        var buff = [], n;
+	        if(currentFolderName){
+	        	$("#docs .title")[0].innerHTML = "HISTORY FOR " + currentFileName;
+	        }
+            for (n = 0; n < list.length; ++n) {
+                var temp = "";
+                if(currentFileName){
+                	temp = '_Version' + list[n].version;
+                }
+                buff.push('<li><div>' + list[n].id + '<span class = ver>' + temp + '</span>' + '</div><img class="preview" alt=""  index="' + n + '" src="' + list[n].frontPage + '" /></li>');
+            }
+	        //temporarily load the same imgs
+	        //implementition: container.filer(":nth-child(1)").html(buff.join('')); container.filer(":nth-child(2)").html(...)
+	        container.each(function (index, elem) {
+	            $(elem).html(buff.join('')).parent().append($("<div style='clear:both'></div>"));
+	        });
+	    }
+
+	    function getHistoryRecords() {
+	    	var fileInfo = {'fileType': currDocType, 'userName': username ,'currentFolderName': currentFolderName};
+	    	var historyRecordList = "";
+	    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+	        	if(data.list){
+		    		for(var i = 0; i < data.list.length; i++) {
+		    			var fileImage = data.list[i];
+		    			if(historyRecordList == ""){
+		    				historyRecordList += "[";
+		    			}
+		    			historyRecordList += "{ id:'" + fileImage.fileName + "', title:'" + fileImage.fileFolderName + "', frontPage: '" + fileImage.filePath + "', description:'" + fileImage.fileName + "', creatDate:'" + fileImage.creatDate + "', version:'" + fileImage.version + "'}";
+		    			if(i < data.list.length - 1){
+		    				historyRecordList += ",";
+		    			} else {
+		    				historyRecordList += "]";
+		    			}
+		    		}
+		    		historyList = eval(historyRecordList);
+	        	}
+	        	if (historyList != undefined && notGetTemplate == false){
+	        		setRecords(historyList,"#docs");
+	        	}
+	        	init();
+	    	});
+	    }
+
+		function loadFiles(fileInfo){
+			currentFileName = null;
+			currentFolderName = null;
+			$("#contentList").html("");
+			var historyRecordList = "";
+	    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+	        	if(data.list){
+		    		for(var i = 0; i < data.list.length; i++) {
+		    			var fileImage = data.list[i];
+		    			if(historyRecordList == ""){
+		    				historyRecordList += "[";
+		    			}
+		    			historyRecordList += "{ id:'" + fileImage.fileName + "', title:'" + fileImage.fileFolderName + "', frontPage: '" + fileImage.filePath + "', description:'" + fileImage.fileName + "', creatDate:'" + fileImage.creatDate + "', version:'" + fileImage.version + "'}";
+		    			if(i < data.list.length - 1){
+		    				historyRecordList += ",";
+		    			} else {
+		    				historyRecordList += "]";
+		    			}
+		    		}
+		    		historyList = eval(historyRecordList);
+	        	}
+	        	if (historyList != undefined){
+	        		setRecords(historyList,"#docs");
+	        	}
+	        	init();
+	    	});
+		}
+	    
+	    function getHistoryRecordsByChar() {
+	    	var fileInfo = {'fileType': currDocType, 'userName': username ,'sortType':'byChar', 'searchText':$('#searchText').val()};
+	    	loadFiles(fileInfo);
+	    }
+
+	    function getHistoryRecordsByDate() {
+	    	var fileInfo = {'fileType': currDocType, 'userName': username ,'sortType':'byDate', 'searchText':$('#searchText').val()};
+	    	loadFiles(fileInfo);
+	    }
+
+	    function getHistoryRecordsByText() {
+	    	var fileInfo = {'fileType': currDocType, 'userName': username ,'sortType':'byText', 'searchText':$('#searchText').val()};
+	    	loadFiles(fileInfo);
+	    }
+
+	    function setClickable($target){
+			if (!$target.is(".clickable")){
+				var src = $target.attr("src");
+				$target.attr("src",src.replace(/_disabled.png/,".png"));
+				$target.addClass("clickable");
+			}
+		}
+
+		function setUnclickable($target){
+			if ($target.is(".clickable")){
+				var src = $target.attr("src");
+				$target.attr("src",src.replace(/.png/,"_disabled.png"));
+				$target.removeClass("clickable");
+			}
+		}
+
+		function setSelected($target){
+			if ($target.next(".imgdot").length == 0){
+				var $img = $("<img src='/PJ_SRC/images/02_Text/Colours Pop-down/red_press.png'></img>").insertAfter($target);
+				$img.css("position","absolute")
+					.css("left", ($target.width()-51/2)+"px")
+					.css("top", -15+"px")
+					.css("opacity","0.5")
+					.addClass("imgDot");
+				selectedPapers.add(historyList[($target.attr("index"))]);
+			}else{
+				var index = selectedPapers.indexOf(historyList[($target.attr("index"))]);
+				selectedPapers.removeAt(index);
+				$target.next(".imgdot").remove();
+			}
+		}
+
+		function bindHistoryClick(){
+			$("#docs img").each(function(){
+				$(this).click(function(){
+					if (!$("#done").is(":visible")){
+						if($("#templates").css("display") == "block"){
+						currentSelectedID = historyList[$(this).attr("index")].id;
+						} else {
+							currentSelectedID = historyList[$(this).attr("index")].version;
+							currentFileName = historyList[$(this).attr("index")].id;
+						}
+						currentFolderName = historyList[$(this).attr("index")].title;
+						$("#docs img").removeClass("img_selected");
+						$(this).addClass("img_selected");
+					}else{
+						setSelected($(this));
+					}
+				});
+			});	
+		}
+		
+		function init(){
+				//set width
+				var width = $(".list li").css("width");
+				if(!width){
+					width = "0px";
+				}
+				var marginRight = $(".list li").css("margin-right");
+				var mergeWidth = parseInt(width, 10) + parseInt(marginRight, 10);
+				var unit = width.slice(-2);
+				
+				$(".list").each(function(){
+					var $documents = $(this);
+					var count = $("li",$documents).length;
+					var totalWidth = mergeWidth * count;
+					var visibleWidth = parseInt($documents.parent().css("width"), 10);
+					if (  totalWidth > visibleWidth){
+						$documents.parent().css("width",totalWidth+unit);
+					}else{
+						$documents.parent().css("width",visibleWidth+unit);
+					}
+				});
+
+				//add slide ability
+				$(".content").mousedown(function(event){
+					var $target = $(this);
+					var startX = event.clientX;
+					var origX = $target.position().left;
+					var deltaX = startX - origX;
+					
+					$target.mousemove(function(event){
+						var speed = 0;
+						var left = event.clientX-deltaX;
+						var minLeft =  parseInt($target.parent().css("width"), 10) - parseInt($target.css("width"), 10)
+						if( left < 0 && left > minLeft ){
+							$target.animate({left:(event.clientX-deltaX)+ unit}, speed);
+						}
+					});
+					
+					$(document).mouseup(function(){
+						/*
+						var left = $(".content").position().left;
+						var over = Math.abs(left)%mergeWidth;
+						var delta;
+						if (over < parseInt(width, 10)/2){
+							delta = over;
+						}else{
+							delta =  0 - (mergeWidth - over);
+						}
+						left += delta;
+						$target.animate({left: left +"px"}, 30);
+						*/
+						$target.unbind("mouseup");
+						$target.unbind("mousemove");
+					});
+
+					event.preventDefault();
+				});
+
+				//A4 TEMPLATES
+				$("#templates .templates:nth-child(1) img").each(function(index){
+					$(this).click(function(){
+						currentSelectedID = templateList[index].description;
+		                currentFolderName = templateList[index].folderName;
+		                $("#templates img").removeClass("img_selected");
+						$(this).addClass("img_selected");
+					});
+				});	
+
+				//US LETTER TEMPLATES
+				$("#templates .templates:nth-child(2) img").each(function(index){
+					$(this).click(function(){
+						currentSelectedID = templateList[index].description;
+			            currentFolderName = templateList[index].folderName;
+			            $("#templates img").removeClass("img_selected");
+						$(this).addClass("img_selected");
+					});
+				});	
+
+				$(".content").click(function(event){
+					if (event.target.tagName.toLowerCase() != "img"){
+						$("#templates img").removeClass("img_selected");
+						$("#docs img").removeClass("img_selected");
+						currentSelectedID = null;
+					}
+				});
+
+				bindHistoryClick();
+
+				$("#open").unbind("click").bind("click", function(e){
+					e.preventDefault();
+					if (!$("#edit").is(".edit_state")){
+						if (currentSelectedID == null) {
+				            alert("Please select a document ! ");
+				            return;
+						}
+						if ($("#templates").is(":visible")){
+							window.location.href = "editor_" + currDocType + ".html?docid=" + currentSelectedID + 
+						"&userName=" + username + "&fileType=" + currDocType + "&folderName=" + currentFolderName +"&00";
+						}else{
+						 window.location.href = "requestConvert?fileName=" + currentFileName + "&version=" + currentSelectedID +
+						"&userName=" + username + "&doctype=" + currDocType + "&uuid=" + currentFolderName +"&00";
+						}
+					}else{
+						alert("This is edit mode!");
+					}
+				}).hover(function(){
+					$(this).addClass("menu_hover");
+				},function(){
+					$(this).removeClass("menu_hover");
+				});
+				
+				$("#history").unbind("click").bind("click", function(e){
+					e.preventDefault();
+					if (!$("#edit").is(".edit_state")){
+						if($("#docs .title")[0].innerHTML == "HISTORY"){
+						if(!$("#templates").is(":visible")){
+						if (currentSelectedID == null) {
+				            alert("Please select a document ! ");
+				            return;
+						}else{
+							var fileInfo = {'fileType': currDocType, 'userName': username ,'currentFolderName': currentFolderName};
+								com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+						        	if(!data.list || data.list.length == 0){
+							        	alert("No history avaliable!");
+							        	return;
+						        	} else {
+					        		$("#docs").hide(0);
+						        		$("#Menu_Templates_Docs_Header div").removeClass("menu_selected");
+					        		$("#history").addClass("menu_selected");
+					        		
+									// reset view
+									var historyRecordList = "";
+					        		for(var i = 0; i < data.list.length; i++) {
+						    			var fileImage = data.list[i];
+						    			if(historyRecordList == ""){
+						    				historyRecordList += "[";
+						    			}
+						    			historyRecordList += "{ id:'" + fileImage.fileName + "', title:'" + fileImage.fileFolderName + "', frontPage: '" + fileImage.filePath + "', description:'" + fileImage.fileName + "', creatDate:'" + fileImage.creatDate + "', version:'" + fileImage.version + "'}";
+						    			if(i < data.list.length - 1){
+						    				historyRecordList += ",";
+						    			} else {
+						    				historyRecordList += "]";
+						    			}
+						    		}
+						    		historyList = eval(historyRecordList);
+						    		setRecords(historyList,"#docs");
+						    		$("#docs").fadeIn("normal");
+						    		bindHistoryClick();				        		
+									}
+						    	});
+						}
+						}else{
+							alert("This is template select mode!");
+							return;
+						}
+						}
+					}else{
+						alert("This is edit mode!");
+					}
+				}).hover(function(){
+					$(this).addClass("menu_hover");
+				},function(){
+					$(this).removeClass("menu_hover");
+				});
+					
+				$("#templates").hide();
+				$("#docs").hide();
+				
+				$("#left").click(function(e){
+					e.preventDefault();
+					if (!$("#edit").is(".edit_state")){
+					$("#docsCtrl").addClass("menu_selected");
+						$("#searchText").val("");
+						$("#sortli").hide();
+						$("#history").parent().css("display", "none");
+						$(".ver").each(function(){
+							$(this).css("display", "none");
+						});	
+						$("#templates").fadeIn("normal");
+						$("#docs").hide("normal");
+						$("#Menu_Templates_Docs_Header div").removeClass("menu_selected");
+						$(this).addClass("menu_selected");
+
+						//remove select
+						$("#templates img").removeClass("img_selected");
+						$("#docs img").removeClass("img_selected");
+						currentSelectedID = null;
+					}else{
+						alert("This is edit mode!");
+					}
+				}).hover(function(){
+					$(this).addClass("menu_hover");
+				},function(){
+					$(this).removeClass("menu_hover");
+				});
+
+
+				$("#right").click(function(e){
+					e.preventDefault();
+					if (!$("#edit").is(".edit_state")){
+						if($("#history").is(".menu_selected") || $("#docsCtrl").is(".menu_selected")){
+						window.location.href = "templates_docs.html?id=" + random;
+					} else {
+						$("#history").parent().css("display", "block");
+						$("#templates").hide("normal");
+						//$("#docs :visiable").show("normal");
+						$("#docs").fadeIn("normal");
+						$("#Menu_Templates_Docs_Header div").removeClass("menu_selected");
+						if($("#docs .title")[0].innerHTML != "HISTORY"){
+							$("#history").addClass("menu_selected");
+							$("#docsCtrl").addClass("menu_selected");
+							$("#sortli").hide();
+							//window.location.href = "templates_docs.html?doctype=" + currDocType +"&userName=" + urlParameter.userName;
+						} else {
+							$("#sortli").show();
+						$(this).addClass("menu_selected");
+						$(".ver").each(function(){
+							$(this).css("display", "none");
+						});
+						}
+						//remove select
+						$("#templates img").removeClass("img_selected");
+						$("#docs img").removeClass("img_selected");
+						currentSelectedID = null;
+						$("img").removeClass("img_selected");
+					}
+					}else{
+						alert("This is edit mode!");
+					}
+				}).hover(function(){
+					$(this).addClass("menu_hover");
+				},function(){
+					$(this).removeClass("menu_hover");
+				});
+
+				//toolbar init
+				$("#done").hide();
+				
+				$("#edit").click(function(){
+					 setClickable($("#duplicate"));
+					 setClickable($("#delete"));
+					 setClickable($("#export"));
+					 setClickable($("#delete"));
+					 setClickable($("#download"));
+					 $(this).addClass("edit_state");
+					 $("#done").show();
+					 $("#Menu_Templates_Docs_Center").css("visibility","hidden");
+					 $("#upload").parent().parent().hide();
+				});
+
+				$("#done").click(function(){
+					setUnclickable($("#duplicate"));
+					setUnclickable($("#delete"));
+					setUnclickable($("#export"));
+					setUnclickable($("#delete"));
+					setUnclickable($("#download"));
+					$(this).hide();
+					$("#Menu_Templates_Docs_Center").css("visibility","visible");
+					$("#edit").removeClass("edit_state");
+					$("#docs .list .imgdot").remove();
+					selectedPapers.length = 0;
+					 $("#upload").parent().parent().show();
+				});
+
+				$("#duplicate").click(function(e){
+					e.preventDefault();
+					if($("#edit").is(".edit_state")){
+						if (selectedPapers.length > 0){
+							var confirmInfo = "Copy the selected " + currDocType + (selectedPapers.length > 1 ? "s": "")+ ". Are you sure?";
+							if(confirm(confirmInfo)){	
+								var selectedFolders = "";
+								for(var i = 0;i<selectedPapers.length;i++){
+									selectedFolders+=selectedPapers[i].title;
+									if(i<selectedPapers.length-1){
+										selectedFolders+="&"
+									}
+								}
+								var copyFileInfo = {'fileType': currDocType, 'userName': 'kennylv' ,'selectedFolderNames': selectedFolders};
+								com.hoperun.util.FileHelper.copyFile(copyFileInfo,function(data){
+										if(data == "true"){
+											for (var i = 0,origLength = historyList.length; i < selectedPapers.length; i++,origLength++){
+												historyList.add(selectedPapers[i]);
+												$('<li><img class="preview" alt=""  index="' + origLength + '" src="' + selectedPapers[i].frontPage + '" /></li>')
+												.appendTo('#docs .list')
+												.children("img")
+												.click(function(){
+													if (!$("#done").is(":visible")){
+														currentSelectedID = historyList[$(this).attr("index")].id;
+														currentFolderName = historyList[$(this).attr("index")].title;
+														$("#docs img").removeClass("img_selected");
+														$(this).addClass("img_selected");
+													}else{
+														setSelected($(this));
+													}
+												});
+												var currentWidth =  parseInt($("#docs .content").eq(0).width(), 10);
+												var totalWidth = mergeWidth *  $("#docs .list li").length;
+												if (currentWidth < totalWidth){
+													$("#docs .content").css("width",totalWidth + unit);
+												}
+											}
+										}
+									});					
+								}
+							}else{
+								alert("Please selected " +currDocType+" to Copy");
+							}
+						}
+					});
+
+				$("#delete").click(function(e){
+					e.preventDefault();
+					if ($("#edit").is(".edit_state")){
+					if (selectedPapers.length > 0){
+						var delTitles = [];
+							var delIds = [];
+						var confirmInfo = "Delete the selected " + currDocType + (selectedPapers.length > 1 ? "s": "") + ". Are you sure?";
+						if ($(this).is(".clickable") && confirm(confirmInfo)){
+							for (var i = 0 ; i < selectedPapers.length; i++){
+								var index = historyList.indexOf(selectedPapers[i]);
+								historyList.removeAt(index);
+								delTitles.push(selectedPapers[i].title);
+									if(currentFileName){
+										delIds.push(selectedPapers[i].version);
+									}
+							}
+	
+							setRecords(historyList,"#docs");
+							bindHistoryClick();
+							selectedPapers = [];
+	
+							var delInfo = {
+									userName: username,
+										fileType: currDocType,
+											delTitles: delTitles.join(","),
+											currSelectedId: delIds.join(",")
+									};
+							$.get("deleteHistory",delInfo,function(){
+								if(!currentFolderName){
+								$(".ver").each(function(){
+									$(this).css("display", "none");
+								});	
+								}
+							});
+						}
+					}else{
+						alert("Please select a file!");
+					}
+					}
+				});
+
+				$("#download").click(function(e){
+					e.preventDefault();
+					if ($("#edit").is(".edit_state")){
+					if (selectedPapers.length > 0){
+						if (selectedPapers.length > 1){
+							alert("Only can select one history!");
+						}else{
+					    	var oForm = document.getElementById("slideHistoryFormDiv");
+						oForm.action="filedownloader?fileType=" + currDocType + "&userName=" + username + "&fileFolderName=" + selectedPapers[0].title + "&currFileName=" + selectedPapers[0].id;
+							oForm.target="downloadIFrame";
+							oForm.submit();
+						}
+					}else{
+						alert("Please select a file!");
+					}
+					}
+				});
+				
+				if (null!=historyList && historyList.length == 0){
+					$("#left").trigger("click");
+				}else{
+					$("#right").trigger("click");
+				}
+
+				/*$("#upload").toggle(
+					function(e){
+						e.preventDefault();
+						$("#uploadDiv").show();
+					},
+					function(e){
+						e.preventDefault();
+						$("#uploadDiv").hide();
+					});*/
+				
+				$("#upload").click(function(e){
+						e.preventDefault();
+						if ($("#uploadDiv").is(":visible")){
+							$("#uploadDiv").hide();
+						}
+						else{
+							$("#uploadDiv").show();
+						}
+					}
+				);
+				
+				
+				$("#fileUploadOK").click(function(){
+					if ($("#fileUpload").val()){
+						$("#divForTestIFrame").html("");
+						$uploadForm = $("#uploadForm");
+					var actionwithParams = "fileUploaderForHistory?userName=kennylv&fileType=" + currDocType + "&uploadFileName=" + $("#fileUpload").val();
+						$uploadForm.attr("action",actionwithParams);
+						$uploadForm.attr("target","downloadIFrame");
+						$uploadForm.submit();
+ 						$("#uploadDiv").hide();
+ 						document.getElementById("downloadIFrame").onload = function(){
+ 							if ($("#divForTestIFrame").html() != ""){
+ 								location.href = location.href;
+ 							}else{
+ 								//alert("Upload failed!");
+ 							}
+ 						};
+					}else{
+						alert("Please select a file!");
+					}
+				});
+
+				$(document).click(function(event){
+					if (event.target.id != "upload" && event.target.id !="fileUpload"){
+						$("#uploadDiv").hide();
+					}
+				});
+		}
+
+
+		$(document).ready(function(){
+				getTemplates();
+
+
+			//by char
+		    $("#sort-by-char").unbind("click.char").bind("click.char", function() {
+		    	$("#sort-by-date,#search-by-text").removeClass("menu_hover");
+			    $(this).addClass("menu_hover");
+			    notGetTemplate = true;
+		    	getHistoryRecordsByChar();
+			});
+
+		  	//by date
+		    $("#sort-by-date").unbind("click.date").bind("click.date", function() {
+		    	$("#sort-by-char,#search-by-text").removeClass("menu_hover");
+			    $(this).addClass("menu_hover");
+			    notGetTemplate = true;
+		    	getHistoryRecordsByDate();
+			});
+
+		  	//by text
+		    $("#search-by-text").unbind("click.text").bind("click.text", function() {
+		    	$("#sort-by-char,#sort-by-date").removeClass("menu_hover");
+			    $(this).addClass("menu_hover");
+			    notGetTemplate = true;
+		    	getHistoryRecordsByText();
+			});
+
+			
+
+			
+		});
+		
+		function fileUpload_MouseUp(){
+			var userAgent = navigator.userAgent.toLowerCase(); 
+			$.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase()); 
+			if($.browser.chrome){
+				$.browser.safari = false;
+			}
+			if($.browser.safari){
+				$('#fileUpload').click();
+			}
+		}
+		
+		if(null != currentFolderName && "" != (currentFolderName)){
+    		$("#docs img").each(function(){
+    			var src = $(this).attr("src");
+    			if (src.indexOf(currentFolderName) == -1){
+    				$(this).parent().hide();
+    			}
+    		})
+    	}
+	</script>
+	
+	<style type="text/css">
+	body{
+		overflow: scroll;
+	}
+	
+	img{
+		border: 0;
+	}
+	
+	img.preview{
+		cursor: pointer;
+		height: 100%;
+		width: 100%;
+		border: 2px solid #FFFFFF;
+		box-shadow: 1px 1px 3px #999999;
+	}
+	
+	img.img_selected{
+		border: 2px solid #B2B2B2;
+	}
+	
+	
+	#Menu_Templates_Docs_Div{
+		background-color: #000;
+		color: #FFF;
+		position: relative;
+		width: 1366px;
+		height: 794px;
+		margin: 25px auto;
+	}
+	
+	#Menu_Templates_Main{
+		padding: 20px 0 25px 58px;
+		position: relative;
+	}
+	
+	#Menu_Docs_Main{
+		padding: 26px 78px 26px 78px;
+	}
+	
+	#Menu_Templates_Docs_Footer{
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		text-align: center;
+	}
+	
+	
+	.menu_item{
+		float: left;
+		margin-left: 39px;
+		margin-right: 39px;
+		
+	}
+	
+	#Menu_Templates_Docs_Left{
+		padding: 0;
+		position: absolute;
+		display: inline;
+		left: 0;
+	}
+	
+	#Menu_Templates_Docs_Center{
+		display: inline-block;
+	}
+	
+	#Menu_Templates_Docs_Right{
+		padding: 0;
+		position: absolute;
+		display: inline;
+		right: 0;
+	}
+	
+	#Menu_Templates_Docs_Header{
+		text-align: left;
+		width: 1080px;
+		margin-bottom: 46px;
+	}
+	
+	
+	#left{
+		float: left;
+		width: 114.5px;
+		height: 100%;
+	}
+	
+	#right{
+		float:right;
+		width: 70.5px;
+		height: 100%;
+	}
+	
+	#open{
+		float: left;
+		width: 100%;
+		height: 100%;
+	}
+	
+	#history{
+		float: left;
+		width: 100%;
+		height: 100%;
+	}
+	
+	.menu_selected{
+		background-image: url("/PJ_SRC/images/05 Menus/Graphics/cam_roll/bar_hg.png");
+	}
+	
+	.menu_hover{
+		background-image: url("/PJ_SRC/images/05 Menus/Graphics/cam_roll/bar_hg_long.png");
+	}
+	
+	#Menu_Templates_Docs_Header a{
+		display: block;
+		opacity: 0.35;
+		padding-left: 8px;
+	}
+	
+	#Menu_Templates_Docs_Header a:link{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#Menu_Templates_Docs_Header a:visited{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#Menu_Templates_Docs_Header a:hover{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#Menu_Templates_Docs_Header ul{
+		margin: 0;	
+		padding: 0;
+		list-style: none;
+	}
+	#Menu_Templates_Docs_Header ul li{
+		float: left;
+		background-image: url("/PJ_SRC/images/03 Main Nav/Pop Menus/menu_mode_btn_off.png");
+		background-repeat: repeat-x;
+		width: 185px;
+		height: 24px;
+		font-size: 17px;
+		font-weight: bold;
+		font-family: helvetica,neue;
+		margin-right: 50px;
+		opacity: 0.75;
+	}
+	
+	#Menu_Templates_Docs_Footer ul{
+		margin: 0;	
+		padding: 0;
+		list-style: none;
+	}
+	#Menu_Templates_Docs_Footer ul li{
+		float: left;
+	}
+	
+	#Menu_Templates_Docs_Footer a{
+		display: block;
+	}
+	
+	#Menu_Templates_Docs_Footer a:link{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#Menu_Templates_Docs_Footer a:visited{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	#Menu_Templates_Docs_Footer a:hover{
+		color: #FFF;
+		text-decoration: none;
+	}
+	
+	.templates{
+		text-color: gray;
+		margin-bottom: 13px;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.title{
+		font-size: 16px;
+		font-weight: bold;
+		font-family: helvetica,neue;
+		padding-bottom: 6px;
+		opacity: 0.35;
+	}
+	
+	.content{
+		margin-top: 25px;
+		position: relative;
+	}
+	
+	.list{
+		margin: 0;	
+		padding: 0;
+		list-style: none;
+	}
+	.list li{
+		width: 183px;
+		height: 259px;
+		float: left;
+		margin: 0 50px 12px 0;
+		position: relative;
+	}
+	
+	.divider{
+		border-top: solid 2px #FFF;
+		opacity: 0.35;
+	}
+
+	#edit, #done{
+		background: url("/PJ_SRC/images/03 Main Nav/Pop Menus/menu_mode_btn_off.png") repeat scroll 0 0 transparent;
+		width: 150px;
+		height: 24px;
+		padding-left: 5px;
+		text-align: left;
+	}
+	
+	#edit span,#done span{
+		opacity: 0.25;
+		font-size: 18px;
+		font-weight: bold;
+		color: #FFFFFF;
+	}
+	
+	#edit.edit_state{
+		background-image: url("/PJ_SRC/images/03 Main Nav/Pop Menus/menu_mode_btn_on.png") ;
+	}
+	
+	.ifile {
+	    left: 0;
+	    opacity: 0;
+	    position: absolute;
+	}
+
+	.i2Style {
+	    background: none repeat scroll 0 0 #F5F5F5;
+	    border: 1px solid #BBBBBB;
+	    border-radius: 5px 5px 5px 5px;
+	    box-shadow: 0 1px 10px #D1CFD1;
+	    color: #000000;
+	    cursor: pointer;
+	    font: 10px Verdana,Geneva,sans-serif;
+	    margin: 0 auto;
+	    padding: 5px 10px;
+	    text-shadow: 0 1px 0 #FFFFFF;
+	    width: 30px;
+	    float: left;
+	    margin-left: 3px;
+	}
+	
+	#uploadDiv{
+		position: absolute;
+		top: -30px;
+		left: 350px;
+		display: none;
+	}
+	
+	#uploadDiv .display{
+		width:140px; 
+		margin:2px 5px 0 0 ; 
+	}
+	
+	</style>
+</head>
+<body>
+	<div id="Menu_Templates_Docs_Div">
+		<div id="Menu_Templates_Main">
+			<div id="Menu_Templates_Docs_Header">
+				<ul>
+					<li><div id="left"><a href="">TEMPLATES</a></div><div id="right"><a href="">DOCS</a></div></li>
+					<li id="sortli" style="width:253px;">
+						<div id="sort-by-char" class="slides-doc-sort" style="float:left;width:40px;height:24px;border-right:1px solid black;"><a href="#" onclick="return false;">A-Z</a></div>
+						<div id="sort-by-date" style="float:left;width:40px;height:24px;border-right:1px solid black;"><a href="#" onclick="return false;">DATE</a></div>
+						<div style="float:left;"><input type="text" id="searchText" name="searchText" style="height:23px;"/></div>
+						<div id="search-by-text" style="float:right;"><img class="hoverStyle" src="images/03 Main Nav/Nav Bar/search.png" style="height:28px;margin-right:-18px;margin-top:-28px;border-right:1px solid #000000"/></div>
+					</li>
+					<li><div id="open"><a href="">OPEN</a></div></li>
+					<li><div id="history"><a href="">HISTORY</a></div></li>
+				</ul>
+				<div style="clear:both"></div>
+			</div>
+			<div id="templates">
+				<div class="templates">
+					<div class="title">A4 TEMPLATES</div>
+					<div class="divider"></div>
+					<div class="content">
+						<ul class="list">
+						</ul>
+					</div>
+				</div>
+				<div class="templates">
+					<div class="title">US LETTER TEMPLATES</div>
+					<div class="divider"></div>
+					<div class="content">
+						<ul class="list">
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="docs">
+				<div class="templates">
+					<div class="title">HISTORY</div>
+					<div class="divider"></div>
+					<div class="content">
+						<ul class="list" id="contentList">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="Menu_Templates_Docs_Footer">
+			<div class="divider"></div>
+			<div id="Menu_Templates_Docs_Left">
+				<ul>
+					<li id="return" onclick="doreturn()"><img class="hoverStyle" src="/PJ_SRC/images/03 Main Nav/Nav Bar/back.png" /></li>
+					<li><div id="edit"><span class="hoverStyle">EDIT</span></div></li>
+					<li><div id="done"><span class="hoverStyle">DONE</span></div></li>
+					<li><a href=""><img id="duplicate" src="/PJ_SRC/images/03 Main Nav/Nav Bar/duplicate_disabled.png" /></a></li>
+					<li><a href="#"><img id="export" src="/PJ_SRC/images/03 Main Nav/Nav Bar/export_disabled.png" /></a></li>
+					<li><a href=""><img id="download" src="/PJ_SRC/images/03 Main Nav/Nav Bar/download_disabled.png" /></a></li>
+					<li><a href=""><img id="upload" src="/PJ_SRC/images/03 Main Nav/Nav Bar/upload.png" /></a></li>
+				</ul>
+			</div>
+			<div id="Menu_Templates_Docs_Center">
+				<a><img class="hoverStyle" src="/PJ_SRC/images/03 Main Nav/Nav Bar/menu_up.png" /></a>
+			</div>
+			<div id="Menu_Templates_Docs_Right">
+				<ul>
+					<li><a href=""><img id="delete" src="/PJ_SRC/images/03 Main Nav/Nav Bar/delete_disabled.png" /></a></li>
+				</ul>
+			</div>
+			<div id="uploadDiv">
+				<form id="uploadForm" action="fileUploaderForHistory" method="post" enctype="multipart/form-data">
+					<input type="file" name="fileUpload" id="fileUpload" class="ifile" style="width:195px;" onchange="upfile.value=this.value" onmouseup="fileUpload_MouseUp();"/>
+					<div style="float:left;"><input type="text" name="upfile" class="display" /></div>
+	 				<div id="fileUploadSelect" class="i2Style" >Select</div>
+					<div id="fileUploadOK" class="i2Style" >OK</div>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+	<form id="slideHistoryFormDiv" method="post" enctype="multipart/form-data" >
+	</form>
+	<IFrame id="downloadIFrame" name="downloadIFrame" width="1px" height="1px" style="display:none;" src=""></IFrame>
+	<div id="divForTestIFrame" style="display:none"></div>
+	<div id="docsCtrl" style="display:none"></div>
+</body>
+</html>
+
