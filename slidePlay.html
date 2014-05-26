@@ -28,13 +28,13 @@ $(document).ready(function(){
 var slidesForPlay = [];
 for(var i=0; i<window.opener.slides.length; i++){
 	var data = window.opener.slides[i].getData();
-	var slide = new com.hoperun.node.Slide();
+	var slide = new com.kenny.node.Slide();
 	slide.setData(data);
 	slidesForPlay.push(slide);
 }
 	
 var currSlide = null;
-var animation = new com.hoperun.util.Animation();
+var animation = new com.kenny.util.Animation();
 
 // play slide
 function play(slide){

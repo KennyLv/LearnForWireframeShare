@@ -7,8 +7,8 @@ function commonDiv_MenuTitle_Ready() {
 		if(currentSelectedObj != null){
 			var data = currentSelectedObj.data;
 			data.style = { 'styleFormat': paraStyle };
-			sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE,
-							com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
+			sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE,
+							com.kenny.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
 							data);
 		}
 	});

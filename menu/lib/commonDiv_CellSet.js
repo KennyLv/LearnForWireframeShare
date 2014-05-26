@@ -240,7 +240,7 @@ function registerCellListener() {
         // .table_insert_tableDivStyle').css('border','2px solid
         // #eeeeee');
         // $(this).parent().css('border','2px solid #8DDF48');
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // add table name`s click function
@@ -255,7 +255,7 @@ function registerCellListener() {
                 data.tableName = false;
             }
             // alert("Table Name :"+data.tableName);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -271,7 +271,7 @@ function registerCellListener() {
                 data.tableBorder = false;
             }
             // alert("Table Border :"+data.tableBorder);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -287,7 +287,7 @@ function registerCellListener() {
                 data.alternatingRows = false;
             }
             // alert("Alternating Rows :"+data.alternatingRows);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -303,7 +303,7 @@ function registerCellListener() {
                 data.horizontalLines = false;
             }
             // alert("Horizontal Lines :"+data.horizontalLines);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -321,7 +321,7 @@ function registerCellListener() {
 			        }
 			        // alert("Header Column Lines :"+data.headerColumnLines);
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			    }
 			});
@@ -340,7 +340,7 @@ function registerCellListener() {
 			        }
 			        // alert("Vertical Lines :"+data.verticalLines);
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			    }
 			});
@@ -351,7 +351,7 @@ function registerCellListener() {
 			    if (currentSelectedObj) {
 
 			        // get parent node
-			        parentNodeElement = com.hoperun.util.NodeCache
+			        parentNodeElement = com.kenny.util.NodeCache
 							.items(currentSelectedObj.getDomInstance().parentNode.id);
 			        if (parentNodeElement.getRows()) {
 			            $('#Menu_Edit_Cell_Header_FooterRows_Size').children()
@@ -424,7 +424,7 @@ function registerCellListener() {
 			        data.flag = "headers";
 			        data.headerRows = Number(this.value);
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							parentNodeElement, data);
 
 			    }
@@ -443,7 +443,7 @@ function registerCellListener() {
                 data.freezeRows = false;
             }
             // alert("Freeze Rows :"+data.freezeRows);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
         }
     });
@@ -467,7 +467,7 @@ function registerCellListener() {
 			    var data = {};
 			    data.flag = "headers";
 			    data.headerColumns = Number(this.value);
-			    sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+			    sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 						currentSelectedObj, data);
 			});
 
@@ -483,7 +483,7 @@ function registerCellListener() {
                 data.freezeColumns = false;
             }
             // alert("Freeze Columns :"+data.freezeColumns);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
         }
     });
@@ -493,7 +493,7 @@ function registerCellListener() {
 			.change(function () {
 			    if (currentSelectedObj) {
 			        // get parent node
-			        parentNodeElement = com.hoperun.util.NodeCache
+			        parentNodeElement = com.kenny.util.NodeCache
 							.items(currentSelectedObj.getDomInstance().parentNode.id);
 			        if (parentNodeElement.getRows()) {
 			            $('#Menu_Edit_Cell_Header_HeaderRows_Size').children()
@@ -546,7 +546,7 @@ function registerCellListener() {
 			        data.flag = "headers";
 			        data.footerRows = Number(this.value);
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							parentNodeElement, data);
 			    }
 
@@ -570,7 +570,7 @@ function registerCellListener() {
 							.append(
 									'<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -592,7 +592,7 @@ function registerCellListener() {
 							.append(
 									'<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -627,7 +627,7 @@ function registerCellListener() {
 			                break;
 			        }
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			    }
 			});
@@ -638,7 +638,7 @@ function registerCellListener() {
         data.flag = "cell";
         data.textSize = Number(this.value);
         // alert("data.textSize :"+data.textSize);
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
     });
 
@@ -664,7 +664,7 @@ function registerCellListener() {
 							'1px solid #b2b2b2');
 
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -686,7 +686,7 @@ function registerCellListener() {
 							.append(
 									'<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -701,7 +701,7 @@ function registerCellListener() {
 			            'horizontalAlign': cmd
 			        }
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			    }
 			    /*
@@ -718,7 +718,7 @@ function registerCellListener() {
 			    * 'ajustment': data.horizontalAlign="justify";
 			    * //data.horizontalAlignAjustment = isChecked;
 			    * refreshRulerMenuAlign('justify'); break; }
-			    * sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+			    * sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 			    * currentSelectedObj, data); }
 			    */
 			});
@@ -752,7 +752,7 @@ function registerCellListener() {
 			                break;
 			        }
 			        sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			    }
 			});
@@ -779,7 +779,7 @@ function registerCellListener() {
 			        $('#Menu_Edit_Cell_To_Color_Option').css('background',
 								fillColor).css('border', '1px solid #b2b2b2');
 			        sendMessage(
-								com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+								com.kenny.util.Observer.MessageType.CELL_CHANGED,
 								currentSelectedObj, data);
 			    }
 			});
@@ -804,7 +804,7 @@ function registerCellListener() {
 			    $('#Menu_Edit_Cell_To_Color_Option').css('background',
 							fillColor).css('border', '1px solid #b2b2b2');
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -820,7 +820,7 @@ function registerCellListener() {
         };
         $('#Menu_Edit_Cell_To_Color_Option').css('background', fillColor)
 					.css('border', '1px solid #b2b2b2');
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
     });
 
@@ -847,7 +847,7 @@ function registerCellListener() {
 									.attr("class"));
 			    // alert(currentStyle);
 			    sendMessage(
-							com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+							com.kenny.util.Observer.MessageType.CELL_CHANGED,
 							currentSelectedObj, data);
 			});
 
@@ -863,7 +863,7 @@ function registerCellListener() {
                 data.wrapTextInCell = false;
             }
             // alert("data.wrapTextInCell :"+data.wrapTextInCell);
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
         }
     });
@@ -1039,7 +1039,7 @@ function registerCellListener() {
                     };
                     break;
             }
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1058,7 +1058,7 @@ function registerCellListener() {
             };
             // alert("decimalsFormat" + "({'value': '-14.001',
             // 'decimal':'" + decimal + "')");
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1070,7 +1070,7 @@ function registerCellListener() {
                 'separator': true
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         // alert("formatSeparator" + "({'value':
         // 'parseFloat(15.777)')");
     });
@@ -1083,7 +1083,7 @@ function registerCellListener() {
                 'separator': false
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         // alert("formatNotSeparator" + "({'value':
         // 'parseFloat(16.777)')");
     });
@@ -1100,7 +1100,7 @@ function registerCellListener() {
             };
             $(".Item_Property").children('img').remove();
             $(this).children(".Item_Property").append('<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1117,7 +1117,7 @@ function registerCellListener() {
                     'sciDecimal': sciDecimal
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1134,7 +1134,7 @@ function registerCellListener() {
                     'styleName': styleName
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             // $(this).children(".Item_Property").append('<input
@@ -1155,7 +1155,7 @@ function registerCellListener() {
                     'curDecimal': curDecimal
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1167,7 +1167,7 @@ function registerCellListener() {
                 'separator': true
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Currency Separator OFF
@@ -1178,7 +1178,7 @@ function registerCellListener() {
                 'separator': false
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Currency AccountStyle ON
@@ -1190,7 +1190,7 @@ function registerCellListener() {
                 'accountstyle': true
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Currency AccountStyle OFF
@@ -1202,7 +1202,7 @@ function registerCellListener() {
                 'accountstyle': false
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Currency Symbol
@@ -1215,7 +1215,7 @@ function registerCellListener() {
                     'dollorType': dollorType
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             // $(this).children(".Item_Property").append('<input
@@ -1235,7 +1235,7 @@ function registerCellListener() {
                     'minusStyle': minusStyle
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             $(this).children(".Item_Property").append('<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
@@ -1253,7 +1253,7 @@ function registerCellListener() {
                     'perDecimal': perDecimal
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
         }
     });
 
@@ -1265,7 +1265,7 @@ function registerCellListener() {
                 'separator': true
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Percentage Separator OFF
@@ -1276,7 +1276,7 @@ function registerCellListener() {
                 'separator': false
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
     });
 
     // Percentage Foramt style
@@ -1289,7 +1289,7 @@ function registerCellListener() {
                     'minusStyle': minusStyle
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             $(this).children(".Item_Property").append('<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
@@ -1307,7 +1307,7 @@ function registerCellListener() {
                     'dateStyle': dateStyle
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             // $(this).children(".Item_Property").append('<input
@@ -1326,7 +1326,7 @@ function registerCellListener() {
                     'timeStyle': timeStyle
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             // $(this).children(".Item_Property").append('<input
@@ -1347,7 +1347,7 @@ function registerCellListener() {
                     'durType': durType
                 }
             };
-            sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+            sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
             $(".Item_Property").children('img').remove();
             // $(this).children(".Item_Property").append('<input
@@ -1359,9 +1359,9 @@ function registerCellListener() {
     //
     $("#Menu_Edit_Cell_Table_Format_Duration_Right,#Menu_Edit_Cell_Table_Format_Duration_Left").mousedown(function (e) {
         var initPositionX = e.pageX;
-        var initLeft = com.hoperun.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Left").css('left'));
-        var initRight = com.hoperun.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Right").css('left'));
-        var initWidth = com.hoperun.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Top").css('width'));
+        var initLeft = com.kenny.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Left").css('left'));
+        var initRight = com.kenny.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Right").css('left'));
+        var initWidth = com.kenny.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Top").css('width'));
         var moveDistance = 0;
         var moveObj = $(this);
         $("#Menu_Edit_Cell_Table_Format_Duration_SettingPannel").bind('mousemove', function mouseMove(e) {
@@ -1382,8 +1382,8 @@ function registerCellListener() {
         $("#Menu_Edit_Cell_Table_Format_Duration_SettingPannel").unbind('mousemove');
         var durationStyleArray = ['Wk', 'Day', 'Hr', 'Min', 'Sec', 'Ms'];
         var durStyle = ['W', 'D', 'H', 'M', 'S', 'MS'];
-        var currLeft = com.hoperun.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Left").css('left'));
-        var currRight = com.hoperun.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Right").css('left'));
+        var currLeft = com.kenny.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Left").css('left'));
+        var currRight = com.kenny.util.BaseTool.convertPixelToNumber($("#Menu_Edit_Cell_Table_Format_Duration_Right").css('left'));
         // 取整
         var newLeftIndex = Math.round(currLeft / 40);
         var newRightIndex = Math.round(currRight / 40);
@@ -1402,7 +1402,7 @@ function registerCellListener() {
                 'durStyle': durStyleStr.substring(1, durStyleStr.length)
             }
         };
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED, currentSelectedObj, data);
 
         $('#Menu_Edit_Cell_Table_Format_Duration_Result').text(durationStyleShow);
     });
@@ -1448,7 +1448,7 @@ function tabChange(obj, id) {
 					}
 				};
 			}
-			sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+			sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
 					currentSelectedObj, data);
 		} else {
 			tabLi[i].className = "";
@@ -1464,7 +1464,7 @@ function updateCellMenu(objData) {
 	if (currentSelectedObj) {
 
 		// // get parent node
-		parentNodeElement = com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj
+		parentNodeElement = com.kenny.util.BaseTool.findObjWithId(currentSelectedObj
 				.getDomInstance().parentNode.id);
 		// 
 		// //alert("parentParentElement"+parentParentElement.getType());
@@ -2196,7 +2196,7 @@ function FormatToNumber(cell) {
                 formateValue = result.value;
                 $("#" + cell.getId()).css('color', result.color);
                 cell.setColor(result.color);
-                // sendMessage(com.hoperun.util.Observer.MessageType.CELL_CHANGED,
+                // sendMessage(com.kenny.util.Observer.MessageType.CELL_CHANGED,
                 // currentSelectedObj, { 'flag': "cell", 'textColor': result.color
                 // });
             }
@@ -2697,7 +2697,7 @@ function deleteCell(activeTableObj, activeSelection) {
 			};
 			cell.setData(newCellData);
 
-			var tempTableSelectionModel = new com.hoperun.model.TableSelection(
+			var tempTableSelectionModel = new com.kenny.model.TableSelection(
 					row, col, 1, 1);
 			tempTableSelectionModel.setBorderType("default");
 			tempTableSelectionModel.setBackgroundColor("transparent");
@@ -2730,7 +2730,7 @@ function copyCellValue(activeSelection, activeTableObj, tempCellArray) {
 		var width = copyCell.getWidth(), height = copyCell.getHeight();
 		// 选择区域内的单元??
 		if (row >= minRow && col >= minCol && row <= maxRow && col <= maxCol) {
-			var pasteCell = new com.hoperun.node.Cell();
+			var pasteCell = new com.kenny.node.Cell();
 			var coptData = copyCell.getData();
 			pasteCell.setData(coptData);// cell set
 			tempCellArray.push(pasteCell);
@@ -2879,7 +2879,7 @@ function pasteCells(activeSelection, activeTableObj, tempCellArray,
 		}
 		// 新建selectModel，把cell的属性赋给selectModel，一个selectModel ==
 		// 一个Cell,selectModel的行??== Cell的行列号
-		var tempTableSelectionModel = new com.hoperun.model.TableSelection(
+		var tempTableSelectionModel = new com.kenny.model.TableSelection(
 				copyToCell.getRow(), copyToCell.getCol(), 1, 1);
 		var cellTextAlign = copyFromCell.getTextAlign();
 		if (cellTextAlign == 'left') {
@@ -2928,13 +2928,13 @@ function refreshCellFunction(cellFunction, rowSpace, colSpace) {
 	if (cells != null) {
 		for ( var i = 0; i < cells.length; i++) {
 			var index = cells[i].search("[0-9]");
-			var col = com.hoperun.util.BaseTool.CellIndex_StrToNum(cells[i]
+			var col = com.kenny.util.BaseTool.CellIndex_StrToNum(cells[i]
 					.substring(0, index));
 			var row = parseInt(cells[i].substring(index, cells[i].length));
 			var newCol = col + colSpace;
 			var newRow = row + rowSpace;
 			cellFunction = cellFunction.replace(cells[i],
-					com.hoperun.util.BaseTool.CellIndex_NumToStr(newCol, '')
+					com.kenny.util.BaseTool.CellIndex_NumToStr(newCol, '')
 							+ newRow);
 		}
 	}
@@ -2957,7 +2957,7 @@ function getSelectionCell(table, activeSelection) {
 		// 粘贴前的单元??
 		if (row >= minRow && col >= minCol && row <= maxRow && col <= maxCol) {
 
-			var beforePasteCell = new com.hoperun.node.Cell();
+			var beforePasteCell = new com.kenny.node.Cell();
 			beforePasteCell.setData(copyCell.getData());
 			beforePasteCellArray.push(beforePasteCell);
 			// console.info('粘贴前的单元格beforePasteCell='+beforePasteCell.toJSON());

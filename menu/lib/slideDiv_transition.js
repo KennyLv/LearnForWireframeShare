@@ -34,11 +34,11 @@ function transitionReady(){
 	            }
 	            //alert(currentLi);
 	        	var currentSlideId = document.getElementById("currentSlideId").innerHTML;
-	        	var currentSlide = com.hoperun.util.BaseTool.findObjWithId(currentSlideId);
-	            sendMessage(com.hoperun.util.Observer.MessageType.SLIDE_ADD_TRANSITION,
+	        	var currentSlide = com.kenny.util.BaseTool.findObjWithId(currentSlideId);
+	            sendMessage(com.kenny.util.Observer.MessageType.SLIDE_ADD_TRANSITION,
 	            		currentSlide,
 	                    data);
-	            com.hoperun.util.BaseTool.closeMenuPopup();
+	            com.kenny.util.BaseTool.closeMenuPopup();
             }
         });
     });

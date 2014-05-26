@@ -8,8 +8,8 @@ function commonDiv_MenuList_Ready() {
 			var paragraph = currentSelectedObj.sender;
 			var offset = currentSelectedObj.data.fromOffset;
 			var data = {action: action, offset:offset};
-			sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_ACTION,
-					com.hoperun.util.BaseTool.findObjWithId(paragraph.getId()),
+			sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_ACTION,
+					com.kenny.util.BaseTool.findObjWithId(paragraph.getId()),
 					data);
 		}
 	});

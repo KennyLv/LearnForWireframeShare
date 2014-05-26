@@ -62,10 +62,10 @@
     });
     
     $('#canvas').bind('mousedown', function(e){
-    	var obj = com.hoperun.util.BaseTool.findEventElement(e);
-        var isValidEvent = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'objectType', "Slide");
-        var isTrackerHandle = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'trackerType', "image");
-        var isBack = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'id', "slides-presentation-template");
+    	var obj = com.kenny.util.BaseTool.findEventElement(e);
+        var isValidEvent = com.kenny.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'objectType', "Slide");
+        var isTrackerHandle = com.kenny.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'trackerType', "image");
+        var isBack = com.kenny.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'id', "slides-presentation-template");
         if (!isValidEvent && !isBack || isTrackerHandle) {
             return;
         }
@@ -156,7 +156,7 @@
 				setCurrSlide(nextSlide);
 				canvas.show();
 				//var left = canvas.css('left');
-				//canvas.css('left',com.hoperun.util.BaseTool.convertPixelToNumber(left)+canvas.width());
+				//canvas.css('left',com.kenny.util.BaseTool.convertPixelToNumber(left)+canvas.width());
 				//canvas.animate({left:left}, 1000);
 			});
 			$('.presentation-slide-button-left').show();
@@ -369,7 +369,7 @@ function addPresentationSlide(slide){
 	var parentDiv = document.createElement("div");
 	parentDiv.className = "slide-presentation slide-presentation-move";
 	var parentTransitionTypeDiv = document.createElement("div");
-	var parentTransitionTypeDivId = com.hoperun.util.BaseTool.uuid();
+	var parentTransitionTypeDivId = com.kenny.util.BaseTool.uuid();
 	parentTransitionTypeDiv.id = parentTransitionTypeDivId;
 	parentTransitionTypeDiv.style.width = SLIDE_WIDTH * _presetationZoom * 0.6;
 	parentTransitionTypeDiv.style.height = 24;
@@ -401,8 +401,8 @@ function addPresentationSlide(slide){
 	var isHandlerFlag = false;
 	$(parentDiv).click(function(e){
 		var eventObj = $(this);
-		var obj = com.hoperun.util.BaseTool.findEventElement(e);
-		var isValidEvent = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'class', "slide-presentation-dot");
+		var obj = com.kenny.util.BaseTool.findEventElement(e);
+		var isValidEvent = com.kenny.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'class', "slide-presentation-dot");
         if(isValidEvent){
 			isHandlerFlag = false;
 			setTimeout(function(){
@@ -421,7 +421,7 @@ function addPresentationSlide(slide){
 			}, 200);
         } else {
         	if(document.getElementById("currentSlideId")){
-	        	com.hoperun.util.BaseTool.showMenuShadow();
+	        	com.kenny.util.BaseTool.showMenuShadow();
 	            document.getElementById("currentSlideId").innerHTML = slide.getId();
 	            document.getElementById("parentDivId").innerHTML = parentTransitionTypeDivId;
 	        	$("#popup-menu-transition").css('display', 'block').css("top", e.pageY).css("left", e.pageX);
@@ -505,14 +505,14 @@ function addPresentationSlide(slide){
 			var isPendingFlag = eventObj.hasClass('movePending');
 			
 			eventObj.removeClass('movePending');
-			if(ui.position.left <= 0) { //com.hoperun.util.BaseTool.convertPixelToNumber($(_activePresentationPageDivObj).css('left'))){ //
+			if(ui.position.left <= 0) { //com.kenny.util.BaseTool.convertPixelToNumber($(_activePresentationPageDivObj).css('left'))){ //
 				eventObj.addClass('movePending');
 				if(!isPendingFlag) setTimeout(function(){
 					if(eventObj.hasClass('movePending')){
 						eventObj.removeClass('movePending');
 						var toBeShownSlidePage = findPrevPresentationPage(_activePresentationPageDivObj);
 		            	if(toBeShownSlidePage){
-		            		//ui.helper.css('left', com.hoperun.util.BaseTool.convertPixelToNumber(ui.helper.css('left')) - $(_activePresentationPageDivObj).width());
+		            		//ui.helper.css('left', com.kenny.util.BaseTool.convertPixelToNumber(ui.helper.css('left')) - $(_activePresentationPageDivObj).width());
 		            		_activePresentationPageDivObj = toBeShownSlidePage;
 		            		
 		            		var left = '-' + $(toBeShownSlidePage).css('left');
@@ -529,7 +529,7 @@ function addPresentationSlide(slide){
 						eventObj.removeClass('movePending');
 						var toBeShownSlidePage = findNextPresentationPage(_activePresentationPageDivObj);
 		            	if(toBeShownSlidePage){
-		            		//ui.helper.css('left', com.hoperun.util.BaseTool.convertPixelToNumber(ui.helper.css('left')) - $(_activePresentationPageDivObj).width());
+		            		//ui.helper.css('left', com.kenny.util.BaseTool.convertPixelToNumber(ui.helper.css('left')) - $(_activePresentationPageDivObj).width());
 		            		_activePresentationPageDivObj = toBeShownSlidePage;
 		            		
 		            		var left = '-'+$(toBeShownSlidePage).css('left');
@@ -573,8 +573,8 @@ function addPresentationSlide(slide){
     		var targetId = this.firstChild.id;
     		var originalId = ui.draggable[0].firstChild.id;
     		
-    		var targetObj = com.hoperun.util.BaeTool.findObjWithId(targetId);
-    		var originalObj = com.hoperun.util.BaeTool.findObjWithId(originalId);
+    		var targetObj = com.kenny.util.BaeTool.findObjWithId(targetId);
+    		var originalObj = com.kenny.util.BaeTool.findObjWithId(originalId);
     		
     		var targetIndex = leftSideSlides.indexOf(targetObj), originalIndex = leftSideSlides.indexOf(originalObj);
 
@@ -667,7 +667,7 @@ function setCurrSlide(slide){
 		currSlide = slide;
 		updatePresentationSlide();
 		document.getElementById("canvas").appendChild(slide.getDomInstance());
-		sendMessage(com.hoperun.util.Observer.MessageType.CONTEXT_BLUR, null, {});
+		sendMessage(com.kenny.util.Observer.MessageType.CONTEXT_BLUR, null, {});
 		
 		//Update buttons
 		var index = slides.indexOf(currSlide, 0);
@@ -696,8 +696,8 @@ function setCurrSlide(slide){
 }
 
 function addSlide(templateId){
-	with(com.hoperun.node)
-	with(com.hoperun.shape)
+	with(com.kenny.node)
+	with(com.kenny.shape)
 	{
 		if(templateId==null || templateId.length==0 || templateId=="template_0"){
 			var slide = new Slide();
@@ -779,15 +779,15 @@ function pasteSlide(){
 
 //Get template
 function templateInitialize() {
-	with(com.hoperun.node)
-	with(com.hoperun.node.shape){
+	with(com.kenny.node)
+	with(com.kenny.node.shape){
     	var fileInfo = {
 				fileType : "slide",
 				docid: "template",
 				folderName: "01",
 				fileFolderName: document.getElementById('folderNameOfFile').innerHTML
 	    	};
-	    	com.hoperun.util.FileHelper.load(fileInfo, function(data){
+	    	com.kenny.util.FileHelper.load(fileInfo, function(data){
 	    		if(data.fileFolderName){
 	    			document.getElementById('folderNameOfFile').innerHTML = data.fileFolderName;
 	    		}
@@ -802,7 +802,7 @@ function templateInitialize() {
 function layoutSlidesTemplate(presentationTemplateDivObj){
 	var moveNextPageItems = [];
 	for(var i=0; i<presentationTemplateDivObj.length; i++){
-		var newSlide = new com.hoperun.node.Slide();
+		var newSlide = new com.kenny.node.Slide();
 		var templatedata = JSON.parse(presentationTemplateDivObj[i])[0];
 		newSlide.setData(templatedata);
 		var templateObj= newSlide.clone();
@@ -909,8 +909,8 @@ function layoutPresentationTemplate(){
 
 (function(){
 	function pageInitialize() {
-		with(com.hoperun.node)
-		with(com.hoperun.node.shape){
+		with(com.kenny.node)
+		with(com.kenny.node.shape){
 			var random = urlParameter.id;
 		    var fileInf = {'random': random};
 		    var fileInfo;
@@ -925,7 +925,7 @@ function layoutPresentationTemplate(){
 		    	};
 				document.getElementById("fileName").value = urlParameter.docid;
 			}
-			com.hoperun.util.FileHelper.loadParams(fileInf, function(temp_data){
+			com.kenny.util.FileHelper.loadParams(fileInf, function(temp_data){
 		    if(temp_data){
 		    	if(random){
 			    	fileInfo = {
@@ -939,7 +939,7 @@ function layoutPresentationTemplate(){
 		    	};
 			    	document.getElementById("fileName").value = temp_data.filename;
 		    	}
-		    	com.hoperun.util.FileHelper.load(fileInfo, function(data){
+		    	com.kenny.util.FileHelper.load(fileInfo, function(data){
 		    		if(data.fileFolderName){
 		    			document.getElementById('folderNameOfFile').innerHTML = data.fileFolderName;
 		    		}
@@ -964,7 +964,7 @@ function layoutPresentationTemplate(){
 			    }
 			}
 			});
-		    sendMessage(com.hoperun.util.Observer.MessageType.SLIDES_CREATE, null, {});
+		    sendMessage(com.kenny.util.Observer.MessageType.SLIDES_CREATE, null, {});
 		}
 	}
 	

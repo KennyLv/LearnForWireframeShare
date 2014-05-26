@@ -44,7 +44,7 @@ document.getElementById("uploadIFrame2").onload = function() {
 		var returnValue = document.getElementById("divForTestIFrame").innerHTML;
 		if ("" != returnValue && returnValue.indexOf("alert") < 0) {
 			var returnValueList = returnValue.split(",");
-			sendMessage( com.hoperun.util.Observer.MessageType.SLIDE_SET_BACKGROUND, currSlide,
+			sendMessage( com.kenny.util.Observer.MessageType.SLIDE_SET_BACKGROUND, currSlide,
 					{ 'src' : returnValueList[0], 'height' : returnValueList[1], 'width' : returnValueList[2] });
 		}
 	} catch (e) {

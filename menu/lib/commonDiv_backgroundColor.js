@@ -12,7 +12,7 @@ function menu_tool_backgroundColor_ready() {
     		    		'<input type="checkbox" disabled="true" checked="true"></div>');
     		    //alert(commend);
     		    //$("#Menu_Edit_img_Style_Color").css('backgroundColor',color);
-    		    sendMessage(com.hoperun.util.Observer.MessageType.SLIDE_SET_BACKGROUND,
+    		    sendMessage(com.kenny.util.Observer.MessageType.SLIDE_SET_BACKGROUND,
     		    		currSlide,
     	                data);
     		}
@@ -27,7 +27,7 @@ function menu_tool_backgroundColor_ready() {
     		    $("#check_backgound_Color").remove();
     		    $(this).append('<div id="check_backgound_Color" style="border:0px;margin-left:25px;margin-top:95px;">' +
     		    		'<input type="checkbox" disabled="true" checked="true"></div>');
-    		    sendMessage(com.hoperun.util.Observer.MessageType.SLIDE_SET_BACKGROUND,
+    		    sendMessage(com.kenny.util.Observer.MessageType.SLIDE_SET_BACKGROUND,
     		    		currSlide,
     	                data);
     		}

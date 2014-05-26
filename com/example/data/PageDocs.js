@@ -1,19 +1,19 @@
 ﻿$(document).ready(function(){
-	with(com.hoperun.node)
-		with(com.hoperun.node.shape) {
+	with(com.kenny.node)
+		with(com.kenny.node.shape) {
 			var docs = $("#myContent");
 		    //Resize Listener
 		    $(window).resize(function () {
-		        var pos = com.hoperun.util.BaseTool.getAbsPostion(docs[0]);
+		        var pos = com.kenny.util.BaseTool.getAbsPostion(docs[0]);
 		        var w = $(window).width(), h = $(window).height()- 30;
 		        docs.css("height", h - pos.y - 10);
 		        if(getActiveContainer()){
 		        	var page = getActiveContainer();
 					//Notify toolBar the page settings
 					var pageDivObj = getActiveContainer().findFirstPage();
-					var pos = com.hoperun.util.BaseTool.getAbsPostion(pageDivObj);
-					var pageSettingsMsg = new com.hoperun.util.Observer.Message();
-					pageSettingsMsg.id = com.hoperun.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
+					var pos = com.kenny.util.BaseTool.getAbsPostion(pageDivObj);
+					var pageSettingsMsg = new com.kenny.util.Observer.Message();
+					pageSettingsMsg.id = com.kenny.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
 					pageSettingsMsg.sender = [];
 					var indent = {
 							left: page.getContentPadding().left,
@@ -32,7 +32,7 @@
 							position: position,
 							documentSettings: documentSettings
 					};
-					com.hoperun.util.Observer.sendMessage(pageSettingsMsg);
+					com.kenny.util.Observer.sendMessage(pageSettingsMsg);
 		        }
 		    });
 			
@@ -43,7 +43,7 @@
 //			document.getElementById("tableSet").appendChild(officeSheet.getDomInstance());
 			
 			
-			/*var table = new com.hoperun.node.Table();
+			/*var table = new com.kenny.node.Table();
 			table.setRows(5);
 			table.setCols(5);
 			table.setTableBorder(true);
@@ -58,7 +58,7 @@
 			table.appendTo(officeSheet);
 			*/
 
-		    var parameters = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+		    var parameters = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
 		    var random = urlParameter.id;
 		    var fileInf = {'random': random};
 		    var fileInfo;
@@ -70,7 +70,7 @@
 					folderName: urlParameter.folderName
 		    	};
 		    }
-			com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+			com.kenny.util.FileHelper.loadParams(fileInf, function(data){
 	    	if(data){
 	    		if(random){
 			    	fileInfo = {
@@ -82,7 +82,7 @@
 						fileFolderName: data.uuid
 			    	};
 		    	}
-		    	com.hoperun.util.FileHelper.load(fileInfo, function(json){
+		    	com.kenny.util.FileHelper.load(fileInfo, function(json){
 		    		if(json.fileFolderName){
 		    			document.getElementById('folderNameOfFile').innerHTML = json.fileFolderName;
 		    		}
@@ -91,9 +91,9 @@
 		    		var doc = page.createDocsPage(docs[0]);
 					//Notify toolBar the page settings
 					var pageDivObj = page.findFirstPage();
-					var pos = com.hoperun.util.BaseTool.getAbsPostion(pageDivObj);
-					var pageSettingsMsg = new com.hoperun.util.Observer.Message();
-					pageSettingsMsg.id = com.hoperun.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
+					var pos = com.kenny.util.BaseTool.getAbsPostion(pageDivObj);
+					var pageSettingsMsg = new com.kenny.util.Observer.Message();
+					pageSettingsMsg.id = com.kenny.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
 					pageSettingsMsg.sender = [];
 					var indent = {
 							left: page.getContentPadding().left,
@@ -112,7 +112,7 @@
 							position: position,
 							documentSettings: documentSettings
 					};
-					com.hoperun.util.Observer.sendMessage(pageSettingsMsg);
+					com.kenny.util.Observer.sendMessage(pageSettingsMsg);
 		    	});
 		    }
 			
@@ -128,7 +128,7 @@
 				page.appendParagraph(paragraph);
 				
 				//TODO: test for svg text box
-				var textBox = new com.hoperun.shape.TextBox();
+				var textBox = new com.kenny.shape.TextBox();
 				textBox.setLeft(65);
 				textBox.setTop(150);
 				textBox.setWidth(200);
@@ -139,8 +139,8 @@
 				
 				var styles = [];
 				
-				var svgStyle1 = new com.hoperun.model.SvgStyle();
-				var svgStyle2 = new com.hoperun.model.SvgStyle();
+				var svgStyle1 = new com.kenny.model.SvgStyle();
+				var svgStyle2 = new com.kenny.model.SvgStyle();
 				
 				svgStyle1.setBold(true);svgStyle1.setFontSize("24");svgStyle1.setItalic(true);
 				svgStyle2.setBold(false);svgStyle2.setFontSize("18");svgStyle2.setItalic(true);
@@ -177,9 +177,9 @@
 				
 				//Notify toolBar the page settings
 				var pageDivObj = page.findFirstPage();
-				var pos = com.hoperun.util.BaseTool.getAbsPostion(pageDivObj);
-				var pageSettingsMsg = new com.hoperun.util.Observer.Message();
-				pageSettingsMsg.id = com.hoperun.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
+				var pos = com.kenny.util.BaseTool.getAbsPostion(pageDivObj);
+				var pageSettingsMsg = new com.kenny.util.Observer.Message();
+				pageSettingsMsg.id = com.kenny.util.Observer.MessageType.DOCUMENT_CONFIGURATION;
 				pageSettingsMsg.sender = [];
 				var indent = {
 						left: page.getContentPadding().left,
@@ -198,7 +198,7 @@
 						position: position,
 						documentSettings: documentSettings
 				};
-				com.hoperun.util.Observer.sendMessage(pageSettingsMsg);
+				com.kenny.util.Observer.sendMessage(pageSettingsMsg);
 		    }
 			});
 		    

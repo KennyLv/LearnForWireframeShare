@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="Import.js"></script>
 	<script type="text/javascript">
 	
-		var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+		var urlParameter = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
 		var random = urlParameter.id;
 
 		var username;
@@ -33,13 +33,13 @@
 	    
 		function getTemplates() {
 	    	var fileInf = {'random': random};
-			com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+			com.kenny.util.FileHelper.loadParams(fileInf, function(data){
 		    	if(data){
 			    	username = data.username;
 		    		currDocType = data.doctype;
 			var fileInfo = {'fileType': currDocType};
 			var templatesRecordList = "";
-			com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+			com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
 		    	if(data.list){
 		    		for(var i = 0; i < data.list.length; i++) {
 		    			var fileImage = data.list[i];
@@ -88,7 +88,7 @@
 	    function getHistoryRecords() {
 	    	var fileInfo = {'fileType': currDocType, 'userName': username ,'currentFolderName': currentFolderName};
 	    	var historyRecordList = "";
-	    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+	    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
 	        	if(data.list){
 		    		for(var i = 0; i < data.list.length; i++) {
 		    			var fileImage = data.list[i];
@@ -116,7 +116,7 @@
 			currentFolderName = null;
 			$("#contentList").html("");
 			var historyRecordList = "";
-	    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+	    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
 	        	if(data.list){
 		    		for(var i = 0; i < data.list.length; i++) {
 		    			var fileImage = data.list[i];
@@ -327,7 +327,7 @@
 				            return;
 						}else{
 							var fileInfo = {'fileType': currDocType, 'userName': username ,'currentFolderName': currentFolderName};
-								com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+								com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
 						        	if(!data.list || data.list.length == 0){
 							        	alert("No history avaliable!");
 							        	return;
@@ -484,7 +484,7 @@
 									}
 								}
 								var copyFileInfo = {'fileType': currDocType, 'userName': 'kennylv' ,'selectedFolderNames': selectedFolders};
-								com.hoperun.util.FileHelper.copyFile(copyFileInfo,function(data){
+								com.kenny.util.FileHelper.copyFile(copyFileInfo,function(data){
 										if(data == "true"){
 											for (var i = 0,origLength = historyList.length; i < selectedPapers.length; i++,origLength++){
 												historyList.add(selectedPapers[i]);

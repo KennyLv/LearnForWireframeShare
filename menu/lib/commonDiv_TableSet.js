@@ -128,7 +128,7 @@ function registerTableListener() {
 	    	//alert(data.src);
 	    //	$('#Menu_Edit_TableAll_Table_Table_box div .table_insert_tableDivStyle').css('border','2px solid #eeeeee');
 	    	//$(this).parent().css('border','2px solid #8DDF48');
-	        sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+	        sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 						currentSelectedObj,
 						data);
 	    });
@@ -145,7 +145,7 @@ function registerTableListener() {
 					data.tableName = false;
 				}
 				//alert("Table Name :"+data.tableName);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -163,7 +163,7 @@ function registerTableListener() {
 					data.tableBorder = false;
 				}
 				//alert("Table Border  :"+data.tableBorder);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -181,7 +181,7 @@ function registerTableListener() {
 					data.alternatingRows = false;
 				}
 				//alert("Alternating Rows   :"+data.alternatingRows);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -199,7 +199,7 @@ function registerTableListener() {
 					data.horizontalLines = false;
 				}
 				//alert("Horizontal Lines    :"+data.horizontalLines);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -217,7 +217,7 @@ function registerTableListener() {
 					data.headerColumnLines = false;
 				}
 				//alert("Header Column Lines     :"+data.headerColumnLines);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -235,7 +235,7 @@ function registerTableListener() {
 					data.verticalLines = false;
 				}
 				//alert("Vertical Lines  :"+data.verticalLines);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -253,7 +253,7 @@ function registerTableListener() {
 					data.headerRowLines = false;
 				}
 				//alert("Header Row Lines  :"+data.headerRowLines);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -271,7 +271,7 @@ function registerTableListener() {
 					data.footerRowLines = false;
 				}
 				//alert("Footer Row Lines  :"+data.footerRowLines);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -323,7 +323,7 @@ function registerTableListener() {
 		var data = {};
 		data.flag = "headers";
 		data.headerRows = Number(this.value);
-		sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+		sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 					currentSelectedObj,
 					data);
 	});
@@ -340,7 +340,7 @@ function registerTableListener() {
 					data.freezeRows = false;
 				}
 				//alert("Freeze Rows :"+data.freezeRows);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -360,7 +360,7 @@ function registerTableListener() {
 			var data = {};
     		data.flag = "headers";
 			data.headerColumns = Number(this.value);
-			sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+			sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 						currentSelectedObj,
 						data);
 	});
@@ -377,7 +377,7 @@ function registerTableListener() {
 					data.freezeColumns = false;
 				}
 				//alert("Freeze Columns :"+data.freezeColumns);
-				sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+				sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 							currentSelectedObj,
 							data);
 			}
@@ -418,7 +418,7 @@ function registerTableListener() {
 		var data = {};
 		data.flag = "headers";
 		data.footerRows = Number(this.value);
-		sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+		sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 					currentSelectedObj,
 					data);
 	});
@@ -434,7 +434,7 @@ function registerTableListener() {
 			$(".Item_Property").children('img').remove();
 	        //$(this).children(".Item_Property").append('<input type="checkbox" class="item_selected" checked="true" disabled="true">');
 			$(this).children(".Item_Property").append('<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
-			sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+			sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 						currentSelectedObj,
 						data);
 	});
@@ -449,7 +449,7 @@ function registerTableListener() {
 			$(".Item_Property").children('img').remove();
 			 //$(this).children(".Item_Property").append('<input type="checkbox" class="item_selected" checked="true" disabled="true">');
 			$(this).children(".Item_Property").append('<img src="./images/icon_choosed.png" class="item_selected" style="height:13px;width:13px;"/>');
-			sendMessage(com.hoperun.util.Observer.MessageType.TABLE_CHANGED,
+			sendMessage(com.kenny.util.Observer.MessageType.TABLE_CHANGED,
 						currentSelectedObj,
 						data);
 	});
@@ -475,7 +475,7 @@ function registerTableListener() {
 //					$('#Menu_Edit_Table_Arrange_Add').attr('disabled', 'disabled');
 //				}
 //				var data = {'zindex':ui.value};
-//				sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+//				sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 //			}
 //		});
 //		$('#Menu_Edit_Table_Arrange_Reduce').removeAttr('disabled');
@@ -501,7 +501,7 @@ function registerTableListener() {
 				value : initValue
 			});
 			var data = {'zindex':initValue};
-			sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+			sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 			
 			$('#Menu_Edit_Table_Arrange_Add').removeAttr('disabled');
 			if(initValue == 1000){
@@ -521,7 +521,7 @@ function registerTableListener() {
 				value : initValue
 			});
 			var data = {'zindex':initValue};
-			sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+			sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 			
 			$('#Menu_Edit_Table_Arrange_Reduce').removeAttr('disabled');
 			//var container = getActiveContainer();
@@ -537,7 +537,7 @@ function registerTableListener() {
 function updateTableMenu(objData) {
 	
 	if(currentSelectedObj) {
-		//parentNodeElement = com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.getDomInstance().parentNode.id);
+		//parentNodeElement = com.kenny.util.BaseTool.findObjWithId(currentSelectedObj.getDomInstance().parentNode.id);
 		// if(!parentNodeElement){
 		// 	
 		// 	// page
@@ -804,7 +804,7 @@ function initTableArrange(){
 						$('#Menu_Edit_Table_Arrange_Add').attr('disabled', 'disabled');
 					}
 					var data = {'zindex':ui.value};
-					sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+					sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 		        }
 		 });
 		$('#Menu_Edit_Table_Arrange_Reduce').removeAttr('disabled');

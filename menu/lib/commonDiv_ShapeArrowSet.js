@@ -13,7 +13,7 @@ function commonDiv_ShapeArrowSet_ready(){
 	        slide: function (event, ui) {
 	            $("#Menu_Edit_Line_Wrap_thisOpacity").text(ui.value + "px");
 				var data = {'MenuEditLineWrapExtraSpaceSlider':ui.value};
-	            sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_ARRANGE,
+	            sendMessage(com.kenny.util.Observer.MessageType.SHAPE_ARRANGE,
 						currentSelectedObj,
 						data);
 	        }
@@ -41,7 +41,7 @@ function commonDiv_ShapeArrowSet_ready(){
 					}
 					var data = {'zindex':ui.value};
 					
-					sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX,
+					sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX,
 							currentSelectedObj,
 							data);
 				}
@@ -64,7 +64,7 @@ function commonDiv_ShapeArrowSet_ready(){
 				value : initValue
 			});
 			var data = {'zindex':initValue};
-			sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+			sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 			
 			$('#Menu_Edit_Line_Arrange_Add').removeAttr('disabled');
 			if(initValue == 1001){
@@ -79,7 +79,7 @@ function commonDiv_ShapeArrowSet_ready(){
 				value : initValue
 			});
 			var data = {'zindex':initValue};
-			sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+			sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 			
 			$('#Menu_Edit_Line_Arrange_Reduce').removeAttr('disabled');
 			var container = getActiveContainer();
@@ -97,7 +97,7 @@ function commonDiv_ShapeArrowSet_ready(){
 	        slide: function (event, ui) {
 	            $("#Menu_Style_Option_Line_thisOpacity").text(ui.value + "px");
 				var data = {'MenuEditStyleOptionLineWidthSlider':ui.value};
-	            sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+	            sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 						currentSelectedObj,
 						data);
 	        }
@@ -112,7 +112,7 @@ function commonDiv_ShapeArrowSet_ready(){
 	        slide: function (event, ui) {
 	            $("#Menu_Style_Option_Effects_thisOpacity").text(ui.value + "%");
 				var data = {'MenuEditLineShadowOpacitySlider':ui.value};
-	            sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+	            sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 						currentSelectedObj,
 						data);
 	        }
@@ -171,7 +171,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			
 			var clazz = $(this).attr('class').split(' ')[1];
 			var data = {'MenuEditLinestylebox':clazz};
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 								currentSelectedObj,
 								data);
 		});
@@ -182,7 +182,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			$("#Menu_Edit_ShapeArrowSet_BorderColor_is_picked").remove();
 			$(this).parent().append('<div id="Menu_Edit_ShapeArrowSet_BorderColor_is_picked" style="border:0px;float:right;margin-top:-20px;margin-right:5px">' +
 	    		'<input type="checkbox" disabled="true" checked="true"></div>');
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 				  currentSelectedObj,
 				  data);
 		});
@@ -191,7 +191,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			
 			var classname = $(this).attr('classname');
 			var data = {'MenuEditLineArrangeWarp':classname};
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 								currentSelectedObj,
 								data);
 		});
@@ -203,7 +203,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			$("#Menu_Edit_ShapeArrowSet_WrapStyle_CheckBoxStyle").remove();
 			$(this).children('span').before('<div id="Menu_Edit_ShapeArrowSet_WrapStyle_CheckBoxStyle" style="float:right;margin-top:10px;margin-right:10px;width:20px;">' +
 	    		'<input type="checkbox" disabled="true" checked="true"/></div>');
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_ARRANGE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_ARRANGE,
 							currentSelectedObj,
 							data);
 		});
@@ -217,7 +217,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			$("#Menu_Edit_ShapeArrowSet_TextColorOne_is_picked").remove();
 			$(this).append('<div id="Menu_Edit_ShapeArrowSet_TextColorOne_is_picked" style="border:0px;float:right;margin-top:10px;margin-right:5px">' +
 	    		'<input type="checkbox" disabled="true" checked="true"></div>');
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 								currentSelectedObj,
 								data);
 		});
@@ -232,7 +232,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			$("#Menu_Edit_ShapeArrowSet_TextColorTwo_is_picked").remove();
 			$(this).append('<div id="Menu_Edit_ShapeArrowSet_TextColorTwo_is_picked" style="width: 20px; height: 20px; float: right; margin-top: 100px; margin-left: 20px;">' +
 	    		'<input type="checkbox" disabled="true" checked="true"></div>');
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 							currentSelectedObj,
 							data);
 		});
@@ -241,7 +241,7 @@ function commonDiv_ShapeArrowSet_ready(){
 		
 			var value =$(this).attr('value');
 			var data = {'MenuEditLineWrapShadowOn':value}; 
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_ARRANGE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_ARRANGE,
 								currentSelectedObj,
 								data);
 		});
@@ -250,7 +250,7 @@ function commonDiv_ShapeArrowSet_ready(){
 			
 			var value =$(this).attr('value');
 			var data = {'MenuEditLineWrapShadowOff':value}; 
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_ARRANGE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_ARRANGE,
 								currentSelectedObj,
 								data);
 			});
@@ -274,7 +274,7 @@ function commonDiv_ShapeArrowSet_ready(){
 					$('#Menu_Edit_ShapeArrowSet_check_shaow4').css('display', 'block');
 					break;
 			}
-			sendMessage(com.hoperun.util.Observer.MessageType.SHAPE_STYLE,
+			sendMessage(com.kenny.util.Observer.MessageType.SHAPE_STYLE,
 							currentSelectedObj,
 							data);
 		});

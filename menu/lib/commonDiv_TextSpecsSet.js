@@ -5,39 +5,39 @@ function commonDiv_TextSpecsSet_Ready() {
     
     //UI parts initialize and event register
     $('#Menu_Edit_TextSpecsSet_Fonts').click(function(e){
-    	com.hoperun.util.BaseTool.showMenuShadow();
-		com.hoperun.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_Fonts_FontName"));
+    	com.kenny.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_Fonts_FontName"));
         $("#Menu_Edit_TextSpecsSet_Fonts_FontName").css('display', 'block');
     });
 	  
 	$('#Menu_Edit_TextSpecsSet_AlignMent').click(function(e){	
-		com.hoperun.util.BaseTool.showMenuShadow();
-		com.hoperun.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_AlignMent_Style_Set"));
+		com.kenny.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_AlignMent_Style_Set"));
         $("#Menu_Edit_TextSpecsSet_AlignMent_Style_Set").css('display', 'block');
 	});
 	
 	$('#Menu_Edit_TextSpecsSet_Color').click(function(e){
-		com.hoperun.util.BaseTool.showMenuShadow();
-		com.hoperun.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_Color_StyleSet"));
+		com.kenny.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_Color_StyleSet"));
 		$("#Menu_Edit_TextSpecsSet_Color_StyleSet").css('display', 'block');
      //   $("#Menu_Edit_TextSpecsSet_Color_StyleSet").css("top", "40px").css("left", e.pageX   - 110).css('display', 'block');
 	});
 	
 	$('#Menu_Edit_TextSpecsSet_More').click(function(e){	
-		com.hoperun.util.BaseTool.showMenuShadow();
-		com.hoperun.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_More_Style"));
+		com.kenny.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.formateVeticalFollowingItemPosition($(this), $("#Menu_Edit_TextSpecsSet_More_Style"));
 		$("#Menu_Edit_TextSpecsSet_More_Style").css('display', 'block');
       //  $("#Menu_Edit_TextSpecsSet_More_Style").css("top", "40px").css("left", e.pageX  -100 ).css('display', 'block');
 	});
 	
 	$('#Menu_Edit_TextSpecsSet_More_Set1_edit_label').click(function(e){
-		com.hoperun.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.showMenuShadow();
         $("#Menu_Edit_TextSpecsSet_More_Edit").css("top", "30px").css("left", e.pageX  -150 ).css('display', 'block');
 	});
 	
 	
 	$('#Menu_Edit_TextSpecsSet_delete').click(function(e){
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		$('#Menu_Edit_TextSpecsSet').hide();
 	});
 	
@@ -54,7 +54,7 @@ function updateMenuTextStatus(style, paragraphStyleData) {
 	var fontColor = style.getColor() == null ? '#000000' : style.getColor();
 	$('#Menu_Edit_TextSpecsSet_Color_StyleSet img').each(function(){
 		var obj = $(this);
-		var color =  com.hoperun.util.BaseTool.rgb2hex(this.style.color);
+		var color =  com.kenny.util.BaseTool.rgb2hex(this.style.color);
 		if(fontColor == color){
 			obj.attr('src', obj.attr('src').replace("_off", "_press"));
 			$('#Menu_Edit_TextSpecsSet_Color img').attr('src', obj.attr('src').replace('_press',''));
@@ -130,7 +130,7 @@ function registerMenuTextSetListener() {
 	
 	//Handler for text's font size
 	$('#Menu_Edit_TextSpecsSet_Font_AddSizeSet, #Menu_Edit_TextSpecsSet_Font_MinusSizeSet').click(function(e){
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		
 		var fontSize = parseInt($('#Menu_Edit_TextSpecsSet_Font_ValueS').text());
 		if($(this).attr('command') == 'add'){
@@ -144,17 +144,17 @@ function registerMenuTextSetListener() {
 			var style = { 'fontSize': fontSize };
 			//Special case for text boxes
     	    if(currentSelectedObj.getType && currentSelectedObj.getType() == 'TextBox'){
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
     	    }
     	    else{
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
     	    }
 		}
 	});
 	
 	//Handler for text's font color
 	$('#Menu_Edit_TextSpecsSet_Color_StyleSet .Menu_Edit_TextSpecsSet_Color img').click(function(e){
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		
 		//Reset image button status
 		$('#Menu_Edit_TextSpecsSet_Color_StyleSet img').each(function(){
@@ -172,17 +172,17 @@ function registerMenuTextSetListener() {
 			
 			//Special case for text boxes
     	    if(currentSelectedObj.getType && currentSelectedObj.getType() == 'TextBox'){
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
     	    }
     	    else{
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
     	    }
 		}
 	});	
 	
 	//Handler for text's font style
     $('#Menu_Edit_TextSpecsSet_BIU input').click(function () {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
     	
     	var cmd = $(this).attr('command');
     	//var imgName = $(this).html(); // .children('img').attr('src');
@@ -214,17 +214,17 @@ function registerMenuTextSetListener() {
             }
 			//Special case for text boxes
     	    if(currentSelectedObj.getType && currentSelectedObj.getType() == 'TextBox'){
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
     	    }
     	    else{
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
     	    }
 		}
     });
 	
 	//Handler for the paragraph's align
 	$('#Menu_Edit_TextSpecsSet_AlignMent_Style_Set .menu-text-align-item').click(function(e){
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		
 		var self = $(this);
 		var cmd = self.attr('command');
@@ -248,17 +248,17 @@ function registerMenuTextSetListener() {
             }
             //Special case for text boxes
     	    if(currentSelectedObj.getType && currentSelectedObj.getType() == 'TextBox'){
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
     	    }
     	    else{
-    	    	sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, currentSelectedObj.getActiveSelection().getFrom(), style);
+    	    	sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, currentSelectedObj.getActiveSelection().getFrom(), style);
     	    }
 	    }
 	});
 	
 	//Handler for text's font family
 	$("#Menu_Edit_TextSpecsSet_Fonts_Group_Format .Menu_Edit_Text_Style_Fonts_Group_FormatStyle").click(function () {
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		
 		var fontStyle = $(this).attr('fontStyle');
 		var style = { 'fontFamily': fontStyle };
@@ -268,10 +268,10 @@ function registerMenuTextSetListener() {
 	           '<img src="./images/icon_choosed.png" style="height:13px;width:13px;"/></div>');
 	    //Special case for text boxes
 	    if(currentSelectedObj.getType && currentSelectedObj.getType() == 'TextBox'){
-	    	sendMessage(com.hoperun.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
+	    	sendMessage(com.kenny.util.Observer.MessageType.SVG_TEXT_STYLE, currentSelectedObj, style);
 	    }
 	    else{
-	    	sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
+	    	sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, currentSelectedObj, style);
 	    }
 	});
 }

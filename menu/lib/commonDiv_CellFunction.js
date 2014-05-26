@@ -330,14 +330,14 @@ function sheet_editFunction(cell) {
         //
         if (currFunctionCells.length > 1) {
             //$("#function_inputValue").text(currExp.substring(0, currExp.length - 1) + ',[' + cell.getRow() + '-' + cell.getCol() + '])');
-            $("#function_inputValue").val(currExp.substring(0, currExp.length - 1) + ',' + com.hoperun.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow() + ')').focus();
+            $("#function_inputValue").val(currExp.substring(0, currExp.length - 1) + ',' + com.kenny.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow() + ')').focus();
         } else {
             //$("#function_inputValue").text(currExp.substring(0, currExp.length - 1) + '[' + cell.getRow() + '-' + cell.getCol() + '])');
-            $("#function_inputValue").val(currExp.substring(0, currExp.length - 1) + com.hoperun.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow() + ')').focus();
+            $("#function_inputValue").val(currExp.substring(0, currExp.length - 1) + com.kenny.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow() + ')').focus();
         }
     } else {
         ////1704 BUG //////NO [] EXISTED ANY MORE///////////////////////
-        //if (currExp.length > 0 && ((currExp.substring(currExp.length - 1, currExp.length) == ']' || currExp.substring(currExp.length - 1, currExp.length) == 'ï¿?))) {
+        //if (currExp.length > 0 && ((currExp.substring(currExp.length - 1, currExp.length) == ']' || currExp.substring(currExp.length - 1, currExp.length) == 'ï¿½?))) {
         //    alert("You have to type and operator !");
         //    return;
         //} else {
@@ -349,7 +349,7 @@ function sheet_editFunction(cell) {
             $("#function_inputValue").focus();
             return;
         } else {
-            $("#function_inputValue").val(currExp + com.hoperun.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow()).focus();
+            $("#function_inputValue").val(currExp + com.kenny.util.BaseTool.CellIndex_NumToStr(cell.getCol(), "") + cell.getRow()).focus();
         }
     }
     var cellFunctionPannel_left = $("#popup-menu-cellFunctionPannel").css('left') + 10;
@@ -398,12 +398,12 @@ function sheet_saveEditFunction() {
         currFunctionCells = [];
     }
     if ($("#function_inputValue").val() != "") {
-        //sendMessage(com.hoperun.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': currentFunction });
+        //sendMessage(com.kenny.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': currentFunction });
         var currentFunction = $("#function_inputValue").val().replace(new RegExp("\"", "g"), "\"\"");
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': currentFunction });
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': currentFunction });
     }
     else {
-        sendMessage(com.hoperun.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': null });
+        sendMessage(com.kenny.util.Observer.MessageType.CELL_ADDFUNCTION, currentEditCell, { 'newFunctions': null });
     }
     //currentFunction = null;
     currentEditCell = null;

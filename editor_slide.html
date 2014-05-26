@@ -4,10 +4,10 @@
 <title>WebOffice - GridFrames</title>
 
 <script type="text/javascript" src="Import.js"></script>
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/slide.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/slide.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/defaultElementStyle.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/jquery-ui-1.8.13.custom.css" />
 <link rel="stylesheet" type="text/css" href="./menu/lib/paperDiv_RulerMenu.css" />
 <script type="text/javascript" src="ImportMenu.js"></script>
 <script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
@@ -26,7 +26,7 @@
 	}
 </style>
 <script type="text/javascript">
-var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+var urlParameter = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
 var id = urlParameter.id;
 var currDocID = urlParameter.docid;
 var currDocType = "slide";
@@ -34,11 +34,11 @@ var currDocType = "slide";
     var insertObject = null;
 
     function sendMessage(_id, _sender, _data) {
-        var message = new com.hoperun.util.Observer.Message();
+        var message = new com.kenny.util.Observer.Message();
         message.id = _id;
         message.sender = _sender;
         message.data = _data;
-        com.hoperun.util.Observer.sendMessage(message);
+        com.kenny.util.Observer.sendMessage(message);
     }
     function openFullWindow() {
         var win = window.open("", "", "scrollbars");
@@ -126,44 +126,44 @@ $(document).ready(function () {
 	
 	$("#slide-footer-undo").click(function (e) {
 		if(document.getElementById("slide-footer-undo").getAttribute("canUndo")=="true")
-			sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+			sendMessage(com.kenny.util.Observer.MessageType.UNDO, null, {});
 	});
 	
         $("#slide-footer-redo").click(function (e) {
             if (document.getElementById("slide-footer-redo").getAttribute("canRedo") == "true")
-                sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+                sendMessage(com.kenny.util.Observer.MessageType.REDO, null, {});
         });
 
 	jskataUndo.onChange = function() {
             if (jsk.canUndo()) {
             	$("#slide-footer-undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo.png');
                 document.getElementById("slide-footer-undo").setAttribute("canUndo", "true");
-                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', null);
+                com.kenny.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', null);
             }
             else {
             	$("#slide-footer-undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo_disabled.png');
                 document.getElementById("slide-footer-undo").setAttribute("canUndo", "false");
-                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', '#AAA');
+                com.kenny.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-undo").style, 'color', '#AAA');
             }
             if (jsk.canRedo()) {
             	$("#slide-footer-redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo.png');
                 document.getElementById("slide-footer-redo").setAttribute("canRedo", "true");
-                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', null);
+                com.kenny.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', null);
             }
             else {
             	$("#slide-footer-redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo_disabled.png');
                 document.getElementById("slide-footer-redo").setAttribute("canRedo", "false");
-                com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', '#AAA');
+                com.kenny.util.BaseTool.setStyleProperty(document.getElementById("slide-footer-redo").style, 'color', '#AAA');
             }
 	};
 
     $("#edit").click(function (e) {
-    	com.hoperun.util.BaseTool.showMenuShadow();
-        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY });
+    	com.kenny.util.BaseTool.showMenuShadow();
+        sendMessage(com.kenny.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY });
     });
 
     $("#insertAnimation").click(function (e) {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
         $("#normalSilderCommandBar").css('display', 'none');
         $("#playSilderCommandBar").css('display', 'block');
         addingAnimation = true;
@@ -178,7 +178,7 @@ $(document).ready(function () {
     });
 
     $("#slide-footer-animate-edit").click(function (e) {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
         openFullWindow();
     });
 
@@ -200,13 +200,13 @@ $(document).ready(function () {
     	var fileName = document.getElementById("fileName").value;
     	if(id){
 			var fileInf = {'random': id};
-			com.hoperun.util.FileHelper.loadParams(fileInf, function(temp_data){
+			com.kenny.util.FileHelper.loadParams(fileInf, function(temp_data){
 		    	if(temp_data){
-				sendMessage(com.hoperun.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':temp_data.doctype, 'userName':temp_data.username, 'fileFolderName':folderNameOfFile});
+				sendMessage(com.kenny.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':temp_data.doctype, 'userName':temp_data.username, 'fileFolderName':folderNameOfFile});
     	}
 			});
 		} else {
-			sendMessage(com.hoperun.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+			sendMessage(com.kenny.util.Observer.MessageType.SLIDES_SAVE, data, {'fileName':fileName, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
 		}
     	
     });
@@ -219,7 +219,7 @@ $(document).ready(function () {
 	     	 		window.location.href = "requestConvert?id=" + id;
 				} else {
 					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
-					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+					com.kenny.util.FileHelper.loadId(fileInfo, function(data){
 						if("false" != data.id){
 							window.location.href = "requestConvert?id=" + data.id;
 						} else {
@@ -241,7 +241,7 @@ $(document).ready(function () {
 	     	 		window.location.href = "requestConvert?id=" + id;
 				} else {
 					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
-					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+					com.kenny.util.FileHelper.loadId(fileInfo, function(data){
 						if("false" != data.id){
 							window.location.href = "requestConvert?id=" + data.id;
 						} else {
@@ -274,23 +274,23 @@ $(document).ready(function () {
     	if(objs.length > 0) {
     		objs.click();
     	}
-   		com.hoperun.util.BaseTool.showMenuShadow();
+   		com.kenny.util.BaseTool.showMenuShadow();
         $("#popup-menu-insert").css("position","absolute").css("top", e.pageY - 350).css("left", e.pageX - 127).css('display', 'block');
     });
 
     $("#slide-footer-type").click(function (e) {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
         //Send insert textbox message.
-		var message = new com.hoperun.util.Observer.Message();
-		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+		var message = new com.kenny.util.Observer.Message();
+		message.id = com.kenny.util.Observer.MessageType.SHAPE_INSERT;
 		message.sender = {objectType: "TextBox"};
-		com.hoperun.util.Observer.sendMessage(message);
+		com.kenny.util.Observer.sendMessage(message);
         //var left = ($(window).width() - $("#myContent").css("width").replace("px","")) / 2;
         //$("#popup-menu-edit-text").css("top", 0).css("left", left).css('display', 'block');
     });
 
     $("#slide-footer-draw").click(function (e) {
-    	com.hoperun.util.BaseTool.showMenuShadow();
+    	com.kenny.util.BaseTool.showMenuShadow();
         $("#popup-menu-draw").css("position","absolute").css("top", e.pageY - 290).css("left", e.pageX - 100).css('display', 'block');
     });
 
@@ -344,8 +344,8 @@ $(document).ready(function () {
     });
 
     $("#slide-footer-information").click(function (e) {
-    	 com.hoperun.util.BaseTool.showMenuShadow();
-         sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY - 304});
+    	 com.kenny.util.BaseTool.showMenuShadow();
+         sendMessage(com.kenny.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX, 'y': e.pageY - 304});
     });
 });
 
@@ -417,23 +417,23 @@ function initRuler() {
 }
 $(document).ready(function(){
 	$("#rotation-left").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
 	});
 	$("#rotation-right").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
 	});
 	
 	$("#flip-left").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
 	});
 	$("#flip-right").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
 	});
 	$("#flip-up").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
 	});
 	$("#flip-down").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
 	});
 });
 </script>

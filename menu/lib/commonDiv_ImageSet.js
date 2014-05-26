@@ -16,7 +16,7 @@
         step: 1,
         slide: function (event, ui) {
             $("#menu_edit_img_style_border_width_text").text("　" + ui.value + "px");
-            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                     currentSelectedObj,
                     { 'borderWidth': ui.value });
         }
@@ -86,7 +86,7 @@
 	    	$(this).append('<div id="menu_image_check_shaow" style="border:0px;margin-top:25px;float:right;margin-right:3px;width:12px;height:12px;background-color:white">' +
 	    			'<img src="./images/icon_choosed.png"  style="height:13px;width:13px;margin-left:-12px;"/></div>');
     	}
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
               currentSelectedObj,
               data);
     });
@@ -120,7 +120,7 @@
         	}
             $("#menu_edit_img_effort_reflection").text(ui.value + "%");
             var data = { 'reflection': ui.value };
-            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                   currentSelectedObj,
                   data);
         }
@@ -135,7 +135,7 @@
 //        slide: function (event, ui) {
 //            $("#menu_edit_img_effort_opacity").text(ui.value + "%");
 //            var data = { 'effOpacity': ui.value };
-//            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+//            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 //                  currentSelectedObj,
 //                  data);
 //        }
@@ -143,13 +143,13 @@
     $("#menu_edit_img_effort_opacity").text($("#menu_edit_img_effort_opacity_slider").slider("value") + "%");
 
     $("#menu_edit_img_arrange_setting_flipV").click(function () {
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                 currentSelectedObj,
                 //{'flip':currentSelectedObj.setFlip({x:(currentSelectedObj.getFlip().x + 180), y:currentSelectedObj.getFlip().y})});
                 {'flip':{x:(currentSelectedObj.getFlip().x + 180), y:currentSelectedObj.getFlip().y}});
     });
     $("#menu_edit_img_arrange_setting_flipH").click(function () {
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                 currentSelectedObj,
                 //{'flip':currentSelectedObj.setFlip({x:currentSelectedObj.getFlip().x, y:(currentSelectedObj.getFlip().y + 180)})});
                 {'flip':{x:currentSelectedObj.getFlip().x, y:(currentSelectedObj.getFlip().y + 180)}});
@@ -157,7 +157,7 @@
     $("#menu_edit_img_arrange_setting_maskReset").click(function () {
     	$("#menu_img_cover_slide").css("display","none");
         //alert("maskReset SlideValue:" + arrangeSlideValue);
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                 currentSelectedObj,
                 {});
     });
@@ -173,7 +173,7 @@
         slide: function (event, ui) {
             //$("#menu_img_cover_Slide_text").text(ui.value + "%");
             var data = { 'maskEdit': ui.value };
-            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                   currentSelectedObj,
                   data);
         }
@@ -202,7 +202,7 @@
 			borderStyle = 'solid';
 		}
 //		currentSelectedObj.setBorderStyle(borderStyle);
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 	               currentSelectedObj,
 	               { 'borderWidth': borderWidth,'borderStyle':borderStyle,'borderColor':borderColor });
 		initImageMenu();
@@ -212,7 +212,7 @@
 //        currentSelectedObj.setBorderWidth(0);
 //		currentSelectedObj.setBorderColor('none');
 //		currentSelectedObj.setBorderStyle('none');
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 	               currentSelectedObj,
 	               { 'borderWidth': 0,'borderStyle':'none','borderColor':'none' });
     });
@@ -248,7 +248,7 @@
         };
 //        //$("#menu_edit_img_styleChoosePannel .menu_edit_img_style_div").css('border','1px solid #eeeeee');
 //        $(this).css('border','1px solid #8DDF48');
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                currentSelectedObj,
                { 'borderImage': borderImage,'borderWidth':borderImageWidth });
 //               { 'imgStyleClass': styleClass });
@@ -259,7 +259,7 @@
         var styleBorderClass = $(this).attr('class');
         var data = { 'borderStyle': styleBorderClass };
         
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
               currentSelectedObj,
               data);
     });
@@ -279,7 +279,7 @@
 		    $(this).parent().append('<div id="check_img_border_line_color" style="border:0px;float:right;margin-top:-20px;margin-right:5px;width:12px;height:12px;background-color:white">' +
 		    		'<img src="./images/icon_choosed.png"  style="height:13px;width:13px;margin-left:-12px"/></div>');
     	}
-        sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
               currentSelectedObj,
               data);
     });
@@ -314,7 +314,7 @@
 //		    			'<input type="checkbox" disabled="true" checked="true"/></div>');
     		    }
     		    $("#Menu_Edit_img_border_Color").css('backgroundColor',color);
-    		    sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+    		    sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
     	                currentSelectedObj,
     	                data);
     		}
@@ -339,7 +339,7 @@
 //        slide: function (event, ui) {
 //            $("#Menu_img_style-extraSpace").text(ui.value + "%");
 //            var data = { 'maskEdit': ui.value };
-//            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+//            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 //                  currentSelectedObj,
 //                  data);
 //        }
@@ -370,11 +370,11 @@
     /*button listener*/
 
    $("#menu_edit_img_flip_On").click(function(e){
-	   sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_FOCUS, currentSelectedObj, {"fliparea":"on"});
+	   sendMessage(com.kenny.util.Observer.MessageType.IMAGE_FOCUS, currentSelectedObj, {"fliparea":"on"});
    });
    
    $("#menu_edit_img_flip_Off").click(function(e){
-	   sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_FOCUS, currentSelectedObj, {"fliparea":"off"});
+	   sendMessage(com.kenny.util.Observer.MessageType.IMAGE_FOCUS, currentSelectedObj, {"fliparea":"off"});
    });
 };
 
@@ -433,7 +433,7 @@ function initImageMenu(){
 	            //currentSelectedObj.setOpacity(ui.value/100);
 	            var id = currentSelectedObj.getId();
 	            $('#' + id).css('opacity',ui.value/100);  //        style.opacity = ui.value/100;
-//	            sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+//	            sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 //	                  currentSelectedObj,
 //	                  data);
 	        }
@@ -442,7 +442,7 @@ function initImageMenu(){
 	    
 	    $("#menu_edit_img_effort_opacity_slider").mouseup(function(e){
     		var effOpacity = $("#menu_edit_img_effort_opacity_slider").slider("value");
-    		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+    		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                     currentSelectedObj,
                     { 'opacity': effOpacity });
     	});
@@ -483,7 +483,7 @@ function initImageMenu(){
 /*    	$("#menu_edit_img_style_border_width_slider").mouseup(function(e){
     		var borderWidth = $("#menu_edit_img_style_border_width_slider").slider("value");
     		//alert(borderWidth);
-    		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+    		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
                     currentSelectedObj,
                     { 'borderWidth': borderWidth });
     	});
@@ -498,7 +498,7 @@ function initImageMenu(){
                 //currentSelectedObj.setBorderWidth(ui.value);
                 var id = currentSelectedObj.getId();
                 $('#' + id).css('borderWidth',ui.value);
-//                sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE,
+//                sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE,
 //                        currentSelectedObj,
 //                        { 'borderWidth': ui.value });
             }
@@ -574,7 +574,7 @@ function initImageMenu(){
 						$('#menu_edit_img_arrange_Add img').attr('disabled', 'disabled');
 					}
 					var data = {'zindex':ui.value};
-					sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+					sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 				}
 			});
 			$('#menu_edit_img_arrange_Reduce img').removeAttr('disabled');
@@ -600,7 +600,7 @@ function initImageMenu(){
 					value : initValue
 				});
 				var data = {'zindex':initValue};
-				sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+				sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 				
 				$('#menu_edit_img_arrange_Add img').removeAttr('disabled');
 				if(initValue == 1000){
@@ -620,7 +620,7 @@ function initImageMenu(){
 					value : initValue
 				});
 				var data = {'zindex':initValue};
-				sendMessage(com.hoperun.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
+				sendMessage(com.kenny.util.Observer.MessageType.UPDATE_ZINDEX, currentSelectedObj, data);
 				//alert(2);
 				$('#menu_edit_img_arrange_Reduce img').removeAttr('disabled');
 				// < 2 ? 2 : container.getAllElements().length;
@@ -636,7 +636,7 @@ function initImageMenu(){
 			max: 180,
 			step: 10,
 			slide: function (event, ui) {
-			   sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':ui.value});
+			   sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':ui.value});
 			}
 		});
 		

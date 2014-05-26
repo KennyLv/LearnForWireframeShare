@@ -83,7 +83,7 @@ function registerButtonListener() {
                 	style = { 'lineThrough': checked };
                     break;
             }
-            sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
+            sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
         }
     });
 
@@ -94,7 +94,7 @@ function registerButtonListener() {
 		$("#Menu_Edit_Text_Style_goColorSet").css('background',$(this).css('backgroundColor'));
 		$(".text_color_is_picked").children('img').remove();
         $(this).children(".text_color_is_picked").append('<img src="./images/icon_choosed.png" style="height:13px;width:13px;margin-left:12px;margin-top:4px"/>');
-		sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
+		sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
 	});
 		
 	$("#Menu_Edit_Text_Style_Color_SecondColorPanel div").click(function () {
@@ -103,7 +103,7 @@ function registerButtonListener() {
 		$("#Menu_Edit_Text_Style_goColorSet").css('background',$(this).css('backgroundColor'));
 		$(".text_color_is_picked").children('img').remove();
         $(this).children(".text_color_is_picked").append('<img src="./images/icon_choosed.png" style="height:13px;width:13px;margin-left:12px;margin-top:60px"/>');
-		sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
+		sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
 	});	
 		
 	$("#Menu_Edit_TextSet_Style_Format .Menu_Edit_Text_Style_Format_ParagraphStyle").click(function () {
@@ -113,7 +113,7 @@ function registerButtonListener() {
 		$("#Menu_Edit_TextStyleListFormat_is_picked").remove();
 	    $(this).children("span").before('<div id="Menu_Edit_TextStyleListFormat_is_picked">' +
 	    		'<img src="./images/icon_choosed.png" style="margin-left:-12px;"/></div>');
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#Menu_Edit_Text_List_Format .Menu_Edit_Text_List_Format_ListStyle").click(function () {
@@ -123,7 +123,7 @@ function registerButtonListener() {
 		$("#textListFormat_is_picked").remove();
 	    $(this).children("span").before('<div id="textListFormat_is_picked">' +
 	    		'<img src="./images/icon_choosed.png" style="margin-left:-12px;"/></div>');
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#Menu_Edit_Text_Style_Fonts_Group_Format .Menu_Edit_Text_Style_Fonts_Group_FormatStyle").click(function () {
@@ -134,7 +134,7 @@ function registerButtonListener() {
 		$("#Menu_Edit_Text_Style_fontGroupFormat_is_picked").remove();
 	    $(this).children("span").before('<div id="Menu_Edit_Text_Style_fontGroupFormat_is_picked" style="float:right;border:0px;margin-right:5px;margin-top:5px;">' +
 	    		'<img src="./images/icon_choosed.png" style="height:13px;width:13px;margin-left:-12px;"/></div>');
-		sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
+		sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
 	});
 	
 	$("#Menu_Edit_Text_Layout_Align .Menu_Edit_Text_Layout_Align_Model").click(function () {
@@ -142,40 +142,40 @@ function registerButtonListener() {
 		var paraAlignStyle = $(this).attr('paraAlignStyle');
 		//alert('set current paragraph alignment to:'+paraAlignStyle);
 		var style = { 'textAlign': paraAlignStyle };
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#Menu_Edit_Text_Layout_Columns .Menu_Edit_Text_Layout_Columns_Model").click(function () {
 		var pageObj = currentSelectedObj;
 		var paraColumns = $(this).attr('paraColumns');
 		var style = { 'columnStyle': paraColumns };
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#Menu_Edit_Text_List_Around_Left").click(function () {
 		var pageObj = currentSelectedObj;
 		var style = { 'indentation': 'left' };
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#Menu_Edit_Text_List_Around_Right").click(function () {
 		var pageObj = currentSelectedObj;
 		var style = { 'indentation': 'right' };
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 	$("#text-style-font-size").change(function () {
 		var pageObj = currentSelectedObj;
 		var textFontSize = $('#text-style-font-size').find('option:selected').text();
 		var style = { 'fontSize': textFontSize };
-		sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
+		sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE, pageObj, style);
 	});
 	
 	$("#text-style-line-spacing").change(function () {
 		var pageObj = currentSelectedObj;
 		var textLineSpacing = $('#text-style-line-spacing').find('option:selected').text();
 		var style = { 'textLineSpacing': textLineSpacing };
-		sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
+		sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, pageObj.getActiveSelection().getFrom(), style);
 	});
 	
 };

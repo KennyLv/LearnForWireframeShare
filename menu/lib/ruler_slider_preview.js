@@ -21,7 +21,7 @@ $(document).ready(function () {
 
 
 	$('#Menu_Edit_Silde').click(function (e) {
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
         var buff = [];
         buff.push('<div class="slidePageDiv"></div>');
         $(buff.join('')).insertAfter('#addSlidePage');

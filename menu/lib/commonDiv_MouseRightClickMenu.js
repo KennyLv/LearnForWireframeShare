@@ -17,10 +17,10 @@ function mouseRightClickMenu(shape){
     $('#mouseRightClickMenu div:first-child').addClass('shortCutMenu_left');
     $('#mouseRightClickMenu div:last-child').addClass('shortCutMenu_right');
 
-    com.hoperun.util.BaseTool.showMenuShadow();
+    com.kenny.util.BaseTool.showMenuShadow();
     
-	var position = com.hoperun.util.BaseTool.getAbsPostion(document.getElementById(shape.getId()));
-	var shapeWidth = com.hoperun.util.BaseTool.convertPixelToNumber(shape.getWidth());
+	var position = com.kenny.util.BaseTool.getAbsPostion(document.getElementById(shape.getId()));
+	var shapeWidth = com.kenny.util.BaseTool.convertPixelToNumber(shape.getWidth());
 	var numShapeWidth = Number(position.x) + Number(shapeWidth);
 	$("#shape_rightclick_menu").css("top", position.y).css("left", numShapeWidth).css('display', 'block');
 	

@@ -278,8 +278,8 @@
 <script type="text/javascript">
 
 function sendInternetUpload(msg){
-	sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_INSERT,
-			com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
+	sendMessage(com.kenny.util.Observer.MessageType.IMAGE_INSERT,
+			com.kenny.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
 			{'src':document.getElementById("txtInternetFiles").value, 'height':80, 'width':100});
 }
 
@@ -287,7 +287,7 @@ function sendUpload(){
 	var oForm = document.getElementById("formDiv");
 	var fileName = document.getElementById("fileUpload").value;
 	var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
-	var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+	var urlParameter = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
 	var url = "fileuploader?folderNameOfFile=" + folderNameOfFile + "&userName=" + urlParameter.userName + "&fileType=" + urlParameter.fileType;
 	imgSubmit(url);
 }

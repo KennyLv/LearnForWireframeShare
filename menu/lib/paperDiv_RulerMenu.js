@@ -106,7 +106,7 @@ $(document).ready(function(){
 		};
 		
 		this.sendPageIndentChange = function(indentData){
-		    sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_STYLE, null, indentData);
+		    sendMessage(com.kenny.util.Observer.MessageType.DOCUMENT_STYLE, null, indentData);
 		};
 		
 		this.sendParagraphIndentChange = function(){
@@ -116,7 +116,7 @@ $(document).ready(function(){
 			var style = {
 				indentation: this.getParagraphIndent()
 			};
-		    sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE, this.paragraphObj, style);
+		    sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE, this.paragraphObj, style);
 		};
 		
 		this.setParagraphRulerFirstLine = function(left){
@@ -305,16 +305,16 @@ $(document).ready(function(){
 		var rulerEventListener = new function(){
 			this.update = function (message) {
 	            switch (message.id) {
-	                case com.hoperun.util.Observer.MessageType.CONTEXT_BLUR:
+	                case com.kenny.util.Observer.MessageType.CONTEXT_BLUR:
 	                	self.disableParagraphButton();
 	                    break;
-	                case com.hoperun.util.Observer.MessageType.TEXT_SELECT:
+	                case com.kenny.util.Observer.MessageType.TEXT_SELECT:
 	                	var container = message.sender;
 	                	var paragraphObj = container.getActiveSelection().getFrom();
 	                	self.paragraphInit(paragraphObj.getIndent('firstLine'), paragraphObj.getIndent('left'), paragraphObj.getIndent('right'));
 	                	self.enableParagraphButton(paragraphObj);
 	                	break;
-	                case com.hoperun.util.Observer.MessageType.DOCUMENT_CONFIGURATION:
+	                case com.kenny.util.Observer.MessageType.DOCUMENT_CONFIGURATION:
 	                	var data = message.data;
 	                	self.pageInit(data.position.width, data.position.left, data.indent.left, data.indent.right);
 	                	self.paragraphInit(0, 0, 0);
@@ -322,9 +322,9 @@ $(document).ready(function(){
 	            }
 			};
 		};
-		com.hoperun.util.Observer.register(com.hoperun.util.Observer.MessageType.DOCUMENT_CONFIGURATION, rulerEventListener);
-		com.hoperun.util.Observer.register(com.hoperun.util.Observer.MessageType.CONTEXT_BLUR, rulerEventListener);
-		com.hoperun.util.Observer.register(com.hoperun.util.Observer.MessageType.TEXT_SELECT, rulerEventListener);
+		com.kenny.util.Observer.register(com.kenny.util.Observer.MessageType.DOCUMENT_CONFIGURATION, rulerEventListener);
+		com.kenny.util.Observer.register(com.kenny.util.Observer.MessageType.CONTEXT_BLUR, rulerEventListener);
+		com.kenny.util.Observer.register(com.kenny.util.Observer.MessageType.TEXT_SELECT, rulerEventListener);
 	};
 });
 
@@ -401,7 +401,7 @@ function registerDocSetupListener(){
         //alert(phtext);
         //alert(pfvalue);
         //alert(pftext);
-        sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_STYLE,
+        sendMessage(com.kenny.util.Observer.MessageType.DOCUMENT_STYLE,
                         null,data);
 }
 
@@ -428,8 +428,8 @@ function registerTextAlignListener(cmd){
                         data.style= { 'textAlign' : 'right' };
                         break;
                 }
-                sendMessage(com.hoperun.util.Observer.MessageType.PARAGRAPH_STYLE,
-                            com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
+                sendMessage(com.kenny.util.Observer.MessageType.PARAGRAPH_STYLE,
+                            com.kenny.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
                             data);
         }
     }
@@ -476,8 +476,8 @@ function registerRulerMenuBIUListener() {
                         data.style = { 'lineThrough': checked };
                         break;
                 }
-                sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE,
-                            com.hoperun.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
+                sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE,
+                            com.kenny.util.BaseTool.findObjWithId(currentSelectedObj.sender.getId()),
                             data);
             }
         }
@@ -511,7 +511,7 @@ function refreshRulerMenu(obj){
         var container = getActiveContainer();
         var top = currentSelectedObj.getTop();
         var pageDivObj = currentSelectedObj.getDomInstance().parentNode;
-        var pos = com.hoperun.util.BaseTool.getAbsPostion(pageDivObj);
+        var pos = com.kenny.util.BaseTool.getAbsPostion(pageDivObj);
         
         leftIndent = page.getContentPadding().left, rightIndent =  page.getContentPadding().right
         container.refreshPage(pageDivObj, top);*/

@@ -5,11 +5,11 @@
 
 <script type="text/javascript" src="Import.js"></script>
 <script type="text/javascript" src="./com/example/data/PageDocs.js"></script>
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/paper.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/docs.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/paper.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/defaultElementStyle.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/docs.css" />
 
 <script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
 <link rel="stylesheet" type="text/css" href="./menu/lib/paperDiv_RulerMenu.css" />
@@ -76,21 +76,21 @@ select{margin-top:10px;margin-right: 5px;}
 	}
 </style>
 <script type="text/javascript">
-var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+var urlParameter = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
 var id = urlParameter.id;
 var currDocID = urlParameter.docid;
 var currDocType = "paper";
 var currFloder = urlParameter.fileFolderName;
 var currFile = urlParameter.fileName;
 var currentSelectedObj = null;
-///var shortCutMenu = new com.hoperun.menu.ShortCutMenu();
+///var shortCutMenu = new com.kenny.menu.ShortCutMenu();
 
 function sendMessage(_id, _sender, _data) {
-    var message = new com.hoperun.util.Observer.Message();
+    var message = new com.kenny.util.Observer.Message();
     message.id = _id;
     message.sender = _sender;
     message.data = _data;
-    com.hoperun.util.Observer.sendMessage(message);
+    com.kenny.util.Observer.sendMessage(message);
 }
 
 function initRuler() {
@@ -158,66 +158,66 @@ $(document).ready(function () {
 	
 	// Added by ganlingli
 	$('#Menu_Drawing_pencil').click(function(e){
-		com.hoperun.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.showMenuShadow();
         $("#Menu_DrawingEraser_Container_Get").css("position","absolute").css("top", e.pageY - 290).css("left", e.pageX - 100).css('display', 'block');
     });
 	$('#Menu_Drawing_Star_Click').click(function(e){
-		com.hoperun.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.showMenuShadow();
 		$('#upfile').attr("value","");
 		$("#Menu_Picture_Insert_Container_Get").css("position","absolute").css("top", e.pageY - 340).css("left", e.pageX - 120).css('display', 'block');
     });
 	
 	$('#Menu_Drawing_MenuUp_Click').click(function(e){
-		com.hoperun.util.BaseTool.showMenuShadow();
+		com.kenny.util.BaseTool.showMenuShadow();
 		$("#Menu_Drawing_Intro_Container_Get").slideDown();
 		$("#Menu_Drawing_Intro_Container_Get").css('left', '0');
     });
 	
 	$('#Menu_Drawing_T_Click').click(function(e){
-		com.hoperun.util.BaseTool.closeMenuPopup();
+		com.kenny.util.BaseTool.closeMenuPopup();
 		
 		var objectType = $(this).attr('objectType');
 		insertObject = {};
 		insertObject.objectType = objectType;
 		if (objectType == "TextBox") {
 		}
-		var message = new com.hoperun.util.Observer.Message();
-		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+		var message = new com.kenny.util.Observer.Message();
+		message.id = com.kenny.util.Observer.MessageType.SHAPE_INSERT;
 		message.sender = insertObject;
-		com.hoperun.util.Observer.sendMessage(message);
+		com.kenny.util.Observer.sendMessage(message);
 	});
 	
 	// end added
 	//Added for Menu_Drawing_Redo & Menu_Drawing_Undo
 	$("#Menu_Drawing_Undo").click(function (e) {
 		if(document.getElementById("Menu_Drawing_Undo").getAttribute("canUndo")=="true")
-			sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+			sendMessage(com.kenny.util.Observer.MessageType.UNDO, null, {});
 	});
 	
 	$("#Menu_Drawing_Redo").click(function (e) {
 		if(document.getElementById("Menu_Drawing_Redo").getAttribute("canRedo")=="true")
-			sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+			sendMessage(com.kenny.util.Observer.MessageType.REDO, null, {});
 	});
 	jskataUndo.onChange = function() {
 		if(jsk.canUndo()){
 			$("#Menu_Drawing_Undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo.png');
 			document.getElementById("Menu_Drawing_Undo").setAttribute("canUndo", "true");
-			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style, 'color',null);
+			com.kenny.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style, 'color',null);
 		}
 		else{
 			$("#Menu_Drawing_Undo img").attr('src', 'images/03 Main Nav/Nav Bar/undo_disabled.png');
 			document.getElementById("Menu_Drawing_Undo").setAttribute("canUndo", "false");
-			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style,'color', '#AAA');
+			com.kenny.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Undo").style,'color', '#AAA');
 		}
 		if(jsk.canRedo()){
 			$("#Menu_Drawing_Redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo.png');
 			document.getElementById("Menu_Drawing_Redo").setAttribute("canRedo", "true");
-			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style,'color', null);
+			com.kenny.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style,'color', null);
 		}
 		else{
 			$("#Menu_Drawing_Redo img").attr('src', 'images/03 Main Nav/Nav Bar/redo_disabled.png');
 			document.getElementById("Menu_Drawing_Redo").setAttribute("canRedo", "false");
-			com.hoperun.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style, 'color','#AAA');
+			com.kenny.util.BaseTool.setStyleProperty(document.getElementById("Menu_Drawing_Redo").style, 'color','#AAA');
 		}
 	};
 	
@@ -228,19 +228,19 @@ $(document).ready(function () {
 		var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
 		if(id){
 			var fileInf = {'random': id};
-			com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+			com.kenny.util.FileHelper.loadParams(fileInf, function(data){
 		    	if(data){
-				sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':data.filename, 'fileType':data.doctype, 'userName':data.username, 'fileFolderName':folderNameOfFile});
+				sendMessage(com.kenny.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':data.filename, 'fileType':data.doctype, 'userName':data.username, 'fileFolderName':folderNameOfFile});
 		    	}
 			});
 		} else {
-			sendMessage(com.hoperun.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+			sendMessage(com.kenny.util.Observer.MessageType.DOCUMENT_SAVE, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
 		}
 	});
 	
 	$("#Paper_Edit").click(function (e) {
-    	com.hoperun.util.BaseTool.showMenuShadow();
-        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +25, 'y': e.pageY });
+    	com.kenny.util.BaseTool.showMenuShadow();
+        sendMessage(com.kenny.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +25, 'y': e.pageY });
 	 });
 	
     document.getElementById('myContent').oncontextmenu = function () {
@@ -252,7 +252,7 @@ $(document).ready(function () {
      	 		window.location.href = "requestConvert?id=" + id;
            	    } else {
 				var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
-				com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+				com.kenny.util.FileHelper.loadId(fileInfo, function(data){
 					if("false" != data.id){
 						window.location.href = "requestConvert?id=" + data.id;
             } else {

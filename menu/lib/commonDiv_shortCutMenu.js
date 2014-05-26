@@ -1,8 +1,8 @@
 function sheet_popuShortCutMenu(cell) {
     //get the position of table
     var currTable = document.getElementById(cell.getId()).parentNode;
-    var tablePosition = com.hoperun.util.BaseTool.getAbsPostion(currTable);
-    var tableWidth = com.hoperun.util.BaseTool.convertPixelToNumber(com.hoperun.util.BaseTool.findObjWithId(currTable.getAttribute('id')).getWidth());
+    var tablePosition = com.kenny.util.BaseTool.getAbsPostion(currTable);
+    var tableWidth = com.kenny.util.BaseTool.convertPixelToNumber(com.kenny.util.BaseTool.findObjWithId(currTable.getAttribute('id')).getWidth());
     var scrollTop =0;
     var scrollLeft = 0;
     var data;
@@ -44,7 +44,7 @@ function sheet_popuShortCutMenu(cell) {
     //alert($('#shortCutMenu div:first-child').attr('command'));
     $('#shortCutMenu div:first-child').addClass('shortCutMenu_left');
     $('#shortCutMenu div:last-child').addClass('shortCutMenu_right');
-    com.hoperun.util.BaseTool.showMenuShadow();
+    com.kenny.util.BaseTool.showMenuShadow();
     
     var shortCutMenuLeft = 0;
     var shortCutMenuTop=0;
@@ -65,35 +65,35 @@ function sheet_popuShortCutMenu(cell) {
     
     
     $(".shortCutMenu_normal").click(function () {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
         var command = $(this).attr('command');
         //alert(command);
-        var message = new com.hoperun.util.Observer.Message();
+        var message = new com.kenny.util.Observer.Message();
         switch (command) {
             case 'Cut':
-                message.id = com.hoperun.util.Observer.MessageType.CELL_CUT;
+                message.id = com.kenny.util.Observer.MessageType.CELL_CUT;
                 message.sender = cell;
-                com.hoperun.util.Observer.sendMessage(message);
+                com.kenny.util.Observer.sendMessage(message);
                 break;
             case 'Copy':
-                message.id = com.hoperun.util.Observer.MessageType.CELL_COPY;
+                message.id = com.kenny.util.Observer.MessageType.CELL_COPY;
                 message.sender = cell;
-                com.hoperun.util.Observer.sendMessage(message);
+                com.kenny.util.Observer.sendMessage(message);
                 break;
             case 'Delete':
-                message.id = com.hoperun.util.Observer.MessageType.CELL_DELETE;
+                message.id = com.kenny.util.Observer.MessageType.CELL_DELETE;
                 message.sender = cell;
-                com.hoperun.util.Observer.sendMessage(message);
+                com.kenny.util.Observer.sendMessage(message);
                 break;
             case 'Paste':
-                message.id = com.hoperun.util.Observer.MessageType.CELL_PASTE;
+                message.id = com.kenny.util.Observer.MessageType.CELL_PASTE;
                 message.sender = cell;
-                com.hoperun.util.Observer.sendMessage(message);
+                com.kenny.util.Observer.sendMessage(message);
                 break;
             //            case 'Fill': 
-            //                message.id = com.hoperun.util.Observer.MessageType.CELL_FILL; 
+            //                message.id = com.kenny.util.Observer.MessageType.CELL_FILL; 
             //                message.sender = cell; 
-            //                com.hoperun.util.Observer.sendMessage(message); 
+            //                com.kenny.util.Observer.sendMessage(message); 
             //                break; 
         }
     });
@@ -105,9 +105,9 @@ function sheet_editFunctionMenu(cell) {
     }
     currentEditCell = cell;
     //get the position of table
-    var currTable = com.hoperun.util.BaseTool.findObjWithId(document.getElementById(cell.getId()).parentNode.getAttribute('id'));
-    var tablePosition = com.hoperun.util.BaseTool.getAbsPostion(currTable.getDomInstance());
-    var tableWidth = com.hoperun.util.BaseTool.convertPixelToNumber(currTable.getWidth());
+    var currTable = com.kenny.util.BaseTool.findObjWithId(document.getElementById(cell.getId()).parentNode.getAttribute('id'));
+    var tablePosition = com.kenny.util.BaseTool.getAbsPostion(currTable.getDomInstance());
+    var tableWidth = com.kenny.util.BaseTool.convertPixelToNumber(currTable.getWidth());
     var scrollTop = 0;
     var data = [
         { Title: 'Add Function', command: 'function' }
@@ -126,7 +126,7 @@ function sheet_editFunctionMenu(cell) {
     $('#shortCutMenu div:first-child').addClass('shortCutMenu_both');
     //$('#shortCutMenu div:last-child').addClass('shortCutMenu_right');
     
-    com.hoperun.util.BaseTool.showMenuShadow();
+    com.kenny.util.BaseTool.showMenuShadow();
 
     var shortCutMenuLeft = 0;
 
@@ -140,7 +140,7 @@ function sheet_editFunctionMenu(cell) {
     $("#popup-menu-shortCut").css("top", tablePosition.y - 32 - scrollTop).css("left", shortCutMenuLeft).css('display', 'block');
 
     $(".shortCutMenu_normal").click(function () {
-        com.hoperun.util.BaseTool.closeMenuPopup();
+        com.kenny.util.BaseTool.closeMenuPopup();
         
         $("#popup-menu-cellFunctionBar").css("top", tablePosition.y - 50 - scrollTop).css('display', 'block');
         if ((tablePosition.x + tableWidth) > 910 && tablePosition.x < 400) {
@@ -165,7 +165,7 @@ function sheet_editFunctionMenu(cell) {
                     //var row = parseInt(cells[i].substring(1, index));
                     //var col = parseInt(cells[i].substring(index + 1, cells[i].length - 1));
                     var index = cells[i].search("[0-9]");
-                    var col = com.hoperun.util.BaseTool.CellIndex_StrToNum(cells[i].substring(0, index));
+                    var col = com.kenny.util.BaseTool.CellIndex_StrToNum(cells[i].substring(0, index));
                     var row = parseInt(cells[i].substring(index, cells[i].length));
                     if (currTable.getCellsByRowAndColNo(row, col) == null) {
                         //Replace with value
@@ -177,10 +177,10 @@ function sheet_editFunctionMenu(cell) {
             $("#function_inputValue").val(cellFunction.replace(new RegExp("\"\"", "g"), "\""));
         }
         $("#function_inputValue").focus();
-        var message = new com.hoperun.util.Observer.Message();
-        message.id = com.hoperun.util.Observer.MessageType.CELL_ADDFUNCTION;
+        var message = new com.kenny.util.Observer.Message();
+        message.id = com.kenny.util.Observer.MessageType.CELL_ADDFUNCTION;
         message.sender = currentEditCell;
-        com.hoperun.util.Observer.sendMessage(message);
+        com.kenny.util.Observer.sendMessage(message);
     });
 }
 
@@ -198,7 +198,7 @@ function slide_popuShortCutMenu(e, slide) {
 		}
 		showName = nameArray.join(' ').trim();
 	}
-    com.hoperun.util.BaseTool.closeMenuPopup();
+    com.kenny.util.BaseTool.closeMenuPopup();
     var data;
     if (this.addingAnimation) {
         data = [
@@ -229,36 +229,36 @@ function slide_popuShortCutMenu(e, slide) {
     $('#shortCutMenu div:first-child').addClass('shortCutMenu_left');
     $('#shortCutMenu div:last-child').addClass('shortCutMenu_right');
 
-    com.hoperun.util.BaseTool.showMenuShadow();
+    com.kenny.util.BaseTool.showMenuShadow();
     $("#popup-menu-shortCut").css("top", e.pageY - 10).css("left", e.pageX + 10).css('display', 'block');
 
     $(".shortCutMenu_normal").click(function () {
-        com.hoperun.util.BaseTool.closeMenuPopup();
+        com.kenny.util.BaseTool.closeMenuPopup();
         var command = $(this).attr('command');
-        var message = new com.hoperun.util.Observer.Message();
+        var message = new com.kenny.util.Observer.Message();
         switch (command) {
         	case 'Cut':
-        		message.id = com.hoperun.util.Observer.MessageType.SLIDE_CUT;
+        		message.id = com.kenny.util.Observer.MessageType.SLIDE_CUT;
             	message.sender = slide;
-        		com.hoperun.util.Observer.sendMessage(message);
+        		com.kenny.util.Observer.sendMessage(message);
         		break;
         	case 'Copy':
-        		message.id = com.hoperun.util.Observer.MessageType.SLIDE_COPY;
+        		message.id = com.kenny.util.Observer.MessageType.SLIDE_COPY;
             	message.sender = slide;
-        		com.hoperun.util.Observer.sendMessage(message);
+        		com.kenny.util.Observer.sendMessage(message);
         		break;
             case 'Delete':
-            	message.id = com.hoperun.util.Observer.MessageType.SLIDE_REMOVE;
+            	message.id = com.kenny.util.Observer.MessageType.SLIDE_REMOVE;
             	message.sender = slide;
-        		com.hoperun.util.Observer.sendMessage(message);
+        		com.kenny.util.Observer.sendMessage(message);
                 break;
             case 'Paste':
-            	message.id = com.hoperun.util.Observer.MessageType.SLIDE_PASTE;
+            	message.id = com.kenny.util.Observer.MessageType.SLIDE_PASTE;
             	message.sender = slide;
-        		com.hoperun.util.Observer.sendMessage(message);
+        		com.kenny.util.Observer.sendMessage(message);
         		break;
             case 'Add':
-            	com.hoperun.util.BaseTool.showMenuShadow();
+            	com.kenny.util.BaseTool.showMenuShadow();
             	
                 currentLi = showName;
                 $("#menu-text-style-slide > li").each(function (i) {
@@ -275,8 +275,8 @@ function slide_popuShortCutMenu(e, slide) {
                     $("#popup-menu-transition").css("top", e.pageY - 220).css("left", e.pageX + 10).css('display', 'block');
                 }
 
-                //sendMessage(com.hoperun.util.Observer.MessageType.TEXT_STYLE,
-                //        com.hoperun.util.BaseTool.findObjWithId(menu._targetId),
+                //sendMessage(com.kenny.util.Observer.MessageType.TEXT_STYLE,
+                //        com.kenny.util.BaseTool.findObjWithId(menu._targetId),
                 //        data);
                 break;
         }
@@ -303,29 +303,29 @@ function shortCutMenuForCellPaste(cell){
     $('#shortCutMenu div:first-child').addClass('shortCutMenu_left');
     $('#shortCutMenu div:last-child').addClass('shortCutMenu_right');
 
-    com.hoperun.util.BaseTool.showMenuShadow();
+    com.kenny.util.BaseTool.showMenuShadow();
     
-    var cellPosition = com.hoperun.util.BaseTool.getAbsPostion(cell.getDomInstance());
-    var width = com.hoperun.util.BaseTool.convertPixelToNumber(cell.getWidth());
-    var heght = cell.getHeight();//com.hoperun.util.BaseTool.convertPixelToNumber(cell.getHeight());
+    var cellPosition = com.kenny.util.BaseTool.getAbsPostion(cell.getDomInstance());
+    var width = com.kenny.util.BaseTool.convertPixelToNumber(cell.getWidth());
+    var heght = cell.getHeight();//com.kenny.util.BaseTool.convertPixelToNumber(cell.getHeight());
     //alert(heght);
     $("#popup-menu-shortCut").css("top", cellPosition.y - heght - 7).css("left", cellPosition.x).css('display', 'block');
     
     
     $(".shortCutMenu_normal").click(function () {
-    	com.hoperun.util.BaseTool.closeMenuPopup();
+    	com.kenny.util.BaseTool.closeMenuPopup();
         var command = $(this).attr('command');
-        var message = new com.hoperun.util.Observer.Message();
+        var message = new com.kenny.util.Observer.Message();
         switch (command) {
 	        case 'Paste Formulas':
-	    		message.id = com.hoperun.util.Observer.MessageType.CELL_FORMULAS;
+	    		message.id = com.kenny.util.Observer.MessageType.CELL_FORMULAS;
 	        	message.sender = cell;
-	    		com.hoperun.util.Observer.sendMessage(message);
+	    		com.kenny.util.Observer.sendMessage(message);
 	    		break;
 	    	case 'Paste Values':
-	    		message.id = com.hoperun.util.Observer.MessageType.CELL_VALUES;
+	    		message.id = com.kenny.util.Observer.MessageType.CELL_VALUES;
 	        	message.sender = cell;
-	    		com.hoperun.util.Observer.sendMessage(message);
+	    		com.kenny.util.Observer.sendMessage(message);
 	    		break;
         }
     });

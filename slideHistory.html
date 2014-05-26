@@ -2,12 +2,12 @@
 <head>
 <title>WebOffice - GridFrames</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css"/>
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css"/>
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/jquery-ui-1.8.13.custom.css"/>
 <script type="text/javascript" >
     var com = {};
-    com.hoperun = {};
-    com.hoperun.util = {};
+    com.kenny = {};
+    com.kenny.util = {};
 </script>
 <script type="text/javascript" src="Import.js"></script>
 <style  type ="text/css">
@@ -18,10 +18,10 @@
 </style>
 <script type="text/javascript">
     //get the doctype from the URL
-    var urlParameters = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+    var urlParameters = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
     var random = urlParameters.id;
     var currentDocType = urlParameters.doctype;
-    window.document.write("<link rel=\"stylesheet\" type=\"text\/css\" href=\"com\/hoperun\/css\/slide.css\">");
+    window.document.write("<link rel=\"stylesheet\" type=\"text\/css\" href=\"com\/kenny\/css\/slide.css\">");
 
     var SLIDE_HEIGHT = 770, SLIDE_WIDTH = 1366, SLIDE_COL_NUMBER = 5, SLIDE_ROW_NUMBER = 4;
     var _presetationZoom = 1, _presentationWidth = 100, _presentationHeight = 75;
@@ -52,14 +52,14 @@
     		currentFolderName = document.getElementById("currFileFolderName").innerHTML;
     	}
     	var fileInf = {'random': random};
-		com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+		com.kenny.util.FileHelper.loadParams(fileInf, function(data){
 	    	if(data){
 		    	username = data.username;
 		    	currentDocType = data.doctype;
 		    	getThemes();
 		    	var fileInfo = {'fileType': currentDocType, 'userName': username,'currentFolderName': currentFolderName};
     	var historyRecordList = "";
-    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
         	if(data.list){
         		layoutSlidesThemesList(data.list, true);
         		historyList = data.list;
@@ -81,7 +81,7 @@
     	$("#slides-presentation-history-list").html("");
     	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byChar', 'searchText':$('#searchText').val()};
     	var historyRecordList = "";
-    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
         	if(data.list){
         		layoutSlidesThemesList(data.list, true);
         		historyList = data.list;
@@ -98,7 +98,7 @@
     	$("#slides-presentation-history-list").html("");
     	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byDate', 'searchText':$('#searchText').val()};
     	var historyRecordList = "";
-    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
         	if(data.list){
         		layoutSlidesThemesList(data.list, true);
         		historyList = data.list;
@@ -115,7 +115,7 @@
     	$("#slides-presentation-history-list").html("");
     	var fileInfo = {'fileType': currentDocType, 'userName': username, 'sortType':'byText', 'searchText':$('#searchText').val()};
     	var historyRecordList = "";
-    	com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+    	com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
         	if(data.list){
         		layoutSlidesThemesList(data.list, true);
         		historyList = data.list;
@@ -129,7 +129,7 @@
 
    	function getThemes() {
        	var fileInfoo = {'fileType': currentDocType};
-       	com.hoperun.util.FileHelper.loadFileImage(fileInfoo, function(dataa){
+       	com.kenny.util.FileHelper.loadFileImage(fileInfoo, function(dataa){
            	if(dataa.list){
    	    		layoutSlidesThemesList(dataa.list, false);
    	    		templateList = dataa.list;
@@ -332,8 +332,8 @@
 		getHistoryRecords();
 
 		$('#slides-presentation-themes-list, #slides-presentation-history-list').bind('mousedown', function(e){
-	    	var obj = com.hoperun.util.BaseTool.findEventElement(e);
-	        var iswrongEvent = com.hoperun.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'class', "slide-presentation slide-presentation-move");
+	    	var obj = com.kenny.util.BaseTool.findEventElement(e);
+	        var iswrongEvent = com.kenny.util.BaseTool.findNearestParentNodeWithAttributeValues(obj, 'class', "slide-presentation slide-presentation-move");
 	        //console.info("isValidEvent:" + isValidEvent);
 	        if (iswrongEvent) {	
 	            return;
@@ -411,7 +411,7 @@
 				        var cFileName = document.getElementById("currFileName").innerHTML;
 				        var cFolderName = document.getElementById("currFileFolderName").innerHTML;
 		        		var fileInfo = {'fileType': currentDocType, 'userName': username ,'currentFolderName': cFolderName};
-						com.hoperun.util.FileHelper.loadFileImage(fileInfo, function(data){
+						com.kenny.util.FileHelper.loadFileImage(fileInfo, function(data){
 				        	if(!data.list || data.list.length == 0){
 					        	alert("No history avaliable!");
 					        	return;
@@ -524,7 +524,7 @@
 						userName: 'kennylv',
 						fileFolderName: currentSelectedHistory[0]
 		    	};
-		    	//com.hoperun.util.FileHelper.downloadFile(fileInfo, function(data){
+		    	//com.kenny.util.FileHelper.downloadFile(fileInfo, function(data){
 		    		
 		    	//});
 		    	var oForm = document.getElementById("slideHistoryFormDiv");

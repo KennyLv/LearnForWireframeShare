@@ -3,7 +3,7 @@
 	$("#MENU_SPEC_3").tabs();
 
 	$(".MENU_SPEC_3_insert_tableDivStyle img").click(function() {
-		sendMessage(com.hoperun.util.Observer.MessageType.TABLE_INSERT, null, { 'src' : $(this).attr('src') });
+		sendMessage(com.kenny.util.Observer.MessageType.TABLE_INSERT, null, { 'src' : $(this).attr('src') });
 	});
 
 	$("#MENU_SPEC_3_SHAPES .MENU_SPEC_3_IMG[objectType]").click(function() {
@@ -64,10 +64,10 @@
 					break;			
 			}
 			
-			var message = new com.hoperun.util.Observer.Message();
-			message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+			var message = new com.kenny.util.Observer.Message();
+			message.id = com.kenny.util.Observer.MessageType.SHAPE_INSERT;
 			message.sender = item;
-			com.hoperun.util.Observer.sendMessage(message);
+			com.kenny.util.Observer.sendMessage(message);
 		} else {
 			alert("This shape hasn't done!");
 		}
@@ -95,13 +95,13 @@
 		var type = $(this).attr('chartType');
 		var subType = $(this).attr('subChartType');
 
-		var message = new com.hoperun.util.Observer.Message();
-		message.id = com.hoperun.util.Observer.MessageType.CHART_INSERT;
+		var message = new com.kenny.util.Observer.Message();
+		message.id = com.kenny.util.Observer.MessageType.CHART_INSERT;
 		message.sender = {
 			"type" : type,
 			"subType" : subType
 		};
-		com.hoperun.util.Observer.sendMessage(message);
+		com.kenny.util.Observer.sendMessage(message);
 	});
 }
 
@@ -122,7 +122,7 @@ function changeMENUSPEC3BarColor(obj) {
 	$(".MENU_SPEC_3_SELECT1").css("background", getImageUrl('short_bar_bkgd.png'));
 	obj.style.background = getImageUrl('bar_hg.png');
 
-	sendMessage(com.hoperun.util.Observer.MessageType.VIDEO_INSERT, null, {
+	sendMessage(com.kenny.util.Observer.MessageType.VIDEO_INSERT, null, {
 		'src' : './images/pr6.mp4',
 		'width' : 320,
 		'height' : 240,
@@ -151,7 +151,7 @@ function imgSubmit(url) {
 				if (json.error) {
 					alert(json.error);
 				} else {
-					sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_INSERT, [], json);
+					sendMessage(com.kenny.util.Observer.MessageType.IMAGE_INSERT, [], json);
 				}
 			} catch (e) { }
 		}

@@ -4,14 +4,14 @@
 <title>WebOffice - GridFrames</title>
 
 <script type="text/javascript" src="Import.js"></script>
-<!--<script type="text/javascript" src="./com/hoperun/util/Calculate.js"></script>-->
-<!-- <script type="text/javascript" src="./com/hoperun/util/Function.js"></script> -->
+<!--<script type="text/javascript" src="./com/kenny/util/Calculate.js"></script>-->
+<!-- <script type="text/javascript" src="./com/kenny/util/Function.js"></script> -->
 <script type="text/javascript" src="./menu/lib/paperDiv_RulerMenu.js"></script>
 
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/jquery-ui-1.8.13.custom.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/main.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/sheet.css" />
-<link rel="stylesheet" type="text/css" href="./com/hoperun/css/defaultElementStyle.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/jquery-ui-1.8.13.custom.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/main.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/sheet.css" />
+<link rel="stylesheet" type="text/css" href="./com/kenny/css/defaultElementStyle.css" />
 <script type="text/javascript" src="ImportMenu.js"></script>
 <style type="text/css">
 .left {
@@ -59,39 +59,39 @@ function initRuler() {
 }
 $(document).ready(function(){
 	$("#rotation-left").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()-10});
 	});
 	$("#rotation-right").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'rotation':currentSelectedObj.getRotation()+10});
 	});
 	
 	$("#flip-left").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y-180}});
 	});
 	$("#flip-right").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x, y:currentSelectedObj.getFlip().y+180}});
 	});
 	$("#flip-up").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x+180, y:currentSelectedObj.getFlip().y}});
 	});
 	$("#flip-down").click(function(){
-		sendMessage(com.hoperun.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
+		sendMessage(com.kenny.util.Observer.MessageType.IMAGE_SETSTYLE, currentSelectedObj, {'flip':{x:currentSelectedObj.getFlip().x-180, y:currentSelectedObj.getFlip().y}});
 	});
 });
 </script>
 <script type="text/javascript">
-    var urlParameter = com.hoperun.util.BaseTool.parseUrl(window.location.href.toString());
+    var urlParameter = com.kenny.util.BaseTool.parseUrl(window.location.href.toString());
     var id = urlParameter.id;
     var currDocID = urlParameter.docid;
     var currDocType = "sheet";
     var currentSelectedObj = null;
 
     function sendMessage(_id, _sender, _data) {
-        var message = new com.hoperun.util.Observer.Message();
+        var message = new com.kenny.util.Observer.Message();
         message.id = _id;
         message.sender = _sender;
         message.data = _data;
-        com.hoperun.util.Observer.sendMessage(message);
+        com.kenny.util.Observer.sendMessage(message);
     }
 
    /* function stopAllVideo(sheet){
@@ -124,14 +124,14 @@ $(document).ready(function(){
         return currSheet;
     }
     function addSheet(n) {
-        var msg = new com.hoperun.util.Observer.Message();
-        msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+        var msg = new com.kenny.util.Observer.Message();
+        msg.id = com.kenny.util.Observer.MessageType.SHEETS_CREATE;
         msg.sender = null;
         msg.data = { 'isFirst': n, obj:{
         	height: "699px",
        		width: "1366px"
         } };
-        com.hoperun.util.Observer.sendMessage(msg);
+        com.kenny.util.Observer.sendMessage(msg);
     }
     function setCurrSheet(sheet) {
         if (sheet != null) {
@@ -213,22 +213,22 @@ $(document).ready(function(){
                 //focusOn($(this).parent().prev());
                 //$(this).parent().remove();
 
-                var msg = new com.hoperun.util.Observer.Message();
-                msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CLOSE;
+                var msg = new com.kenny.util.Observer.Message();
+                msg.id = com.kenny.util.Observer.MessageType.SHEETS_CLOSE;
                 msg.sender = null;
                 msg.data = { 'sheetId': sheetId };
-                com.hoperun.util.Observer.sendMessage(msg);
+                com.kenny.util.Observer.sendMessage(msg);
 
             } else {//if the first one ？
                 focusOn($(this).parent().next());
                 $(this).parent().next().attr('class', 'tabselected_first');
                 $(this).parent().next().children()[0].className = 'tabFont_first';
            //     $(this).parent().remove();
-                var msg = new com.hoperun.util.Observer.Message();
-	            msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CLOSE;
+                var msg = new com.kenny.util.Observer.Message();
+	            msg.id = com.kenny.util.Observer.MessageType.SHEETS_CLOSE;
 	            msg.sender = null;
 	            msg.data = { 'sheetId': sheetId };
-	            com.hoperun.util.Observer.sendMessage(msg);
+	            com.kenny.util.Observer.sendMessage(msg);
             }
             
             
@@ -293,7 +293,7 @@ $(document).ready(function(){
                 
                 var existFLag = false;
                 for (var s = 0; s < sheets.length; s++) {
-                	// com.hoperun.util.BaseTool.log4js('DEBUG' ,"NAMES: "+sheets[s].getSheetName());
+                	// com.kenny.util.BaseTool.log4js('DEBUG' ,"NAMES: "+sheets[s].getSheetName());
                     if (newName == sheets[s].getSheetName() ) {
                         alert("This name was used!");
                         newName = sheetName;
@@ -380,10 +380,10 @@ $(document).ready(function(){
         if (sheet) {
             setCurrSheet(sheet);
         }
-        var msg = new com.hoperun.util.Observer.Message();
-        msg.id = com.hoperun.util.Observer.MessageType.CONTEXT_BLUR;
+        var msg = new com.kenny.util.Observer.Message();
+        msg.id = com.kenny.util.Observer.MessageType.CONTEXT_BLUR;
         msg.sender = sheet;
-        com.hoperun.util.Observer.sendMessage(msg);
+        com.kenny.util.Observer.sendMessage(msg);
     }
     
     function findSheetById(id){
@@ -410,7 +410,7 @@ $(document).ready(function(){
 	     	 		window.location.href = "requestConvert?id=" + id;
 				} else {
 					var fileInfo = {'fileType': urlParameter.fileType, 'userName': urlParameter.userName ,'currentFolderName': document.getElementById("folderNameOfFile").innerHTML};
-					com.hoperun.util.FileHelper.loadId(fileInfo, function(data){
+					com.kenny.util.FileHelper.loadId(fileInfo, function(data){
 						if("false" != data.id){
 							window.location.href = "requestConvert?id=" + data.id;
 						} else {
@@ -486,27 +486,27 @@ $(document).ready(function(){
 	    };
 		$("#undo").click(function (e) {
 			if(document.getElementById("undo").getAttribute("canUndo")=="true")
-				sendMessage(com.hoperun.util.Observer.MessageType.UNDO, null, {});
+				sendMessage(com.kenny.util.Observer.MessageType.UNDO, null, {});
 		});
 		$("#redo").click(function (e) {
 			if(document.getElementById("redo").getAttribute("canRedo")=="true")
-				sendMessage(com.hoperun.util.Observer.MessageType.REDO, null, {});
+				sendMessage(com.kenny.util.Observer.MessageType.REDO, null, {});
 		});
 
 		//<Draw> Event 
 		$("#Menu_Drawing_pencil").click(function(e){
-			com.hoperun.util.BaseTool.showMenuShadow();
+			com.kenny.util.BaseTool.showMenuShadow();
 	        $("#popup-menu-draw").css("position","absolute").css("top", e.pageY - 290 + $(".menu_edit_form").scrollTop()).css("left", e.pageX - 103 + $(".menu_edit_form").scrollLeft()).css('display', 'block');
 	    });
 	    
         //<Edit> Event 
 	    $("#edit").click(function (e) {
-	    	com.hoperun.util.BaseTool.showMenuShadow();
-	        sendMessage(com.hoperun.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +155 + $(".menu_edit_form").scrollLeft(), 'y': e.pageY + $(".menu_edit_form").scrollTop() });
+	    	com.kenny.util.BaseTool.showMenuShadow();
+	        sendMessage(com.kenny.util.Observer.MessageType.POPU_MENU, null, { 'x': e.pageX +155 + $(".menu_edit_form").scrollLeft(), 'y': e.pageY + $(".menu_edit_form").scrollTop() });
 	    });
 	    //<Insert> Event 
 	    $("#insert").click(function (e) {
-	    	com.hoperun.util.BaseTool.showMenuShadow();
+	    	com.kenny.util.BaseTool.showMenuShadow();
 	        $("#popup-menu-insert").css("top", e.pageY -350 + $(".menu_edit_form").scrollTop()).css("left", e.pageX -125 +$(".menu_edit_form").scrollLeft()).css('display', 'block');
 	    });
 
@@ -517,7 +517,7 @@ $(document).ready(function(){
 	    $("#menu-tool-content-radio-Center").buttonset();
 	    $("#menu-tool-content-radio-Check").buttonset();
 	    $("#tool").click(function (e) {
-	    	com.hoperun.util.BaseTool.showMenuShadow();
+	    	com.kenny.util.BaseTool.showMenuShadow();
 	    	
 	        $("#menu-tool").css("top", e.pageY - 300).css("left", e.pageX - 200).css('display', 'block');
 	        $("#menu-tool-content-setting").click(function () {
@@ -552,17 +552,17 @@ $(document).ready(function(){
 	    	var folderNameOfFile = document.getElementById("folderNameOfFile").innerHTML;
 	    	if(id){
 		    	var fileInf = {'random': id};
-		    	com.hoperun.util.FileHelper.loadParams(fileInf, function(temp_data){
+		    	com.kenny.util.FileHelper.loadParams(fileInf, function(temp_data){
 	    	var fileInfo = {
 		    			userName : temp_data.username,
 		    			fileName : temp_data.filename,
 		    			fileType : temp_data.doctype,
     			fileFolderName : folderNameOfFile
         	};
-	        sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_SAVE, data, fileInfo);
+	        sendMessage(com.kenny.util.Observer.MessageType.SHEETS_SAVE, data, fileInfo);
 	    });
 	    	} else {
-	    		sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_SAVE, data, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
+	    		sendMessage(com.kenny.util.Observer.MessageType.SHEETS_SAVE, data, {'fileName':urlParameter.docid, 'fileType':urlParameter.fileType, 'userName':urlParameter.userName, 'fileFolderName':folderNameOfFile});
 	    	}
 	    });
 
@@ -576,17 +576,17 @@ $(document).ready(function(){
         });
 	    
         $('#Menu_Drawing_T_Click').click(function(e){
-        	com.hoperun.util.BaseTool.closeMenuPopup();
+        	com.kenny.util.BaseTool.closeMenuPopup();
         	
     		var objectType = $(this).attr('objectType');
     		insertObject = {};
     		insertObject.objectType = objectType;
     		if (objectType == "TextBox") {
     		}
-    		var message = new com.hoperun.util.Observer.Message();
-    		message.id = com.hoperun.util.Observer.MessageType.SHAPE_INSERT;
+    		var message = new com.kenny.util.Observer.Message();
+    		message.id = com.kenny.util.Observer.MessageType.SHAPE_INSERT;
     		message.sender = insertObject;
-    		com.hoperun.util.Observer.sendMessage(message);
+    		com.kenny.util.Observer.sendMessage(message);
     		$('#Menu_Edit_TextSpecsSet').css('display', 'block');
     	});
         
@@ -639,7 +639,7 @@ $(document).ready(function(){
 	}
 
     function init() {
-    	with(com.hoperun.node) {
+    	with(com.kenny.node) {
     		var random = urlParameter.id;
 		    var fileInf = {'random': random};
 		    var fileInfo;
@@ -651,7 +651,7 @@ $(document).ready(function(){
 					folderName: urlParameter.folderName
 		    	};
 		    }
-    		com.hoperun.util.FileHelper.loadParams(fileInf, function(data){
+    		com.kenny.util.FileHelper.loadParams(fileInf, function(data){
     	    	if(data){
     	    		if(random){
 		    	    	fileInfo = {
@@ -664,7 +664,7 @@ $(document).ready(function(){
 								fileFolderName: data.uuid
     	    	};
     	    		}
-    	    	com.hoperun.util.FileHelper.load(fileInfo, function (data) {
+    	    	com.kenny.util.FileHelper.load(fileInfo, function (data) {
     	    		if(data.fileFolderName){
     	    			document.getElementById('folderNameOfFile').innerHTML = data.fileFolderName;
     	    		}
@@ -673,19 +673,19 @@ $(document).ready(function(){
 
     	    	        for (var j = 0; j < sheetsReturn.length; j++) {
     	    	            var obj = sheetsReturn[j];
-    	    	            var msg = new com.hoperun.util.Observer.Message();
-    	    	            msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+    	    	            var msg = new com.kenny.util.Observer.Message();
+    	    	            msg.id = com.kenny.util.Observer.MessageType.SHEETS_CREATE;
     	    	            msg.sender = null;
     	    	           // msg.data = obj;
     	    	            msg.data = { 'isFirst': 1,'obj': obj};
-    	    	            com.hoperun.util.Observer.sendMessage(msg);
+    	    	            com.kenny.util.Observer.sendMessage(msg);
     	    	            
-    	    	            //sendMessage(com.hoperun.util.Observer.MessageType.SHEETS_CREATE, null, obj);
-    	    	            //var msg = new com.hoperun.util.Observer.Message();
-    	    	            //msg.id = com.hoperun.util.Observer.MessageType.SHEETS_CREATE;
+    	    	            //sendMessage(com.kenny.util.Observer.MessageType.SHEETS_CREATE, null, obj);
+    	    	            //var msg = new com.kenny.util.Observer.Message();
+    	    	            //msg.id = com.kenny.util.Observer.MessageType.SHEETS_CREATE;
     	    	            //msg.sender = null;
     	    	            //msg.data = obj;
-    	    	            //com.hoperun.util.Observer.sendMessage(msg);
+    	    	            //com.kenny.util.Observer.sendMessage(msg);
     	    	        }
     	    	    }
     	    	});
