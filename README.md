@@ -1,7 +1,7 @@
 
-[Online Tools] for 
+[Online Tools] for create, share, comment and discuss wireframes
 
-## Refer : 
+## Refer TO: 
 :   1, mybalsamiq for wireframe design.
 :   2, PPT for preview and online search.
 :   3, js2pdf and pdf viewer to download files.
@@ -11,4 +11,5 @@
 - Add support for wireframe design
 - Add online display & share & team work, 
 - Add pdf download
-- ADD account management like manager check, modify history and final release control
+- Add team/group account
+- Add account management like manager check, modify history and final release control
